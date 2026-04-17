@@ -157,9 +157,14 @@ function changeImage(el){
   el.classList.add('active');
 }
 
-// GOOGLE SHEETS LINK
+// ✅ DEFINE VARIABLES (YOU FORGOT THIS)
+const form = document.getElementById('leadForm');
+const successMsg = document.getElementById('successMsg');
+
+// GOOGLE SCRIPT LINK
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzTqcUSQ-E29pDUzFDl8P6USPDhCaHXvJA2lAKdwaPdOs8jUc4WEdEH-L7AR1yNczZVtw/exec";
 
+// FORM SUBMIT
 form.addEventListener('submit', function(e){
   e.preventDefault();
 
@@ -175,13 +180,16 @@ form.addEventListener('submit', function(e){
     "&quantity=" + encodeURIComponent(quantitySelect.value) +
     "&price=" + encodeURIComponent(price);
 
+  // SEND REQUEST
   fetch(url);
-});
 
-  // SUCCESS MESSAGE
+  // SHOW SUCCESS
   successMsg.style.display = 'block';
+
+  // RESET
   form.reset();
 
+  // SCROLL
   window.scrollTo({
     top: successMsg.offsetTop - 100,
     behavior: 'smooth'
