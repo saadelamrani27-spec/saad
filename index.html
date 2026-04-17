@@ -111,13 +111,17 @@ input, select, textarea {
 <h1>سدادة تصريف الأرضية</h1>
 
 <div class="gallery">
-  <img src="main1.jpg" id="main">
-</div>
 
-<div class="price-box">
-  <div id="oldPrice">149 درهم</div>
-  <div id="newPrice">119 درهم</div>
-  <div id="savePrice">وفر 30 درهم</div>
+  <!-- MAIN IMAGE -->
+  <img src="main1.jpg" id="main" class="main-image">
+
+  <!-- THUMBNAILS -->
+  <div class="thumbs">
+    <img src="4.jpg" onclick="changeImage(this)" class="active">
+    <img src="5.jpg" onclick="changeImage(this)">
+    <img src="6.jpg" onclick="changeImage(this)">
+  </div>
+
 </div>
 
 </div>
