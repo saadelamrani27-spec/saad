@@ -6,100 +6,45 @@
 <title>سدادة تصريف الأرضية</title>
 
 <style>
-*{box-sizing:border-box}
-body{
-  margin:0;
-  font-family:Tahoma,Arial;
-  background:#fff8ef;
-  color:#1d1d1f;
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: Tahoma, Arial, sans-serif;
+  background: #fff8ef;
+  color: #1d1d1f;
 }
+.topbar { background:#111;color:#fff;text-align:center;padding:12px;font-weight:700; }
+.urgent { background:#ff3d00;color:#fff;text-align:center;padding:10px;font-weight:800; }
+.container { max-width:760px;margin:auto;padding:18px; }
+.section { background:#fff;border-radius:24px;padding:22px;margin-top:18px; }
 
-.topbar{
-  background:#111;
-  color:#fff;
-  text-align:center;
-  padding:12px;
-  font-weight:700;
-}
-
-.urgent{
-  background:#ff3d00;
-  color:#fff;
-  text-align:center;
-  padding:10px;
-  font-weight:800;
-}
-
-.container{
-  max-width:760px;
-  margin:auto;
-  padding:18px;
-}
-
-.section{
-  background:#fff;
-  border-radius:20px;
-  padding:20px;
-  margin-top:18px;
-  box-shadow:0 8px 20px rgba(0,0,0,.08);
-}
-
-h1,h2{text-align:center}
-
-.gallery img{
-  width:100%;
-  border-radius:18px;
-}
-
-/* FORM */
-.form-grid{display:grid;gap:14px}
-
-label{font-weight:800}
-
-input,select,textarea{
+.form-grid { display:grid; gap:12px; }
+label { font-size:18px; font-weight:800; }
+input, select, textarea {
   width:100%;
   padding:14px;
   border-radius:14px;
   border:1px solid #ddd;
   font-size:16px;
 }
-
-input:focus,select:focus,textarea:focus{
-  border-color:#ff6a00;
-  outline:none;
-}
-
-.buy-btn{
+.buy-btn {
   background:linear-gradient(90deg,#ff3d00,#ff7b00);
   color:#fff;
   font-size:20px;
-  font-weight:bold;
+  font-weight:900;
   padding:16px;
-  border:none;
   border-radius:14px;
+  border:none;
   cursor:pointer;
 }
 
-/* PRICE */
-.price-box{
+.price-box {
   background:#111;
   color:#fff;
-  border-radius:20px;
-  padding:16px;
+  border-radius:24px;
+  padding:20px;
   text-align:center;
-  margin-top:15px;
-}
-
-.new{font-size:40px;color:#ffd54a;font-weight:900}
-.old{text-decoration:line-through}
-.save{color:#72f39a}
-
-/* TIMER */
-.timer{
-  text-align:center;
-  font-size:28px;
-  color:#ff3d00;
-  margin-top:15px;
+  margin-top:18px;
 }
 </style>
 </head>
@@ -112,74 +57,87 @@ input:focus,select:focus,textarea:focus{
 <div class="container">
 
 <!-- FORM -->
-<div class="section">
-<h2>اطلب ديالك دابا</h2>
+<div class="section" id="order">
+  <h2>اطلب ديالك دابا</h2>
 
-<form class="form-grid">
+  <form id="leadForm" class="form-grid">
 
-<label>الاسم الكامل</label>
-<input required>
+    <label>الاسم الكامل</label>
+    <input id="full_name" required>
 
-<label>رقم الهاتف</label>
-<input required>
+    <label>رقم الهاتف</label>
+    <input id="phone" required>
 
-<label>المدينة</label>
-<select>
-<option>الدار البيضاء</option>
-<option>الرباط</option>
-<option>سلا</option>
-<option>تمارة</option>
-<option>مراكش</option>
-<option>فاس</option>
-<option>طنجة</option>
-<option>أكادير</option>
-<option>وجدة</option>
-<option>القنيطرة</option>
-<option>الجديدة</option>
-<option>آسفي</option>
-<option>خريبكة</option>
-<option>بني ملال</option>
-<option>الناظور</option>
-<option>الحسيمة</option>
-<option>الداخلة</option>
-<option>العيون</option>
-</select>
+    <label>المدينة</label>
+    <select id="city" required>
+      <option disabled selected>اختر المدينة</option>
+      <option>الدار البيضاء</option>
+      <option>الرباط</option>
+      <option>سلا</option>
+      <option>تمارة</option>
+      <option>مراكش</option>
+      <option>فاس</option>
+      <option>طنجة</option>
+      <option>أكادير</option>
+      <option>وجدة</option>
+      <option>القنيطرة</option>
+      <option>الجديدة</option>
+      <option>آسفي</option>
+      <option>خريبكة</option>
+      <option>بني ملال</option>
+      <option>الناظور</option>
+      <option>الحسيمة</option>
+      <option>الداخلة</option>
+      <option>العيون</option>
+    </select>
 
-<label>العنوان</label>
-<textarea></textarea>
+    <label>العنوان</label>
+    <textarea id="address" required></textarea>
 
-<button class="buy-btn">أكد الطلب ديالي</button>
+    <label>اختار العرض</label>
+    <select id="quantity">
+      <option value="1" data-old="149" data-price="119">1 قطعة - 119 درهم</option>
+      <option value="2" data-old="219" data-price="169">2 قطع - 169 درهم</option>
+      <option value="3" data-old="289" data-price="219">3 قطع - 219 درهم</option>
+    </select>
 
-</form>
+    <input type="hidden" id="price" value="119">
+
+    <button type="submit" class="buy-btn">أكد الطلب ديالي</button>
+
+  </form>
 </div>
 
-<!-- PRODUCT -->
 <h1>سدادة تصريف الأرضية</h1>
 
 <div class="gallery">
-<img src="main1.jpg">
+  <img src="main1.jpg" id="main">
 </div>
 
 <div class="price-box">
-<div class="old" id="oldPrice">149 درهم</div>
-<div class="new" id="newPrice">119 درهم</div>
-<div class="save" id="savePrice">وفر 30 درهم</div>
+  <div id="oldPrice">149 درهم</div>
+  <div id="newPrice">119 درهم</div>
+  <div id="savePrice">وفر 30 درهم</div>
 </div>
-
-<div class="timer" id="timer">02:45:30</div>
 
 </div>
 
 <script>
-// TIMER
-let seconds=9930;
-setInterval(()=>{
-let h=String(Math.floor(seconds/3600)).padStart(2,'0');
-let m=String(Math.floor((seconds%3600)/60)).padStart(2,'0');
-let s=String(seconds%60).padStart(2,'0');
-document.getElementById('timer').textContent=h+":"+m+":"+s;
-if(seconds>0)seconds--;
-},1000);
+// PRICE UPDATE
+const quantity = document.getElementById('quantity');
+const oldPrice = document.getElementById('oldPrice');
+const newPrice = document.getElementById('newPrice');
+const savePrice = document.getElementById('savePrice');
+
+quantity.addEventListener('change', () => {
+  const opt = quantity.options[quantity.selectedIndex];
+  const oldP = Number(opt.dataset.old);
+  const newP = Number(opt.dataset.price);
+
+  oldPrice.textContent = oldP + " درهم";
+  newPrice.textContent = newP + " درهم";
+  savePrice.textContent = "وفر " + (oldP - newP) + " درهم";
+});
 </script>
 
 </body>
