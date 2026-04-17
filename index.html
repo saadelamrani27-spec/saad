@@ -168,10 +168,9 @@ form.addEventListener('submit', function(e){
 
   const quantitySelect = document.getElementById('quantity');
   const selectedOption = quantitySelect.options[quantitySelect.selectedIndex];
-
   const price = selectedOption.getAttribute("data-price") || "99";
 
-  // ✅ THIS IS THE FIX (FormData instead of JSON)
+  // ✅ USE FORMDATA (THIS MATCHES GOOGLE SCRIPT)
   const formData = new FormData();
   formData.append("full_name", document.getElementById('full_name').value);
   formData.append("phone", document.getElementById('phone').value);
@@ -181,14 +180,12 @@ form.addEventListener('submit', function(e){
   formData.append("price", price);
 
   fetch(SCRIPT_URL, {
-  method: "POST",
-  mode: "no-cors",
-  headers: {
-    "Content-Type": "application/json"
-  },
-  body: JSON.stringify(data)
-});
+    method: "POST",
+    mode: "no-cors",
+    body: formData
+  });
 
+  // ✅ ALWAYS SHOW SUCCESS
   successMsg.style.display = 'block';
   form.reset();
 
