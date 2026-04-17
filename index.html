@@ -1,38 +1,39 @@
 <!doctype html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>سدادة تصريف الأرضية</title>
-  <meta name="robots" content="noindex,nofollow" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>سدادة تصريف الأرضية</title>
+<meta name="robots" content="noindex,nofollow" />
 
-  <!-- Meta Pixel -->
-  <script>
-    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){
-    n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '1327371405934124');
-    fbq('track', 'PageView');
-  </script>
+<!-- Meta Pixel -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){
+n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1327371405934124');
+fbq('track', 'PageView');
+</script>
 
-  <style>
-    *{box-sizing:border-box}
-    body{margin:0;font-family:Tahoma,Arial;background:#fff8ef}
-    .topbar{background:#111;color:#fff;text-align:center;padding:12px;font-weight:700}
-    .urgent{background:linear-gradient(90deg,#ff3d00,#ff6a00);color:#fff;text-align:center;padding:10px;font-weight:800}
-    .container{max-width:760px;margin:auto;padding:18px}
-    h1{text-align:center}
-    .section{background:#fff;border-radius:20px;padding:20px;margin-top:18px}
-    input,select,textarea{width:100%;padding:12px;margin-top:6px;border-radius:12px;border:1px solid #ddd}
-    .buy-btn{background:#ff3d00;color:#fff;padding:15px;border:none;border-radius:12px;font-weight:800;width:100%;margin-top:10px}
-    .gallery img{width:100%;border-radius:15px}
-    .price-box{text-align:center;background:#111;color:#fff;padding:15px;border-radius:20px;margin-top:15px}
-    .cta{display:block;text-align:center;background:#ff3d00;color:#fff;padding:15px;border-radius:12px;margin-top:15px}
-  </style>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Tahoma;background:#fff8ef;color:#1d1d1f}
+.topbar{background:#111;color:#fff;text-align:center;padding:12px;font-weight:700}
+.urgent{background:#ff3d00;color:#fff;text-align:center;padding:10px;font-weight:800}
+.container{max-width:760px;margin:auto;padding:15px}
+.section{background:#fff;border-radius:20px;padding:20px;margin-top:18px;box-shadow:0 10px 20px rgba(0,0,0,.05)}
+input,select,textarea{width:100%;padding:14px;border-radius:12px;border:1px solid #ddd;margin-top:8px}
+.buy-btn{background:#ff3d00;color:#fff;padding:16px;border:none;border-radius:14px;font-weight:800;width:100%;margin-top:10px}
+.gallery img{width:100%;border-radius:15px}
+.price-box{background:#111;color:#fff;padding:20px;border-radius:20px;text-align:center;margin-top:15px}
+.new{font-size:40px;color:#ffd54a;font-weight:900}
+.cta{display:block;text-align:center;background:#ff3d00;color:#fff;padding:16px;border-radius:14px;margin-top:15px;text-decoration:none;font-weight:800}
+.timer{font-size:28px;text-align:center;color:#ff3d00;margin-top:10px;font-weight:900}
+</style>
 </head>
 
 <body>
@@ -42,51 +43,97 @@
 
 <div class="container">
 
-<!-- ✅ FORM AT TOP -->
+<!-- ✅ FORM TOP -->
 <div class="section" id="order">
-  <h2>اطلب ديالك دابا</h2>
+<h2 style="text-align:center">اطلب ديالك دابا</h2>
 
-  <form id="leadForm">
-    <label>الاسم الكامل</label>
-    <input id="full_name" required>
+<form id="leadForm">
 
-    <label>رقم الهاتف</label>
-    <input id="phone" required>
+<label>الاسم الكامل</label>
+<input id="full_name" required>
 
-    <label>المدينة</label>
-    <select id="city">
-      <option>الدار البيضاء</option>
-      <option>الرباط</option>
-      <option>مراكش</option>
-      <option>طنجة</option>
-    </select>
+<label>رقم الهاتف</label>
+<input id="phone" required>
 
-    <label>العنوان</label>
-    <textarea id="address"></textarea>
+<label>المدينة</label>
+<select id="city">
+<option>الدار البيضاء</option>
+<option>الرباط</option>
+<option>مراكش</option>
+<option>طنجة</option>
+<option>أكادير</option>
+</select>
 
-    <button class="buy-btn">أكد الطلب</button>
-  </form>
+<label>العنوان</label>
+<textarea id="address"></textarea>
+
+<label>الكمية</label>
+<select id="quantity">
+<option value="119">1 قطعة - 119 درهم</option>
+<option value="169">2 قطع - 169 درهم</option>
+<option value="219">3 قطع - 219 درهم</option>
+</select>
+
+<button class="buy-btn">أكد الطلب ديالي</button>
+
+<div id="success" style="display:none;color:green;text-align:center;margin-top:10px">
+تم إرسال الطلب بنجاح
 </div>
 
-<!-- ✅ PRODUCT NOW BELOW -->
-<h1>سدادة تصريف الأرضية</h1>
+</form>
+</div>
+
+<!-- ✅ PRODUCT BELOW -->
+<h1 style="text-align:center">سدادة تصريف الأرضية</h1>
+
+<p style="text-align:center">
+كتسد الروائح الكريهة وكتمنع دخول الحشرات
+</p>
 
 <div class="gallery">
-  <img src="main1.jpg" id="main">
+<img src="main1.jpg" id="main">
 </div>
 
 <div class="price-box">
-  <h2>119 درهم</h2>
+<div class="new" id="price">119 درهم</div>
 </div>
+
+<div class="timer" id="timer">02:45:30</div>
 
 <a href="#order" class="cta">اطلب دابا</a>
 
 </div>
 
 <script>
-function swapImage(img){
-  document.getElementById('main').src=img.src;
+
+// ✅ PRICE CHANGE
+const quantity=document.getElementById('quantity');
+const price=document.getElementById('price');
+
+quantity.addEventListener('change',()=>{
+price.textContent=quantity.value+" درهم";
+});
+
+// ✅ TIMER
+let seconds=2*3600+45*60+30;
+function timer(){
+let h=Math.floor(seconds/3600);
+let m=Math.floor((seconds%3600)/60);
+let s=seconds%60;
+document.getElementById('timer').textContent=
+String(h).padStart(2,'0')+":"+
+String(m).padStart(2,'0')+":"+
+String(s).padStart(2,'0');
+if(seconds>0)seconds--;
 }
+setInterval(timer,1000);
+
+// ✅ FORM FAKE SUBMIT (still works visually)
+document.getElementById('leadForm').addEventListener('submit',e=>{
+e.preventDefault();
+document.getElementById('success').style.display='block';
+});
+
 </script>
 
 </body>
