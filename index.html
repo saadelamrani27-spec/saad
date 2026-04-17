@@ -170,22 +170,21 @@ form.addEventListener('submit', function(e){
   const selectedOption = quantitySelect.options[quantitySelect.selectedIndex];
   const price = selectedOption.getAttribute("data-price") || "99";
 
-  // ✅ USE FORMDATA (THIS MATCHES GOOGLE SCRIPT)
-  const formData = new FormData();
-  formData.append("full_name", document.getElementById('full_name').value);
-  formData.append("phone", document.getElementById('phone').value);
-  formData.append("city", document.getElementById('city').value);
-  formData.append("address", document.getElementById('address').value);
-  formData.append("quantity", quantitySelect.value);
-  formData.append("price", price);
+  // ✅ THIS IS THE KEY FIX (URLSearchParams)
+  const params = new URLSearchParams();
+  params.append("full_name", document.getElementById('full_name').value);
+  params.append("phone", document.getElementById('phone').value);
+  params.append("city", document.getElementById('city').value);
+  params.append("address", document.getElementById('address').value);
+  params.append("quantity", quantitySelect.value);
+  params.append("price", price);
 
   fetch(SCRIPT_URL, {
     method: "POST",
-    mode: "no-cors",
-    body: formData
+    body: params
   });
 
-  // ✅ ALWAYS SHOW SUCCESS
+  // SUCCESS MESSAGE
   successMsg.style.display = 'block';
   form.reset();
 
