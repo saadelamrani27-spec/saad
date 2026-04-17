@@ -181,9 +181,13 @@ form.addEventListener('submit', function(e){
   formData.append("price", price);
 
   fetch(SCRIPT_URL, {
-    method: "POST",
-    body: formData
-  });
+  method: "POST",
+  mode: "no-cors",
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify(data)
+});
 
   successMsg.style.display = 'block';
   form.reset();
