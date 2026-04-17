@@ -38,7 +38,6 @@ input, select, textarea {
   cursor:pointer;
 }
 
-/* IMAGE FIX */
 .gallery {
   max-width:500px;
   margin:20px auto;
@@ -67,7 +66,6 @@ input, select, textarea {
   border-color:#ff6a00;
 }
 
-/* SUCCESS MESSAGE */
 .success {
   display:none;
   margin-top:12px;
@@ -88,7 +86,6 @@ input, select, textarea {
 
 <div class="container">
 
-<!-- FORM -->
 <div class="section" id="order">
   <h2>اطلب ديالك دابا</h2>
 
@@ -100,91 +97,26 @@ input, select, textarea {
     <label>رقم الهاتف</label>
     <input id="phone" required>
 
-  
-     <select id="city" required>
-<option disabled selected>اختر المدينة</option>
-
-<!-- Grand Casablanca -->
-<option>الدار البيضاء</option>
-<option>المحمدية</option>
-<option>عين حرودة</option>
-<option>بوسكورة</option>
-<option>مديونة</option>
-
-<!-- Rabat / Salé -->
-<option>الرباط</option>
-<option>سلا</option>
-<option>سلا الجديدة</option>
-<option>تمارة</option>
-<option>الصخيرات</option>
-<option>الخميسات</option>
-<option>تيفلت</option>
-
-<!-- North -->
-<option>طنجة</option>
-<option>تطوان</option>
-<option>المضيق</option>
-<option>الفنيدق</option>
-<option>مرتيل</option>
-<option>أصيلة</option>
-<option>العرائش</option>
-<option>القصر الكبير</option>
-<option>شفشاون</option>
-<option>وزان</option>
-
-<!-- East -->
-<option>وجدة</option>
-<option>بركان</option>
-<option>الناظور</option>
-<option>زايو</option>
-<option>جرسيف</option>
-<option>الدريوش</option>
-<option>تاوريرت</option>
-
-<!-- Center -->
-<option>فاس</option>
-<option>مكناس</option>
-<option>صفرو</option>
-<option>إفران</option>
-<option>الحاجب</option>
-<option>تازة</option>
-
-<!-- Marrakech -->
-<option>مراكش</option>
-<option>قلعة السراغنة</option>
-<option>شيشاوة</option>
-<option>إمنتانوت</option>
-<option>بن جرير</option>
-
-<!-- West -->
-<option>الجديدة</option>
-<option>أزمور</option>
-<option>آسفي</option>
-<option>الصويرة</option>
-<option>سيدي بنور</option>
-
-<!-- Atlas -->
-<option>بني ملال</option>
-<option>الفقيه بن صالح</option>
-<option>أزيلال</option>
-<option>خنيفرة</option>
-
-<!-- South -->
-<option>أكادير</option>
-<option>إنزكان</option>
-<option>آيت ملول</option>
-<option>تارودانت</option>
-<option>تيزنيت</option>
-<option>كلميم</option>
-<option>طانطان</option>
-
-<!-- Sahara -->
-<option>العيون</option>
-<option>الداخلة</option>
-<option>السمارة</option>
-<option>بوجدور</option>
-
-</select>
+    <label>المدينة</label>
+    <select id="city" required>
+      <option disabled selected>اختر المدينة</option>
+      <option>الدار البيضاء</option>
+      <option>الرباط</option>
+      <option>سلا</option>
+      <option>تمارة</option>
+      <option>طنجة</option>
+      <option>مراكش</option>
+      <option>فاس</option>
+      <option>أكادير</option>
+      <option>وجدة</option>
+      <option>القنيطرة</option>
+      <option>الجديدة</option>
+      <option>آسفي</option>
+      <option>بني ملال</option>
+      <option>الناظور</option>
+      <option>الحسيمة</option>
+      <option>الداخلة</option>
+      <option>العيون</option>
     </select>
 
     <label>العنوان</label>
@@ -207,15 +139,12 @@ input, select, textarea {
 <h1>حامل الهاتف المغنطيسي</h1>
 
 <div class="gallery">
-
   <img src="main1.jpg" id="main" class="main-image">
-
   <div class="thumbs">
     <img src="4.jpg" onclick="changeImage(this)" class="active">
     <img src="5.jpg" onclick="changeImage(this)">
     <img src="6.jpg" onclick="changeImage(this)">
   </div>
-
 </div>
 
 </div>
@@ -224,40 +153,17 @@ input, select, textarea {
 // IMAGE SWITCH
 function changeImage(el){
   document.getElementById('main').src = el.src;
-
-  document.querySelectorAll('.thumbs img')
-    .forEach(img => img.classList.remove('active'));
-
+  document.querySelectorAll('.thumbs img').forEach(img => img.classList.remove('active'));
   el.classList.add('active');
 }
 
-// FORM SUCCESS
+// GOOGLE SHEETS LINK
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycby_QZo5jeOC-LHqzi-rNxqKWtBRsVwf3fZNvz4KbXpTB2k20yv9_ErCPg-1hG9SCg2N/exec";
+
 const form = document.getElementById('leadForm');
 const successMsg = document.getElementById('successMsg');
 
-form.addEventListener('submit', function(e){
-  e.preventDefault();
-
-  successMsg.style.display = 'block';
-
-  window.scrollTo({
-    top: successMsg.offsetTop - 100,
-    behavior: 'smooth'
-  });
-
-  form.reset();
-});
-</script>
-
-</body>
-</html>
-
-<script>
-const form = document.getElementById('leadForm');
-
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycby_QZo5jeOC-LHqzi-rNxqKWtBRsVwf3fZNvz4KbXpTB2k20yv9_ErCPg-1hG9SCg2N/exec";
-
-form.addEventListener('submit', function(e){
+form.addEventListener('submit', async function(e){
   e.preventDefault();
 
   const data = {
@@ -268,12 +174,20 @@ form.addEventListener('submit', function(e){
     quantity: document.getElementById('quantity').value
   };
 
-  fetch(SCRIPT_URL, {
-    method: "POST",
-    body: JSON.stringify(data)
-  });
+  try {
+    await fetch(SCRIPT_URL, {
+      method: "POST",
+      body: JSON.stringify(data)
+    });
 
-  alert("تم تسجيل الطلب ديالك 👍");
-  form.reset();
+    successMsg.style.display = 'block';
+    form.reset();
+
+  } catch (err) {
+    alert("وقع مشكل، حاول مرة أخرى");
+  }
 });
 </script>
+
+</body>
+</html>
