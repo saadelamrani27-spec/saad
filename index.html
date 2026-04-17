@@ -124,7 +124,7 @@ input, select, textarea {
 
     <label>اختار العرض</label>
     <select id="quantity">
-      <option value="1">1 قطعة - 99 درهم</option>
+      <option value="1" data-price="99">1 قطعة - 99 درهم</option>
     </select>
 
     <button type="submit" class="buy-btn">أكد الطلب ديالي</button>
@@ -169,9 +169,7 @@ form.addEventListener('submit', function(e){
   const quantitySelect = document.getElementById('quantity');
   const selectedOption = quantitySelect.options[quantitySelect.selectedIndex];
 
-  // ✅ EXTRACT PRICE (99 from text)
-  const priceText = selectedOption.textContent;
-  const price = priceText.match(/\d+/)[0];
+  const price = selectedOption.getAttribute("data-price"); // ✅ FIXED
 
   const data = {
     full_name: document.getElementById('full_name').value,
@@ -179,7 +177,7 @@ form.addEventListener('submit', function(e){
     city: document.getElementById('city').value,
     address: document.getElementById('address').value,
     quantity: quantitySelect.value,
-    price: price // ✅ NEW FIELD
+    price: price
   };
 
   fetch(SCRIPT_URL, {
