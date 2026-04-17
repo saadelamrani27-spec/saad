@@ -38,13 +38,45 @@ input, select, textarea {
   cursor:pointer;
 }
 
-.price-box {
-  background:#111;
-  color:#fff;
-  border-radius:24px;
-  padding:20px;
+/* IMAGE FIX */
+.gallery {
+  max-width:500px;
+  margin:20px auto;
+}
+.main-image {
+  width:100%;
+  max-height:380px;
+  object-fit:cover;
+  border-radius:16px;
+}
+.thumbs {
+  display:grid;
+  grid-template-columns: repeat(3,1fr);
+  gap:10px;
+  margin-top:10px;
+}
+.thumbs img {
+  width:100%;
+  height:80px;
+  object-fit:cover;
+  border-radius:12px;
+  cursor:pointer;
+  border:2px solid transparent;
+}
+.thumbs img.active {
+  border-color:#ff6a00;
+}
+
+/* SUCCESS MESSAGE */
+.success {
+  display:none;
+  margin-top:12px;
+  padding:12px;
+  border-radius:10px;
   text-align:center;
-  margin-top:18px;
+  font-weight:700;
+  background:#e8fff0;
+  color:#0d7a37;
 }
 </style>
 </head>
@@ -96,14 +128,16 @@ input, select, textarea {
 
     <label>اختار العرض</label>
     <select id="quantity">
-      <option value="1" data-old="149" data-price="119">1 قطعة - 119 درهم</option>
-      <option value="2" data-old="219" data-price="169">2 قطع - 169 درهم</option>
-      <option value="3" data-old="289" data-price="219">3 قطع - 219 درهم</option>
+      <option value="1">1 قطعة - 119 درهم</option>
+      <option value="2">2 قطع - 169 درهم</option>
+      <option value="3">3 قطع - 219 درهم</option>
     </select>
 
-    <input type="hidden" id="price" value="119">
-
     <button type="submit" class="buy-btn">أكد الطلب ديالي</button>
+
+    <div id="successMsg" class="success">
+      تم تأكيد طلبك بنجاح! غادي نتاصلوا بك قريباً 📞
+    </div>
 
   </form>
 </div>
@@ -112,10 +146,8 @@ input, select, textarea {
 
 <div class="gallery">
 
-  <!-- MAIN IMAGE -->
   <img src="main1.jpg" id="main" class="main-image">
 
-  <!-- THUMBNAILS -->
   <div class="thumbs">
     <img src="4.jpg" onclick="changeImage(this)" class="active">
     <img src="5.jpg" onclick="changeImage(this)">
@@ -127,20 +159,31 @@ input, select, textarea {
 </div>
 
 <script>
-// PRICE UPDATE
-const quantity = document.getElementById('quantity');
-const oldPrice = document.getElementById('oldPrice');
-const newPrice = document.getElementById('newPrice');
-const savePrice = document.getElementById('savePrice');
+// IMAGE SWITCH
+function changeImage(el){
+  document.getElementById('main').src = el.src;
 
-quantity.addEventListener('change', () => {
-  const opt = quantity.options[quantity.selectedIndex];
-  const oldP = Number(opt.dataset.old);
-  const newP = Number(opt.dataset.price);
+  document.querySelectorAll('.thumbs img')
+    .forEach(img => img.classList.remove('active'));
 
-  oldPrice.textContent = oldP + " درهم";
-  newPrice.textContent = newP + " درهم";
-  savePrice.textContent = "وفر " + (oldP - newP) + " درهم";
+  el.classList.add('active');
+}
+
+// FORM SUCCESS
+const form = document.getElementById('leadForm');
+const successMsg = document.getElementById('successMsg');
+
+form.addEventListener('submit', function(e){
+  e.preventDefault();
+
+  successMsg.style.display = 'block';
+
+  window.scrollTo({
+    top: successMsg.offsetTop - 100,
+    behavior: 'smooth'
+  });
+
+  form.reset();
 });
 </script>
 
