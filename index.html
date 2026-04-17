@@ -169,28 +169,23 @@ form.addEventListener('submit', function(e){
   const quantitySelect = document.getElementById('quantity');
   const selectedOption = quantitySelect.options[quantitySelect.selectedIndex];
 
-  // ✅ GET PRICE (FIXED)
   const price = selectedOption.getAttribute("data-price") || "99";
 
-  const data = {
-    full_name: document.getElementById('full_name').value,
-    phone: document.getElementById('phone').value,
-    city: document.getElementById('city').value,
-    address: document.getElementById('address').value,
-    quantity: quantitySelect.value,
-    price: price
-  };
+  // ✅ THIS IS THE FIX (FormData instead of JSON)
+  const formData = new FormData();
+  formData.append("full_name", document.getElementById('full_name').value);
+  formData.append("phone", document.getElementById('phone').value);
+  formData.append("city", document.getElementById('city').value);
+  formData.append("address", document.getElementById('address').value);
+  formData.append("quantity", quantitySelect.value);
+  formData.append("price", price);
 
-  // ✅ SEND TO GOOGLE SHEETS (WORKING VERSION)
   fetch(SCRIPT_URL, {
     method: "POST",
-    body: JSON.stringify(data)
+    body: formData
   });
 
-  // ✅ SUCCESS MESSAGE
   successMsg.style.display = 'block';
-
-  // RESET
   form.reset();
 
   window.scrollTo({
