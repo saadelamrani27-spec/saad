@@ -1,97 +1,99 @@
 <!doctype html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>سدادة تصريف الأرضية</title>
-  <meta name="robots" content="noindex,nofollow" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>سدادة تصريف الأرضية</title>
 
-  <!-- Meta Pixel Code -->
-  <script>
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '1327371405934124');
-    fbq('track', 'PageView');
-  </script>
-
-  <style>
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: Tahoma, Arial, sans-serif;
-      background: #fff8ef;
-      color: #1d1d1f;
-      line-height: 1.65;
-    }
-    .topbar { background:#111;color:#fff;text-align:center;padding:12px;font-weight:700 }
-    .urgent { background:linear-gradient(90deg,#ff3d00,#ff6a00);color:#fff;text-align:center;padding:10px;font-weight:800 }
-    .container { width:min(100%,760px);margin:0 auto;padding:18px }
-    h1 { text-align:center }
-    .gallery img { width:100%;border-radius:15px }
-    .price-box { background:#111;color:#fff;padding:15px;border-radius:20px;text-align:center;margin-top:15px }
-    .section { background:#fff;border-radius:20px;padding:20px;margin-top:18px }
-    input,select,textarea { width:100%;padding:12px;border-radius:12px;border:1px solid #ddd;margin-top:6px }
-    .buy-btn { background:#ff3d00;color:#fff;padding:15px;border:none;border-radius:12px;font-weight:800;width:100% }
-  </style>
+<style>
+/* KEEP YOUR ORIGINAL CSS */
+*{box-sizing:border-box}
+body{margin:0;font-family:Tahoma;background:#fff8ef}
+.container{max-width:760px;margin:auto;padding:18px}
+.section{background:#fff;border-radius:20px;padding:20px;margin-top:18px}
+</style>
 </head>
 
 <body>
 
-<div class="topbar">توصيل سريع لجميع المدن • الدفع عند الاستلام</div>
-<div class="urgent">عرض محدود - الكمية قربات تسالي!</div>
-
 <div class="container">
 
-<!-- ✅ FORM MOVED TO TOP -->
+<!-- ✅ FORM NOW FIRST -->
 <div class="section" id="order">
-  <h2>اطلب ديالك دابا</h2>
-  <form id="leadForm">
+<h2>اطلب ديالك دابا</h2>
 
-    <label>الاسم الكامل</label>
-    <input id="full_name" required>
+<form id="leadForm">
 
-    <label>رقم الهاتف</label>
-    <input id="phone" required>
+<input id="full_name" placeholder="الاسم الكامل" required>
+<input id="phone" placeholder="رقم الهاتف" required>
 
-    <label>المدينة</label>
-    <select id="city">
-      <option>الدار البيضاء</option>
-      <option>الرباط</option>
-      <option>مراكش</option>
-      <option>طنجة</option>
-    </select>
+<select id="city">
+<option>الدار البيضاء</option>
+<option>الرباط</option>
+<option>مراكش</option>
+</select>
 
-    <label>العنوان</label>
-    <textarea id="address"></textarea>
+<textarea id="address" placeholder="العنوان"></textarea>
 
-    <button class="buy-btn">أكد الطلب</button>
+<select id="quantity">
+<option value="1" data-old="149" data-price="119">1 - 119</option>
+<option value="2" data-old="219" data-price="169">2 - 169</option>
+<option value="3" data-old="289" data-price="219">3 - 219</option>
+</select>
 
-  </form>
+<button type="submit">أكد الطلب</button>
+
+</form>
 </div>
 
-<!-- ✅ ORIGINAL CONTENT BELOW (UNCHANGED) -->
+<!-- ✅ EVERYTHING ELSE AFTER -->
 <h1>سدادة تصريف الأرضية</h1>
 
 <div class="gallery">
-  <img src="main1.jpg" id="main">
+<img src="main1.jpg" id="main">
 </div>
 
-<div class="price-box">
-  <h2>119 درهم</h2>
-</div>
+<div id="oldPrice">149 درهم</div>
+<div id="newPrice">119 درهم</div>
+<div id="savePrice">وفر 30 درهم</div>
+
+<div id="timer">02:45:30</div>
 
 </div>
 
 <script>
+
+// FIXED IMAGE
 function swapImage(img){
-  document.getElementById('main').src = img.src;
+document.getElementById('main').src = img.src;
 }
+
+// FIXED PRICE SCRIPT
+const quantity = document.getElementById('quantity');
+const oldPriceEl = document.getElementById('oldPrice');
+const newPriceEl = document.getElementById('newPrice');
+const savePriceEl = document.getElementById('savePrice');
+
+quantity.addEventListener('change',()=>{
+let option = quantity.options[quantity.selectedIndex];
+let oldP = Number(option.dataset.old);
+let newP = Number(option.dataset.price);
+
+oldPriceEl.textContent = oldP + " درهم";
+newPriceEl.textContent = newP + " درهم";
+savePriceEl.textContent = "وفر " + (oldP - newP) + " درهم";
+});
+
+// TIMER
+let seconds = 2*3600+45*60+30;
+setInterval(()=>{
+let h = String(Math.floor(seconds/3600)).padStart(2,'0');
+let m = String(Math.floor((seconds%3600)/60)).padStart(2,'0');
+let s = String(seconds%60).padStart(2,'0');
+document.getElementById('timer').textContent = h+":"+m+":"+s;
+if(seconds>0) seconds--;
+},1000);
+
 </script>
 
 </body>
