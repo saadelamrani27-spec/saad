@@ -251,3 +251,29 @@ form.addEventListener('submit', function(e){
 
 </body>
 </html>
+
+<script>
+const form = document.getElementById('leadForm');
+
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycby_QZo5jeOC-LHqzi-rNxqKWtBRsVwf3fZNvz4KbXpTB2k20yv9_ErCPg-1hG9SCg2N/exec";
+
+form.addEventListener('submit', function(e){
+  e.preventDefault();
+
+  const data = {
+    full_name: document.getElementById('full_name').value,
+    phone: document.getElementById('phone').value,
+    city: document.getElementById('city').value,
+    address: document.getElementById('address').value,
+    quantity: document.getElementById('quantity').value
+  };
+
+  fetch(SCRIPT_URL, {
+    method: "POST",
+    body: JSON.stringify(data)
+  });
+
+  alert("تم تسجيل الطلب ديالك 👍");
+  form.reset();
+});
+</script>
