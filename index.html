@@ -91,3 +91,168 @@ input, select, textarea {
 }
 </style>
 </head>
+
+<body>
+
+<div class="topbar">توصيل سريع لجميع المدن • الدفع عند الاستلام</div>
+<div class="urgent">عرض محدود - الكمية قربات تسالي!</div>
+
+<div class="container">
+
+<div class="section" id="order">
+  <h2>اطلب ديالك دابا</h2>
+
+  <form id="leadForm" class="form-grid">
+
+    <label>الاسم الكامل</label>
+    <input id="full_name" required>
+
+    <label>رقم الهاتف</label>
+    <input id="phone" required>
+
+    <label>المدينة</label>
+    <select id="city" required>
+      <option disabled selected>اختر المدينة</option>
+
+      <option>الدار البيضاء</option>
+      <option>المحمدية</option>
+      <option>عين حرودة</option>
+      <option>بوسكورة</option>
+      <option>مديونة</option>
+
+      <option>الرباط</option>
+      <option>سلا</option>
+      <option>سلا الجديدة</option>
+      <option>تمارة</option>
+      <option>الصخيرات</option>
+      <option>الخميسات</option>
+      <option>تيفلت</option>
+
+      <option>طنجة</option>
+      <option>تطوان</option>
+      <option>المضيق</option>
+      <option>الفنيدق</option>
+      <option>مرتيل</option>
+      <option>أصيلة</option>
+      <option>العرائش</option>
+      <option>القصر الكبير</option>
+      <option>شفشاون</option>
+      <option>وزان</option>
+
+      <option>وجدة</option>
+      <option>بركان</option>
+      <option>الناظور</option>
+      <option>زايو</option>
+      <option>جرسيف</option>
+      <option>الدريوش</option>
+      <option>تاوريرت</option>
+
+      <option>فاس</option>
+      <option>مكناس</option>
+      <option>صفرو</option>
+      <option>إفران</option>
+      <option>الحاجب</option>
+      <option>تازة</option>
+
+      <option>مراكش</option>
+      <option>قلعة السراغنة</option>
+      <option>شيشاوة</option>
+      <option>إمنتانوت</option>
+      <option>بن جرير</option>
+
+      <option>الجديدة</option>
+      <option>أزمور</option>
+      <option>آسفي</option>
+      <option>الصويرة</option>
+      <option>سيدي بنور</option>
+
+      <option>بني ملال</option>
+      <option>الفقيه بن صالح</option>
+      <option>أزيلال</option>
+      <option>خنيفرة</option>
+
+      <option>أكادير</option>
+      <option>إنزكان</option>
+      <option>آيت ملول</option>
+      <option>تارودانت</option>
+      <option>تيزنيت</option>
+      <option>كلميم</option>
+      <option>طانطان</option>
+
+      <option>العيون</option>
+      <option>الداخلة</option>
+      <option>السمارة</option>
+      <option>بوجدور</option>
+    </select>
+
+    <label>العنوان</label>
+    <textarea id="address" required></textarea>
+
+    <label>اختار العرض</label>
+    <select id="quantity">
+      <option value="1" data-price="99">1 قطعة - 99 درهم</option>
+    </select>
+
+    <button type="submit" class="buy-btn">أكد الطلب ديالي</button>
+
+    <div id="successMsg" class="success">
+      تم تأكيد طلبك بنجاح! غادي نتاصلوا بك قريباً 📞
+    </div>
+
+  </form>
+</div>
+
+<h1>حامل الهاتف المغنطيسي</h1>
+
+<div class="gallery">
+  <img src="MainPro.jpeg" id="main" class="main-image">
+  <div class="thumbs">
+    <img src="2Pro.jpeg" onclick="changeImage(this)" class="active">
+    <img src="3pro.jpeg" onclick="changeImage(this)">
+    <img src="1Pro.jpeg" onclick="changeImage(this)">
+  </div>
+</div>
+
+</div>
+
+<script>
+function changeImage(el){
+  document.getElementById('main').src = el.src;
+  document.querySelectorAll('.thumbs img').forEach(img => img.classList.remove('active'));
+  el.classList.add('active');
+}
+
+const form = document.getElementById('leadForm');
+const successMsg = document.getElementById('successMsg');
+
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx8Azpl1MMJ8SBZhAYPoQ3xni-1ojmcwKKIaxfRkJ5foqGNYK6xW2AgTBpVtICS0bpbJA/exec";
+
+form.addEventListener('submit', function(e){
+  e.preventDefault();
+
+  const quantitySelect = document.getElementById('quantity');
+  const selectedOption = quantitySelect.options[quantitySelect.selectedIndex];
+  const price = selectedOption.getAttribute("data-price") || "99";
+
+  const url = SCRIPT_URL +
+    "?full_name=" + encodeURIComponent(document.getElementById('full_name').value) +
+    "&phone=" + encodeURIComponent(document.getElementById('phone').value) +
+    "&city=" + encodeURIComponent(document.getElementById('city').value) +
+    "&address=" + encodeURIComponent(document.getElementById('address').value) +
+    "&quantity=" + encodeURIComponent(quantitySelect.value) +
+    "&price=" + encodeURIComponent(price);
+
+  fetch(url);
+
+  successMsg.style.display = 'block';
+  form.reset();
+
+  window.scrollTo({
+    top: successMsg.offsetTop - 100,
+    behavior: 'smooth'
+  });
+});
+</script>
+
+</body>
+</html>
