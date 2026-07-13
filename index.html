@@ -116,10 +116,10 @@ input, select, textarea {
   <form id="leadForm" class="form-grid">
 
     <label>الاسم الكامل</label>
-    <input id="full_name" required>
+    <input id="full_name" type="text" required autocomplete="name" pattern="^[A-Za-zÀ-ÿ\u0600-\u06FF\s]+$" title="المرجو إدخال الاسم بالحروف فقط">
 
     <label>رقم الهاتف</label>
-    <input id="phone" required>
+    <input id="phone" type="tel" required inputmode="numeric" maxlength="10" minlength="10" pattern="^(05|06|07)[0-9]{8}$" title="المرجو إدخال رقم هاتف مغربي صحيح">
 
     <label>المدينة</label>
     <select id="city" required>
@@ -226,10 +226,18 @@ function changeImage(el){
 const form = document.getElementById('leadForm');
 const successMsg = document.getElementById('successMsg');
 
+// Validation
+document.getElementById("full_name").addEventListener("input",function(){this.value=this.value.replace(/[^A-Za-zÀ-ÿ\u0600-\u06FF\s]/g,"");});
+document.getElementById("phone").addEventListener("input",function(){this.value=this.value.replace(/\D/g,"");});
+
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx8Azpl1MMJ8SBZhAYPoQ3xni-1ojmcwKKIaxfRkJ5foqGNYK6xW2AgTBpVtICS0bpbJA/exec";
 
 form.addEventListener('submit', function(e){
   e.preventDefault();
+const fullName=document.getElementById('full_name').value.trim();
+const phone=document.getElementById('phone').value.trim();
+if(!/^[A-Za-zÀ-ÿ\u0600-\u06FF\s]+$/.test(fullName)){alert('المرجو إدخال الاسم بالحروف فقط.');return;}
+if(!/^(05|06|07)[0-9]{8}$/.test(phone)){alert('المرجو إدخال رقم هاتف مغربي صحيح.');return;}
 
   const quantitySelect = document.getElementById('quantity');
   const selectedOption = quantitySelect.options[quantitySelect.selectedIndex];
