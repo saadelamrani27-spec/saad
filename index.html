@@ -238,17 +238,20 @@ if(!/^(05|06|07)[0-9]{8}$/.test(phone)){alert('المرجو إدخال رقم ه
     "&quantity=" + encodeURIComponent(quantitySelect.value) +
     "&price=" + encodeURIComponent(price);
 
- fetch(url)
+fetch(url)
   .then(() => {
 
+    // Meta Pixel events
     if (typeof fbq !== 'undefined') {
-
-      // Lead event
       fbq('track', 'Lead');
 
-      // Purchase event with value and currency
-     fbq('track', 'Purchase');
+      fbq('track', 'Purchase', {
+        value: Number(price),
+        currency: 'MAD'
+      });
+    }
 
+    // Success message
     successMsg.style.display = 'block';
     form.reset();
 
@@ -261,7 +264,8 @@ if(!/^(05|06|07)[0-9]{8}$/.test(phone)){alert('المرجو إدخال رقم ه
   .catch(error => {
     console.error(error);
     alert("وقع خطأ أثناء إرسال الطلب، المرجو إعادة المحاولة.");
-  });  //});
+  });
+
 });
 </script>
 
