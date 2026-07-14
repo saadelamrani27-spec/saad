@@ -247,12 +247,7 @@ if(!/^(05|06|07)[0-9]{8}$/.test(phone)){alert('المرجو إدخال رقم ه
       fbq('track', 'Lead');
 
       // Purchase event with value and currency
-      fbq('track', 'Purchase', {
-        value: Number(price),
-        currency: 'MAD'
-      });
-
-    }
+     fbq('track', 'Purchase');
 
     successMsg.style.display = 'block';
     form.reset();
