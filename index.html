@@ -3,7 +3,12 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>مبراة ديال الرجلين كهربائية</title>
+<title>TABRIMA | طقوس الحمّام المغربي الأصيل</title>
+<meta name="description" content="روتينات حمّام مغربية أصيلة مبنية حول تبريمة. اختر الروتين الذي يلائم شعرك واطلبه الآن." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
 <!-- Meta Pixel Code -->
 <script>
@@ -25,195 +30,866 @@ src="https://www.facebook.com/tr?id=1327371405934124&ev=PageView&noscript=1"/>
 <!-- End Meta Pixel Code -->
 
 <style>
-* { box-sizing: border-box; }
-body {
-  margin: 0;
-  font-family: Tahoma, Arial, sans-serif;
-  background: #fff8ef;
-  color: #1d1d1f;
+/* ============ TOKENS ============ */
+:root{
+  --cream:#faf5ea;
+  --cream-deep:#f1e8d6;
+  --olive:#5c6b47;
+  --olive-dark:#37402a;
+  --olive-soft:#8a9773;
+  --gold:#c6a15b;
+  --gold-soft:#e8d7b0;
+  --white:#ffffff;
+  --ink:#2b2a25;
+  --ink-soft:#6b6a60;
+  --line:rgba(92,107,71,.18);
+  --shadow:0 20px 50px -25px rgba(55,64,42,.35);
+  --shadow-soft:0 10px 30px -15px rgba(55,64,42,.25);
+  --radius-lg:28px;
+  --radius-md:18px;
+  --radius-sm:12px;
+  --ease:cubic-bezier(.22,.61,.36,1);
 }
-.topbar { background:#111;color:#fff;text-align:center;padding:12px;font-weight:700; }
-.urgent { background:#ff3d00;color:#fff;text-align:center;padding:10px;font-weight:800; }
-.container { max-width:760px;margin:auto;padding:18px; }
-.section { background:#fff;border-radius:24px;padding:22px;margin-top:18px; }
-.form-grid { display:grid; gap:12px; }
-label { font-size:18px; font-weight:800; }
-input, select, textarea {
-  width:100%;
-  padding:14px;
-  border-radius:14px;
-  border:1px solid #ddd;
-  font-size:16px;
+
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  font-family:'Cairo',sans-serif;
+  background:var(--cream);
+  color:var(--ink);
+  line-height:1.75;
+  -webkit-font-smoothing:antialiased;
 }
-.buy-btn {
-  background:linear-gradient(90deg,#ff3d00,#ff7b00);
-  color:#fff;
-  font-size:20px;
-  font-weight:900;
-  padding:16px;
-  border-radius:14px;
-  border:none;
-  cursor:pointer;
-}
-.gallery { max-width:500px; margin:20px auto; }
-.main-image {
-  width:100%;
-  max-height:380px;
-  object-fit:cover;
-  border-radius:16px;
-}
-.thumbs {
-  display:grid;
-  grid-template-columns: repeat(3,1fr);
-  gap:10px;
-  margin-top:10px;
-}
-.thumbs img {
-  width:100%;
-  height:80px;
-  object-fit:cover;
-  border-radius:12px;
-  cursor:pointer;
-  border:2px solid transparent;
-}
-.thumbs img.active { border-color:#ff6a00; }
-.success {
-  display:none;
-  margin-top:12px;
-  padding:12px;
-  border-radius:10px;
-  text-align:center;
+h1,h2,h3,.display{
+  font-family:'Amiri',serif;
+  color:var(--olive-dark);
+  margin:0;
   font-weight:700;
-  background:#e8fff0;
-  color:#0d7a37;
+}
+p{margin:0;}
+img{max-width:100%;display:block;}
+button{font-family:inherit;}
+a{color:inherit;text-decoration:none;}
+
+.wrap{max-width:1120px;margin:0 auto;padding:0 22px;}
+.section{padding:56px 0;position:relative;}
+.section-alt{background:var(--cream-deep);}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:10px;
+  font-size:13px;letter-spacing:.14em;font-weight:700;
+  color:var(--olive);text-transform:uppercase;
+  margin-bottom:14px;
+}
+.eyebrow::before{
+  content:"";width:26px;height:1px;background:var(--gold);
+}
+.section-head{max-width:640px;margin:0 auto 52px;text-align:center;}
+.section-head h2{font-size:clamp(28px,4vw,40px);line-height:1.3;}
+.section-head p{margin-top:14px;color:var(--ink-soft);font-size:16.5px;}
+
+/* subtle reveal on scroll */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .8s var(--ease),transform .8s var(--ease);}
+.reveal.in{opacity:1;transform:translateY(0);}
+
+/* sprig icon */
+.sprig{width:30px;height:30px;color:var(--olive);flex-shrink:0;}
+.sprig-lg{width:52px;height:52px;}
+.drop{width:20px;height:20px;color:var(--gold);flex-shrink:0;}
+
+/* ============ TOPBAR ============ */
+.topbar{
+  background:var(--olive-dark);color:var(--gold-soft);
+  text-align:center;padding:11px 16px;font-size:13.5px;font-weight:600;
+  letter-spacing:.02em;
+}
+
+/* ============ NAV ============ */
+.nav{
+  position:sticky;top:0;z-index:40;
+  background:rgba(250,245,234,.82);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line);
+}
+.nav-inner{
+  max-width:1120px;margin:0 auto;padding:14px 22px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.brand{display:flex;align-items:center;gap:10px;font-family:'Amiri',serif;font-weight:700;font-size:21px;color:var(--olive-dark);}
+.brand .sprig{width:26px;height:26px;}
+.nav-cta{
+  background:var(--olive-dark);color:var(--cream);
+  padding:10px 22px;border-radius:100px;font-size:14px;font-weight:700;
+  transition:background .3s var(--ease),transform .3s var(--ease);
+}
+.nav-cta:hover{background:var(--olive);transform:translateY(-1px);}
+
+/* ============ HERO ============ */
+.hero{
+  position:relative;overflow:hidden;
+  padding:64px 0 90px;
+  background:
+    radial-gradient(circle at 85% 10%, rgba(198,161,91,.16), transparent 55%),
+    radial-gradient(circle at 10% 90%, rgba(92,107,71,.14), transparent 50%),
+    var(--cream);
+}
+.hero-inner{
+  max-width:1120px;margin:0 auto;padding:0 22px;
+  display:grid;grid-template-columns:minmax(0,1fr);gap:44px;align-items:center;
+}
+.hero-logo{
+  width:78px;height:78px;margin:0 auto 26px;
+  border-radius:50%;border:1px solid var(--gold-soft);
+  display:flex;align-items:center;justify-content:center;
+  background:var(--white);box-shadow:var(--shadow-soft);
+}
+.hero-logo .sprig{width:40px;height:40px;}
+.hero-text{text-align:center;}
+.hero-text h1{
+  font-size:clamp(34px,6vw,58px);line-height:1.25;
+  margin-bottom:20px;
+}
+.hero-text h1 em{font-style:normal;color:var(--olive);}
+.hero-text p{
+  max-width:520px;margin:0 auto;color:var(--ink-soft);
+  font-size:17.5px;
+}
+.hero-actions{
+  display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:32px;
+}
+.btn-primary{
+  background:linear-gradient(135deg,var(--olive),var(--olive-dark));
+  color:var(--cream);padding:16px 34px;border-radius:100px;
+  font-weight:700;font-size:16px;border:none;cursor:pointer;
+  box-shadow:var(--shadow-soft);
+  transition:transform .35s var(--ease),box-shadow .35s var(--ease);
+}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:var(--shadow);}
+.btn-ghost{
+  background:transparent;color:var(--olive-dark);
+  padding:16px 30px;border-radius:100px;font-weight:700;font-size:16px;
+  border:1px solid var(--line);cursor:pointer;
+  transition:background .3s var(--ease),border-color .3s var(--ease);
+}
+.btn-ghost:hover{background:var(--white);border-color:var(--olive-soft);}
+
+.hero-visual{
+  position:relative;border-radius:var(--radius-lg);overflow:hidden;
+  aspect-ratio:16/11;
+  background:
+    radial-gradient(circle at 30% 20%, rgba(255,255,255,.5), transparent 45%),
+    linear-gradient(155deg, var(--cream-deep), var(--gold-soft) 65%, var(--olive-soft));
+  box-shadow:var(--shadow);
+  display:flex;align-items:center;justify-content:center;
+}
+.hero-visual .sprig{width:120px;height:120px;color:rgba(55,64,42,.55);}
+.hero-visual .visual-caption{
+  position:absolute;bottom:22px;right:22px;left:22px;
+  display:flex;justify-content:space-between;align-items:flex-end;
+  color:var(--olive-dark);font-size:12.5px;letter-spacing:.08em;
+  text-transform:uppercase;font-weight:700;
+}
+
+/* ============ TRUST STRIP (inside hero) ============ */
+.trust-strip{
+  display:flex;flex-wrap:wrap;gap:10px 22px;
+  margin-top:30px;justify-content:center;
+}
+.trust-item{
+  display:flex;align-items:center;gap:8px;
+  font-size:13.5px;font-weight:700;color:var(--olive-dark);
+}
+.trust-item .sprig{width:18px;height:18px;}
+
+/* ============ ROUTINE SELECTOR ============ */
+.routine-grid{
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;
+  margin-bottom:44px;
+}
+.routine-card{
+  background:var(--white);border-radius:var(--radius-md);
+  padding:22px 18px;text-align:center;cursor:pointer;
+  border:2px solid transparent;
+  box-shadow:var(--shadow-soft);
+  transition:transform .35s var(--ease),border-color .35s var(--ease),box-shadow .35s var(--ease);
+}
+.routine-card:hover{transform:translateY(-4px);}
+.routine-card.active{
+  border-color:var(--gold);
+  box-shadow:var(--shadow);
+  background:linear-gradient(180deg,var(--white),var(--cream-deep));
+}
+.routine-card .sprig{margin:0 auto 12px;}
+.routine-card h4{font-family:'Amiri',serif;font-size:17px;color:var(--olive-dark);margin-bottom:6px;}
+.routine-card span{font-size:12.5px;color:var(--ink-soft);}
+
+.routine-detail{
+  background:var(--white);border-radius:var(--radius-lg);
+  overflow:hidden;box-shadow:var(--shadow);
+  border:1px solid var(--line);
+  display:grid;grid-template-columns:minmax(0,1fr);
+  opacity:0;transform:translateY(10px);
+  transition:opacity .5s var(--ease),transform .5s var(--ease);
+}
+.routine-detail.show{opacity:1;transform:translateY(0);}
+.rd-visual{
+  aspect-ratio:16/10;position:relative;min-width:0;
+  background:linear-gradient(150deg,var(--cream-deep),var(--gold-soft));
+  display:flex;align-items:center;justify-content:center;
+}
+.rd-visual .sprig{width:90px;height:90px;color:rgba(55,64,42,.5);}
+.rd-body{padding:30px 26px 34px;min-width:0;overflow-wrap:break-word;}
+.rd-tag{
+  display:inline-block;background:var(--cream-deep);color:var(--olive);
+  padding:6px 14px;border-radius:100px;font-size:12.5px;font-weight:700;
+  margin-bottom:14px;
+}
+.rd-body h3{font-size:26px;margin-bottom:10px;}
+.rd-body > p.rd-desc{color:var(--ink-soft);font-size:15.5px;margin-bottom:22px;}
+.rd-items{list-style:none;padding:0;margin:0 0 24px;display:grid;gap:10px;}
+.rd-items li{
+  display:flex;align-items:center;gap:10px;font-size:15px;
+  padding:10px 14px;background:var(--cream);border-radius:var(--radius-sm);
+}
+.rd-price-row{
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;row-gap:12px;column-gap:16px;
+  padding-top:18px;border-top:1px dashed var(--line);
+}
+.rd-price{font-family:'Amiri',serif;font-size:22px;color:var(--olive-dark);}
+.rd-price small{font-family:'Cairo',sans-serif;font-size:12.5px;color:var(--ink-soft);font-weight:400;display:block;}
+.rd-cta{
+  background:var(--olive-dark);color:var(--cream);
+  padding:13px 28px;border-radius:100px;font-weight:700;font-size:14.5px;
+  border:none;cursor:pointer;transition:background .3s var(--ease),transform .3s var(--ease);
+}
+.rd-cta:hover{background:var(--olive);transform:translateY(-2px);}
+
+/* ============ HOW TO USE — TIMELINE ============ */
+.timeline{position:relative;max-width:640px;margin:0 auto;}
+.timeline::before{
+  content:"";position:absolute;top:0;bottom:0;right:27px;
+  width:1px;background:var(--line);
+}
+.tl-step{
+  position:relative;display:flex;gap:20px;padding-bottom:20px;
+}
+.tl-step:last-child{padding-bottom:0;}
+.tl-num{
+  width:56px;height:56px;border-radius:50%;flex-shrink:0;
+  background:var(--white);border:1.5px solid var(--gold);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Amiri',serif;font-weight:700;font-size:20px;color:var(--olive-dark);
+  box-shadow:var(--shadow-soft);z-index:1;
+}
+.tl-content{padding-top:8px;}
+.tl-content h4{font-size:17px;color:var(--olive-dark);font-family:'Amiri',serif;margin-bottom:4px;}
+.tl-content p{font-size:14.5px;color:var(--ink-soft);}
+.tl-step.result .tl-num{background:var(--olive-dark);border-color:var(--olive-dark);color:var(--cream);}
+
+/* ============ RD BENEFIT CHIPS (inside routine detail) ============ */
+.rd-benefits{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px;}
+.rd-benefit{
+  display:inline-flex;align-items:center;gap:6px;
+  background:var(--cream);border-radius:100px;padding:7px 13px;
+  font-size:12.5px;font-weight:700;color:var(--olive-dark);
+}
+
+/* ============ REVIEWS ============ */
+.reviews-scroll{
+  display:flex;gap:18px;overflow-x:auto;padding-bottom:10px;
+  scroll-snap-type:x mandatory;
+}
+.review-card{
+  scroll-snap-align:start;flex:0 0 82%;
+  background:var(--white);border-radius:var(--radius-md);
+  padding:24px;border:1px solid var(--line);box-shadow:var(--shadow-soft);
+}
+.review-top{display:flex;align-items:center;gap:12px;margin-bottom:14px;}
+.review-avatar{
+  width:44px;height:44px;border-radius:50%;
+  background:var(--cream-deep);color:var(--olive-dark);
+  display:flex;align-items:center;justify-content:center;
+  font-weight:800;font-family:'Amiri',serif;
+}
+.review-name{font-weight:700;font-size:14.5px;color:var(--olive-dark);}
+.review-stars{color:var(--gold);font-size:13px;letter-spacing:2px;}
+.review-text{font-size:14.5px;color:var(--ink-soft);}
+.review-note{
+  text-align:center;font-size:12px;color:var(--ink-soft);
+  margin-top:14px;opacity:.7;
+}
+
+/* ============ CHECKOUT ============ */
+.checkout-wrap{
+  display:grid;grid-template-columns:minmax(0,1fr);gap:22px;
+}
+.checkout-summary{
+  background:var(--olive-dark);color:var(--cream);
+  border-radius:var(--radius-lg);padding:28px 24px;
+  box-shadow:var(--shadow);height:fit-content;
+}
+.checkout-summary h3{color:var(--cream);font-size:19px;margin-bottom:18px;}
+.cs-row{
+  display:flex;gap:14px;align-items:center;
+  background:rgba(255,255,255,.06);border-radius:var(--radius-sm);
+  padding:14px;margin-bottom:14px;
+}
+.cs-visual{
+  width:56px;height:56px;border-radius:12px;flex-shrink:0;
+  background:rgba(198,161,91,.25);
+  display:flex;align-items:center;justify-content:center;
+}
+.cs-visual .sprig{width:30px;height:30px;color:var(--gold-soft);}
+.cs-name{font-weight:700;font-size:15px;}
+.cs-name small{display:block;font-weight:400;font-size:12px;color:var(--gold-soft);margin-top:2px;}
+.cs-items{list-style:none;padding:0;margin:0 0 16px;font-size:13.5px;color:rgba(250,245,234,.75);display:grid;gap:6px;}
+.cs-items li{display:flex;gap:8px;align-items:center;}
+.cs-items li::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--gold);flex-shrink:0;}
+.cs-total{
+  display:flex;justify-content:space-between;align-items:center;
+  border-top:1px dashed rgba(250,245,234,.25);padding-top:16px;
+}
+.cs-total .amount{font-family:'Amiri',serif;font-size:24px;color:var(--gold-soft);}
+.cs-total .amount small{display:block;font-family:'Cairo',sans-serif;font-size:11px;color:rgba(250,245,234,.6);font-weight:400;}
+
+.checkout-form{
+  background:var(--white);border-radius:var(--radius-lg);
+  padding:28px 24px;box-shadow:var(--shadow-soft);border:1px solid var(--line);
+}
+.form-grid{display:grid;gap:16px;}
+label{font-size:14.5px;font-weight:700;color:var(--olive-dark);display:block;margin-bottom:7px;}
+.field{margin:0;}
+input,select,textarea{
+  width:100%;padding:14px 16px;border-radius:var(--radius-sm);
+  border:1px solid var(--line);font-size:15.5px;background:var(--cream);
+  font-family:'Cairo',sans-serif;color:var(--ink);
+  transition:border-color .3s var(--ease),box-shadow .3s var(--ease);
+}
+input:focus,select:focus,textarea:focus{
+  outline:none;border-color:var(--gold);
+  box-shadow:0 0 0 3px rgba(198,161,91,.18);
+}
+textarea{min-height:88px;resize:vertical;}
+.buy-btn{
+  background:linear-gradient(135deg,var(--olive),var(--olive-dark));
+  color:var(--cream);font-size:17px;font-weight:800;
+  padding:17px;border-radius:100px;border:none;cursor:pointer;
+  box-shadow:var(--shadow-soft);
+  transition:transform .35s var(--ease),box-shadow .35s var(--ease);
+}
+.buy-btn:hover{transform:translateY(-2px);box-shadow:var(--shadow);}
+.buy-btn:active{transform:translateY(0);}
+.success{
+  display:none;margin-top:6px;padding:16px;border-radius:var(--radius-sm);
+  text-align:center;font-weight:700;background:#eef4e6;color:var(--olive-dark);
+  border:1px solid var(--olive-soft);
+}
+
+/* ============ FLOATING QUICK-ORDER BAR ============ */
+.quick-order{
+  position:fixed;left:0;right:0;bottom:0;z-index:50;
+  background:rgba(250,245,234,.92);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-top:1px solid var(--line);
+  box-shadow:0 -10px 30px -18px rgba(55,64,42,.35);
+  padding:12px 16px;
+  display:flex;align-items:center;justify-content:space-between;gap:14px;
+  transform:translateY(120%);transition:transform .4s var(--ease);
+}
+.quick-order.show{transform:translateY(0);}
+.qo-info{display:flex;align-items:center;gap:10px;min-width:0;}
+.qo-info .sprig{width:22px;height:22px;flex-shrink:0;}
+.qo-text{min-width:0;}
+.qo-text .qo-name{font-size:13.5px;font-weight:700;color:var(--olive-dark);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block;max-width:46vw;}
+.qo-text .qo-price{font-size:11.5px;color:var(--ink-soft);}
+.qo-btn{
+  background:linear-gradient(135deg,var(--olive),var(--olive-dark));
+  color:var(--cream);padding:12px 22px;border-radius:100px;
+  font-weight:800;font-size:14px;border:none;cursor:pointer;flex-shrink:0;
+  transition:transform .3s var(--ease);
+}
+.qo-btn:hover{transform:translateY(-2px);}
+@media(min-width:820px){
+  .quick-order{left:auto;right:26px;bottom:26px;border-radius:100px;border:1px solid var(--line);padding:10px 10px 10px 22px;max-width:420px;}
+  .qo-text .qo-name{max-width:200px;}
+}
+
+/* ============ FOOTER ============ */
+footer{
+  background:var(--olive-dark);color:rgba(250,245,234,.7);
+  text-align:center;padding:44px 22px;font-size:13.5px;
+}
+footer .brand{color:var(--cream);justify-content:center;margin-bottom:14px;}
+footer .brand .sprig{color:var(--gold-soft);}
+
+/* ============ RESPONSIVE — DESKTOP ============ */
+@media(min-width:820px){
+  .hero-inner{grid-template-columns:minmax(0,1fr) minmax(0,1fr);text-align:right;}
+  .hero-text{text-align:right;}
+  .hero-text p{margin:0;}
+  .hero-actions{justify-content:flex-start;}
+  .hero-logo{margin:0 0 26px;}
+  .pillars{grid-template-columns:repeat(4,1fr);}
+  .routine-grid{grid-template-columns:repeat(4,minmax(0,1fr));}
+  .routine-detail{grid-template-columns:minmax(0,1fr) minmax(0,1fr);}
+  .rd-body{padding:40px 40px 40px 34px;}
+  .review-card{flex:0 0 360px;}
+  .checkout-wrap{grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);align-items:start;}
+}
+@media(prefers-reduced-motion:reduce){
+  *{transition:none !important;animation:none !important;}
 }
 </style>
 </head>
 
 <body>
 
-<div class="topbar">توصيل سريع لجميع المدن • الدفع عند الاستلام</div>
-<div class="urgent">عرض محدود - الكمية قربات تسالي!</div>
+<div class="topbar">توصيل سريع لجميع المدن &nbsp;•&nbsp; الدفع عند الاستلام</div>
 
-<div class="container">
+<!-- ============ SVG SPRITE (signature line-art icons matching the logo) ============ -->
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <symbol id="icon-sprig" viewBox="0 0 64 64">
+      <g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M32 58V22"/>
+        <path d="M32 34c0-11 -9-18-18-18 0 11 9 18 18 18Z"/>
+        <path d="M32 26c0-13 10-20 20-20 0 12-9 20-20 20Z"/>
+        <circle cx="32" cy="14" r="2.2" fill="currentColor" stroke="none"/>
+      </g>
+    </symbol>
+    <symbol id="icon-drop" viewBox="0 0 24 24">
+      <path d="M12 2C8 9 4 12.5 4 16.5 4 20.6 7.6 24 12 24s8-3.4 8-7.5C20 12.5 16 9 12 2Z" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    </symbol>
+    <symbol id="icon-hand" viewBox="0 0 64 40">
+      <path d="M4 30c8-2 14-10 18-16 3 4 1 10-2 14 6-2 11-9 13-16 3 5 1 12-3 17 5-1 9-6 11-11 2 6-1 13-8 17-8 4-20 4-29-5Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+    </symbol>
+  </defs>
+</svg>
 
-<div class="section" id="order">
-  <h2>اطلب ديالك دابا</h2>
+<!-- ============ NAV ============ -->
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="brand"><svg class="sprig"><use href="#icon-sprig"/></svg> TABRIMA</div>
+    <a href="#checkout" class="nav-cta">اطلب الآن</a>
+  </div>
+</nav>
 
-  <form id="leadForm" class="form-grid">
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-text">
+      <div class="hero-logo"><svg class="sprig"><use href="#icon-sprig"/></svg></div>
+      <div class="eyebrow">TABRIMA — طهارة حمّامية أصيلة</div>
+      <h1>طقوس الحمّام المغربي، <em>بين يديك</em></h1>
+      <p>من قلب الحمّام التقليدي إلى روتين عناية يومي بسيط. اختر الروتين الذي يلائم طبيعة شعرك، ودع الطبيعة تكمل الباقي.</p>
+      <div class="hero-actions">
+        <button class="btn-primary" onclick="document.getElementById('routines').scrollIntoView({behavior:'smooth'})">اختر روتينك</button>
+        <a href="#checkout" class="btn-ghost">اطلب مباشرة</a>
+      </div>
+      <div class="trust-strip">
+        <span class="trust-item"><svg class="sprig"><use href="#icon-sprig"/></svg> مكوّنات طبيعية 100%</span>
+        <span class="trust-item"><svg class="sprig"><use href="#icon-sprig"/></svg> وصفة حمّامية أصيلة</span>
+        <span class="trust-item"><svg class="sprig"><use href="#icon-sprig"/></svg> الدفع عند الاستلام</span>
+      </div>
+    </div>
+    <div class="hero-visual reveal">
+      <svg class="sprig"><use href="#icon-sprig"/></svg>
+      <div class="visual-caption">
+        <span>TABRIMA · Hammam Ritual</span>
+        <span>100% طبيعي</span>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <label>الاسم الكامل</label>
-    <input id="full_name" type="text" required autocomplete="name" pattern="^[A-Za-zÀ-ÿ\u0600-\u06FF\s]+$" title="المرجو إدخال الاسم بالحروف فقط">
-
-    <label>رقم الهاتف</label>
-    <input id="phone" type="tel" required inputmode="numeric" maxlength="10" minlength="10" pattern="^(05|06|07)[0-9]{8}$" title="المرجو إدخال رقم هاتف مغربي صحيح">
-
-    <label>المدينة</label>
-    <select id="city" required>
-      <option disabled selected>اختر المدينة</option>
-      <option>الدار البيضاء</option>
-      <option>المحمدية</option>
-      <option>عين حرودة</option>
-      <option>بوسكورة</option>
-      <option>مديونة</option>
-      <option>الرباط</option>
-      <option>سلا</option>
-      <option>سلا الجديدة</option>
-      <option>تمارة</option>
-      <option>الصخيرات</option>
-      <option>الخميسات</option>
-      <option>تيفلت</option>
-      <option>طنجة</option>
-      <option>تطوان</option>
-      <option>المضيق</option>
-      <option>الفنيدق</option>
-      <option>مرتيل</option>
-      <option>أصيلة</option>
-      <option>العرائش</option>
-      <option>القصر الكبير</option>
-      <option>شفشاون</option>
-      <option>وزان</option>
-      <option>وجدة</option>
-      <option>بركان</option>
-      <option>الناظور</option>
-      <option>زايو</option>
-      <option>جرسيف</option>
-      <option>الدريوش</option>
-      <option>تاوريرت</option>
-      <option>فاس</option>
-      <option>مكناس</option>
-      <option>صفرو</option>
-      <option>إفران</option>
-      <option>الحاجب</option>
-      <option>تازة</option>
-      <option>مراكش</option>
-      <option>قلعة السراغنة</option>
-      <option>شيشاوة</option>
-      <option>إمنتانوت</option>
-      <option>بن جرير</option>
-      <option>الجديدة</option>
-      <option>أزمور</option>
-      <option>آسفي</option>
-      <option>الصويرة</option>
-      <option>سيدي بنور</option>
-      <option>بني ملال</option>
-      <option>الفقيه بن صالح</option>
-      <option>أزيلال</option>
-      <option>خنيفرة</option>
-      <option>أكادير</option>
-      <option>إنزكان</option>
-      <option>آيت ملول</option>
-      <option>تارودانت</option>
-      <option>تيزنيت</option>
-      <option>كلميم</option>
-      <option>طانطان</option>
-      <option>العيون</option>
-      <option>الداخلة</option>
-      <option>السمارة</option>
-      <option>بوجدور</option>
-    </select>
-
-    <label>العنوان</label>
-    <textarea id="address" required></textarea>
-
-    <label>اختار العرض</label>
-    <select id="quantity">
-      <option value="1" data-price="129">1 قطعة - 129 درهم</option>
-    </select>
-
-    <button type="submit" class="buy-btn">أكد الطلب ديالي</button>
-
-    <div id="successMsg" class="success">
-      تم تأكيد طلبك بنجاح! غادي نتاصلوا بك قريباً 📞
+<!-- ============ ROUTINE SELECTOR + DETAILS ============ -->
+<section class="section section-alt" id="routines">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow" style="justify-content:center">اختر روتينك</div>
+      <h2>أربعة روتينات، لكل نوع شعر</h2>
+      <p>كل روتين يجمع تبريمة مع منتجات مختارة بعناية لتلائم احتياج شعرك.</p>
     </div>
 
-  </form>
-</div>
-
-<h1>مبراة ديال الرجلين كهربائية</h1>
-
-<div class="gallery">
-  <img src="Main1pro.png" id="main" class="main-image">
-  <div class="thumbs">
-    <img src="2promax - Copie.png" onclick="changeImage(this)" class="active">
-    <img src="3promax - Copie.png" onclick="changeImage(this)">
-    <img src="4promax.png" onclick="changeImage(this)">
+    <div class="routine-grid" id="routineGrid"></div>
+    <div class="routine-detail show" id="routineDetail"></div>
   </div>
-</div>
+</section>
 
+<!-- ============ HOW TO USE ============ -->
+<section class="section section-alt" id="how">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow" style="justify-content:center">طريقة الاستعمال</div>
+      <h2>خمس خطوات، وطقس حمّام كامل</h2>
+    </div>
+    <div class="timeline">
+      <div class="tl-step reveal">
+        <div class="tl-num">١</div>
+        <div class="tl-content"><h4>التوجّه إلى الحمّام</h4><p>ترطيب بالبخار لفتح المسام.</p></div>
+      </div>
+      <div class="tl-step reveal">
+        <div class="tl-num">٢</div>
+        <div class="tl-content"><h4>استعمال تبريمة</h4><p>بحركات دائرية على فروة الرأس.</p></div>
+      </div>
+      <div class="tl-step reveal">
+        <div class="tl-num">٣</div>
+        <div class="tl-content"><h4>الغسل</h4><p>شطف جيد بماء فاتر.</p></div>
+      </div>
+      <div class="tl-step reveal">
+        <div class="tl-num">٤</div>
+        <div class="tl-content"><h4>تطبيق الزيت</h4><p>من الأطراف حتى الجذور.</p></div>
+      </div>
+      <div class="tl-step reveal">
+        <div class="tl-num">٥</div>
+        <div class="tl-content"><h4>تطبيق الكريم</h4><p>لترطيب يدوم طوال اليوم.</p></div>
+      </div>
+      <div class="tl-step result reveal">
+        <div class="tl-num"><svg class="sprig" style="width:24px;height:24px"><use href="#icon-sprig"/></svg></div>
+        <div class="tl-content"><h4>النتيجة</h4><p>شعر ناعم ولامع، بلمسة حمّام أصيل.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ REVIEWS ============ -->
+<section class="section section-alt" id="reviews">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow" style="justify-content:center">آراء العميلات</div>
+    </div>
+    <div class="reviews-scroll" id="reviewsScroll"></div>
+  </div>
+</section>
+
+<!-- ============ CHECKOUT ============ -->
+<section class="section section-alt" id="checkout">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow" style="justify-content:center">إتمام الطلب</div>
+      <h2>أكملي طلبك الآن</h2>
+      <p>الدفع عند الاستلام — سنتواصل معك لتأكيد الطلب خلال دقائق.</p>
+    </div>
+
+    <div class="checkout-wrap">
+      <div class="checkout-summary" id="checkoutSummary"></div>
+
+      <div class="checkout-form">
+        <form id="leadForm" class="form-grid">
+
+          <div class="field">
+            <label>الاسم الكامل</label>
+            <input id="full_name" type="text" required autocomplete="name" pattern="^[A-Za-zÀ-ÿ\u0600-\u06FF\s]+$" title="المرجو إدخال الاسم بالحروف فقط">
+          </div>
+
+          <div class="field">
+            <label>رقم الهاتف</label>
+            <input id="phone" type="tel" required inputmode="numeric" maxlength="10" minlength="10" pattern="^(05|06|07)[0-9]{8}$" title="المرجو إدخال رقم هاتف مغربي صحيح">
+          </div>
+
+          <div class="field">
+            <label>المدينة</label>
+            <select id="city" required>
+              <option disabled selected value="">اختر المدينة</option>
+              <option>الدار البيضاء</option>
+              <option>المحمدية</option>
+              <option>عين حرودة</option>
+              <option>بوسكورة</option>
+              <option>مديونة</option>
+              <option>الرباط</option>
+              <option>سلا</option>
+              <option>سلا الجديدة</option>
+              <option>تمارة</option>
+              <option>الصخيرات</option>
+              <option>الخميسات</option>
+              <option>تيفلت</option>
+              <option>طنجة</option>
+              <option>تطوان</option>
+              <option>المضيق</option>
+              <option>الفنيدق</option>
+              <option>مرتيل</option>
+              <option>أصيلة</option>
+              <option>العرائش</option>
+              <option>القصر الكبير</option>
+              <option>شفشاون</option>
+              <option>وزان</option>
+              <option>وجدة</option>
+              <option>بركان</option>
+              <option>الناظور</option>
+              <option>زايو</option>
+              <option>جرسيف</option>
+              <option>الدريوش</option>
+              <option>تاوريرت</option>
+              <option>فاس</option>
+              <option>مكناس</option>
+              <option>صفرو</option>
+              <option>إفران</option>
+              <option>الحاجب</option>
+              <option>تازة</option>
+              <option>مراكش</option>
+              <option>قلعة السراغنة</option>
+              <option>شيشاوة</option>
+              <option>إمنتانوت</option>
+              <option>بن جرير</option>
+              <option>الجديدة</option>
+              <option>أزمور</option>
+              <option>آسفي</option>
+              <option>الصويرة</option>
+              <option>سيدي بنور</option>
+              <option>بني ملال</option>
+              <option>الفقيه بن صالح</option>
+              <option>أزيلال</option>
+              <option>خنيفرة</option>
+              <option>أكادير</option>
+              <option>إنزكان</option>
+              <option>آيت ملول</option>
+              <option>تارودانت</option>
+              <option>تيزنيت</option>
+              <option>كلميم</option>
+              <option>طانطان</option>
+              <option>العيون</option>
+              <option>الداخلة</option>
+              <option>السمارة</option>
+              <option>بوجدور</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label>العنوان</label>
+            <textarea id="address" required></textarea>
+          </div>
+
+          <div class="field">
+            <label>الروتين المختار</label>
+            <select id="quantity"></select>
+          </div>
+
+          <button type="submit" class="buy-btn">أكّدي طلبك الآن</button>
+
+          <div id="successMsg" class="success">
+            تم تأكيد طلبك بنجاح! غادي نتاصلوا بك قريباً 📞
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="brand"><svg class="sprig"><use href="#icon-sprig"/></svg> TABRIMA</div>
+  <p>© 2026 TABRIMA — طقوس الحمّام المغربي الأصيل. جميع الحقوق محفوظة.</p>
+</footer>
+
+<!-- ============ FLOATING QUICK-ORDER BAR — checkout always one tap away ============ -->
+<div class="quick-order" id="quickOrder">
+  <div class="qo-info">
+    <svg class="sprig"><use href="#icon-sprig"/></svg>
+    <div class="qo-text">
+      <span class="qo-name" id="qoName">روتين الشعر الجاف</span>
+      <span class="qo-price" id="qoPrice">السعر يُعلن قريبًا</span>
+    </div>
+  </div>
+  <button type="button" class="qo-btn" onclick="document.getElementById('checkout').scrollIntoView({behavior:'smooth'})">اطلب الآن</button>
 </div>
 
 <script>
-function changeImage(el){
-  document.getElementById('main').src = el.src;
-  document.querySelectorAll('.thumbs img').forEach(img => img.classList.remove('active'));
-  el.classList.add('active');
+/* ============================================================
+   DATA — every routine lives here. Add / edit routines by
+   editing this object only; the whole UI updates from it.
+   PRICES ARE PLACEHOLDERS (0) — replace with real prices
+   before launch. Do not remove data-price wiring below.
+   ============================================================ */
+const routines = {
+  dry: {
+    key:'dry',
+    name:'شعر جاف',
+    fullName:'روتين الشعر الجاف',
+    tag:'ترطيب عميق',
+    desc:'تركيبة غنية مصممة لإعادة الحياة للشعر الجاف والمتعب، تمنحه نعومة ومرونة من أول استعمال.',
+    items:['تبريمة','زيت الشعر الجاف','كريم الحمّام'],
+    benefits:['ترطيب عميق','لمعان طبيعي','تقليل التقصف'],
+    price:0
+  },
+  oily: {
+    key:'oily',
+    name:'شعر دهني',
+    fullName:'روتين الشعر الدهني',
+    tag:'توازن وانتعاش',
+    desc:'يوازن إفراز الدهون الزائدة في فروة الرأس، ويمنح الشعر خفة ونظافة تدوم طويلاً.',
+    items:['تبريمة','زيت الشعر الدهني','كريم الحمّام'],
+    benefits:['توازن الدهون','نظافة تدوم','خفة ملموسة'],
+    price:0
+  },
+  normal: {
+    key:'normal',
+    name:'شعر عادي',
+    tag:'عناية متوازنة',
+    fullName:'روتين الشعر العادي',
+    desc:'للحفاظ على توازن الشعر الصحي، بلمسة عناية يومية تُبقيه لامعًا وحيويًا.',
+    items:['تبريمة','زيت الشعر العادي','كريم الحمّام'],
+    benefits:['حيوية يومية','لمعان صحي','عناية متوازنة'],
+    price:0
+  },
+  complete: {
+    key:'complete',
+    name:'الروتين الشامل',
+    fullName:'الروتين الشامل — طقس الحمّام الكامل',
+    tag:'الأكثر تكاملاً',
+    desc:'تجربة حمّام متكاملة تجمع كل ما تحتاجه بشرتك وشعرك في طقس عناية واحد فاخر.',
+    items:['تبريمة','زيت العناية','كريم الحمّام','قفاز الكيس المغربي'],
+    benefits:['تجربة متكاملة','نتائج شاملة','قيمة أعلى'],
+    price:0
+  }
+};
+
+let activeRoutine = 'dry';
+
+/* ---------- render routine cards ---------- */
+const routineGrid = document.getElementById('routineGrid');
+Object.values(routines).forEach(r=>{
+  const card = document.createElement('div');
+  card.className = 'routine-card' + (r.key===activeRoutine ? ' active' : '');
+  card.dataset.key = r.key;
+  card.innerHTML = `
+    <svg class="sprig"><use href="#icon-sprig"/></svg>
+    <h4>${r.name}</h4>
+    <span>${r.tag}</span>
+  `;
+  card.addEventListener('click', ()=> selectRoutine(r.key));
+  routineGrid.appendChild(card);
+});
+
+/* ---------- render routine detail panel ---------- */
+const routineDetail = document.getElementById('routineDetail');
+function renderDetail(key){
+  const r = routines[key];
+  routineDetail.classList.remove('show');
+  setTimeout(()=>{
+    routineDetail.innerHTML = `
+      <div class="rd-visual"><svg class="sprig"><use href="#icon-sprig"/></svg></div>
+      <div class="rd-body">
+        <span class="rd-tag">${r.tag}</span>
+        <h3>${r.fullName}</h3>
+        <p class="rd-desc">${r.desc}</p>
+        <div class="rd-benefits">
+          ${r.benefits.map(b=>`<span class="rd-benefit"><svg class="drop"><use href="#icon-drop"/></svg> ${b}</span>`).join('')}
+        </div>
+        <ul class="rd-items">
+          ${r.items.map(i=>`<li><svg class="sprig" style="width:18px;height:18px"><use href="#icon-sprig"/></svg> ${i}</li>`).join('')}
+        </ul>
+        <div class="rd-price-row">
+          <div class="rd-price">${r.price>0 ? r.price+' درهم' : 'السعر يُعلن قريبًا'}<small>شامل التوصيل</small></div>
+          <button type="button" class="rd-cta" onclick="document.getElementById('checkout').scrollIntoView({behavior:'smooth'})">اطلبي هذا الروتين</button>
+        </div>
+      </div>
+    `;
+    routineDetail.classList.add('show');
+  },180);
 }
 
+/* ---------- checkout summary ---------- */
+const checkoutSummary = document.getElementById('checkoutSummary');
+function renderSummary(key){
+  const r = routines[key];
+  checkoutSummary.innerHTML = `
+    <h3>ملخص طلبك</h3>
+    <div class="cs-row">
+      <div class="cs-visual"><svg class="sprig"><use href="#icon-sprig"/></svg></div>
+      <div class="cs-name">${r.fullName}<small>${r.tag}</small></div>
+    </div>
+    <ul class="cs-items">${r.items.map(i=>`<li>${i}</li>`).join('')}</ul>
+    <div class="cs-total">
+      <span>المجموع</span>
+      <div class="amount">${r.price>0 ? r.price+' د.م' : '—'}<small>الدفع عند الاستلام</small></div>
+    </div>
+  `;
+}
+
+/* ---------- checkout routine <select> ---------- */
+const quantitySelect = document.getElementById('quantity');
+function renderQuantitySelect(){
+  quantitySelect.innerHTML = Object.values(routines).map(r=>
+    `<option value="${r.fullName}" data-price="${r.price}" ${r.key===activeRoutine?'selected':''}>${r.fullName}</option>`
+  ).join('');
+}
+quantitySelect.addEventListener('change', function(){
+  const key = Object.values(routines).find(r=>r.fullName===this.value)?.key;
+  if(key) selectRoutine(key,true);
+});
+
+/* ---------- master selection handler ---------- */
+function selectRoutine(key, skipSelectSync){
+  activeRoutine = key;
+  document.querySelectorAll('.routine-card').forEach(c=>{
+    c.classList.toggle('active', c.dataset.key===key);
+  });
+  renderDetail(key);
+  renderSummary(key);
+  if(!skipSelectSync){
+    quantitySelect.value = routines[key].fullName;
+  }
+  const r = routines[key];
+  const qoName = document.getElementById('qoName');
+  const qoPrice = document.getElementById('qoPrice');
+  if(qoName) qoName.textContent = r.fullName;
+  if(qoPrice) qoPrice.textContent = r.price>0 ? r.price+' درهم' : 'السعر يُعلن قريبًا';
+}
+
+renderQuantitySelect();
+selectRoutine('dry');
+
+/* ---------- reviews (placeholder cards) ---------- */
+const reviewsData = [
+  {name:'سعاد',city:'الدار البيضاء',text:'شعري صار ناعم وخفيف من أول استعمال. رائحة تبريمة رائعة وحسيت بفرق حقيقي.'},
+  {name:'إيمان',city:'الرباط',text:'الروتين الشامل غيّر روتين العناية ديالي بالكامل، حسيت بحمّام حقيقي فالدار.'},
+  {name:'خديجة',city:'مراكش',text:'التوصيل سريع والمنتجات فاخرة بزاف، غادي نعاود الطلب مرة أخرى.'}
+];
+const reviewsScroll = document.getElementById('reviewsScroll');
+reviewsScroll.innerHTML = reviewsData.map(rv=>`
+  <div class="review-card">
+    <div class="review-top">
+      <div class="review-avatar">${rv.name.charAt(0)}</div>
+      <div>
+        <div class="review-name">${rv.name} — ${rv.city}</div>
+        <div class="review-stars">★★★★★</div>
+      </div>
+    </div>
+    <p class="review-text">${rv.text}</p>
+  </div>
+`).join('');
+
+/* ---------- floating quick-order bar visibility ---------- */
+const quickOrder = document.getElementById('quickOrder');
+const heroEl = document.querySelector('.hero');
+const checkoutEl = document.getElementById('checkout');
+function updateQuickOrder(){
+  const heroBottom = heroEl.getBoundingClientRect().bottom;
+  const checkoutTop = checkoutEl.getBoundingClientRect().top;
+  const shouldShow = heroBottom < 0 && checkoutTop > window.innerHeight * 0.5;
+  quickOrder.classList.toggle('show', shouldShow);
+}
+window.addEventListener('scroll', updateQuickOrder, {passive:true});
+updateQuickOrder();
+
+/* ---------- scroll reveal ---------- */
+const revealEls = document.querySelectorAll('.reveal');
+const io = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+  });
+},{threshold:.15});
+revealEls.forEach(el=>io.observe(el));
+
+/* ============================================================
+   FORM SUBMISSION — preserved exactly from the existing site:
+   Meta Pixel Lead + Purchase events, Google Apps Script GET
+   request, phone + name validation.
+   ============================================================ */
 const form = document.getElementById('leadForm');
 const successMsg = document.getElementById('successMsg');
 
-// Validation
 document.getElementById("full_name").addEventListener("input",function(){this.value=this.value.replace(/[^A-Za-zÀ-ÿ\u0600-\u06FF\s]/g,"");});
 document.getElementById("phone").addEventListener("input",function(){this.value=this.value.replace(/\D/g,"");});
 
@@ -221,24 +897,25 @@ const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx8Azpl1MMJ8SBZhAYPo
 
 form.addEventListener('submit', function(e){
   e.preventDefault();
-const fullName=document.getElementById('full_name').value.trim();
-const phone=document.getElementById('phone').value.trim();
-if(!/^[A-Za-zÀ-ÿ\u0600-\u06FF\s]+$/.test(fullName)){alert('المرجو إدخال الاسم بالحروف فقط.');return;}
-if(!/^(05|06|07)[0-9]{8}$/.test(phone)){alert('المرجو إدخال رقم هاتف مغربي صحيح.');return;}
+  const fullName = document.getElementById('full_name').value.trim();
+  const phone = document.getElementById('phone').value.trim();
 
-  const quantitySelect = document.getElementById('quantity');
+  if(!/^[A-Za-zÀ-ÿ\u0600-\u06FF\s]+$/.test(fullName)){ alert('المرجو إدخال الاسم بالحروف فقط.'); return; }
+  if(!/^(05|06|07)[0-9]{8}$/.test(phone)){ alert('المرجو إدخال رقم هاتف مغربي صحيح.'); return; }
+  if(!document.getElementById('city').value){ alert('المرجو اختيار المدينة.'); return; }
+
   const selectedOption = quantitySelect.options[quantitySelect.selectedIndex];
-  const price = selectedOption.getAttribute("data-price") || "129";
+  const price = selectedOption.getAttribute("data-price") || "0";
 
   const url = SCRIPT_URL +
-    "?full_name=" + encodeURIComponent(document.getElementById('full_name').value) +
-    "&phone=" + encodeURIComponent(document.getElementById('phone').value) +
+    "?full_name=" + encodeURIComponent(fullName) +
+    "&phone=" + encodeURIComponent(phone) +
     "&city=" + encodeURIComponent(document.getElementById('city').value) +
     "&address=" + encodeURIComponent(document.getElementById('address').value) +
     "&quantity=" + encodeURIComponent(quantitySelect.value) +
     "&price=" + encodeURIComponent(price);
 
-fetch(url);
+  fetch(url);
 
   if (typeof fbq !== 'undefined') {
     fbq('track', 'Lead');
@@ -247,12 +924,12 @@ fetch(url);
 
   successMsg.style.display = 'block';
   form.reset();
+  renderQuantitySelect();
 
   window.scrollTo({
-    top: successMsg.offsetTop - 100,
+    top: successMsg.offsetTop + document.querySelector('.checkout-form').offsetTop - 120,
     behavior: 'smooth'
   });
-
 });
 </script>
 
