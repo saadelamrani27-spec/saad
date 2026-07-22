@@ -264,59 +264,12 @@ a{color:inherit;text-decoration:none;}
 }
 .rd-cta:hover{background:var(--olive);transform:translateY(-2px);}
 
-/* ============ HOW TO USE — TIMELINE ============ */
-.timeline{position:relative;max-width:640px;margin:0 auto;}
-.timeline::before{
-  content:"";position:absolute;top:0;bottom:0;right:27px;
-  width:1px;background:var(--line);
-}
-.tl-step{
-  position:relative;display:flex;gap:20px;padding-bottom:20px;
-}
-.tl-step:last-child{padding-bottom:0;}
-.tl-num{
-  width:56px;height:56px;border-radius:50%;flex-shrink:0;
-  background:var(--white);border:1.5px solid var(--gold);
-  display:flex;align-items:center;justify-content:center;
-  font-family:'Amiri',serif;font-weight:700;font-size:20px;color:var(--olive-dark);
-  box-shadow:var(--shadow-soft);z-index:1;
-}
-.tl-content{padding-top:8px;}
-.tl-content h4{font-size:17px;color:var(--olive-dark);font-family:'Amiri',serif;margin-bottom:4px;}
-.tl-content p{font-size:14.5px;color:var(--ink-soft);}
-.tl-step.result .tl-num{background:var(--olive-dark);border-color:var(--olive-dark);color:var(--cream);}
-
 /* ============ RD BENEFIT CHIPS (inside routine detail) ============ */
 .rd-benefits{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px;}
 .rd-benefit{
   display:inline-flex;align-items:center;gap:6px;
   background:var(--cream);border-radius:100px;padding:7px 13px;
   font-size:12.5px;font-weight:700;color:var(--olive-dark);
-}
-
-/* ============ REVIEWS ============ */
-.reviews-scroll{
-  display:flex;gap:18px;overflow-x:auto;padding-bottom:10px;
-  scroll-snap-type:x mandatory;
-}
-.review-card{
-  scroll-snap-align:start;flex:0 0 82%;
-  background:var(--white);border-radius:var(--radius-md);
-  padding:24px;border:1px solid var(--line);box-shadow:var(--shadow-soft);
-}
-.review-top{display:flex;align-items:center;gap:12px;margin-bottom:14px;}
-.review-avatar{
-  width:44px;height:44px;border-radius:50%;
-  background:var(--cream-deep);color:var(--olive-dark);
-  display:flex;align-items:center;justify-content:center;
-  font-weight:800;font-family:'Amiri',serif;
-}
-.review-name{font-weight:700;font-size:14.5px;color:var(--olive-dark);}
-.review-stars{color:var(--gold);font-size:13px;letter-spacing:2px;}
-.review-text{font-size:14.5px;color:var(--ink-soft);}
-.review-note{
-  text-align:center;font-size:12px;color:var(--ink-soft);
-  margin-top:14px;opacity:.7;
 }
 
 /* ============ CHECKOUT ============ */
@@ -433,7 +386,6 @@ footer .brand .sprig{color:var(--gold-soft);}
   .routine-grid{grid-template-columns:repeat(4,minmax(0,1fr));}
   .routine-detail{grid-template-columns:minmax(0,1fr) minmax(0,1fr);}
   .rd-body{padding:40px 40px 40px 34px;}
-  .review-card{flex:0 0 360px;}
   .checkout-wrap{grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);align-items:start;}
 }
 @media(prefers-reduced-motion:reduce){
@@ -513,52 +465,6 @@ footer .brand .sprig{color:var(--gold-soft);}
 
     <div class="routine-grid" id="routineGrid"></div>
     <div class="routine-detail show" id="routineDetail"></div>
-  </div>
-</section>
-
-<!-- ============ HOW TO USE ============ -->
-<section class="section section-alt" id="how">
-  <div class="wrap">
-    <div class="section-head reveal">
-      <div class="eyebrow" style="justify-content:center">طريقة الاستعمال</div>
-      <h2>خمس خطوات، وطقس حمّام كامل</h2>
-    </div>
-    <div class="timeline">
-      <div class="tl-step reveal">
-        <div class="tl-num">١</div>
-        <div class="tl-content"><h4>التوجّه إلى الحمّام</h4><p>ترطيب بالبخار لفتح المسام.</p></div>
-      </div>
-      <div class="tl-step reveal">
-        <div class="tl-num">٢</div>
-        <div class="tl-content"><h4>استعمال تبريمة</h4><p>بحركات دائرية على فروة الرأس.</p></div>
-      </div>
-      <div class="tl-step reveal">
-        <div class="tl-num">٣</div>
-        <div class="tl-content"><h4>الغسل</h4><p>شطف جيد بماء فاتر.</p></div>
-      </div>
-      <div class="tl-step reveal">
-        <div class="tl-num">٤</div>
-        <div class="tl-content"><h4>تطبيق الزيت</h4><p>من الأطراف حتى الجذور.</p></div>
-      </div>
-      <div class="tl-step reveal">
-        <div class="tl-num">٥</div>
-        <div class="tl-content"><h4>تطبيق الكريم</h4><p>لترطيب يدوم طوال اليوم.</p></div>
-      </div>
-      <div class="tl-step result reveal">
-        <div class="tl-num"><svg class="sprig" style="width:24px;height:24px"><use href="#icon-sprig"/></svg></div>
-        <div class="tl-content"><h4>النتيجة</h4><p>شعر ناعم ولامع، بلمسة حمّام أصيل.</p></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ REVIEWS ============ -->
-<section class="section section-alt" id="reviews">
-  <div class="wrap">
-    <div class="section-head reveal">
-      <div class="eyebrow" style="justify-content:center">آراء العميلات</div>
-    </div>
-    <div class="reviews-scroll" id="reviewsScroll"></div>
   </div>
 </section>
 
@@ -838,26 +744,6 @@ function selectRoutine(key, skipSelectSync){
 
 renderQuantitySelect();
 selectRoutine('dry');
-
-/* ---------- reviews (placeholder cards) ---------- */
-const reviewsData = [
-  {name:'سعاد',city:'الدار البيضاء',text:'شعري صار ناعم وخفيف من أول استعمال. رائحة تبريمة رائعة وحسيت بفرق حقيقي.'},
-  {name:'إيمان',city:'الرباط',text:'الروتين الشامل غيّر روتين العناية ديالي بالكامل، حسيت بحمّام حقيقي فالدار.'},
-  {name:'خديجة',city:'مراكش',text:'التوصيل سريع والمنتجات فاخرة بزاف، غادي نعاود الطلب مرة أخرى.'}
-];
-const reviewsScroll = document.getElementById('reviewsScroll');
-reviewsScroll.innerHTML = reviewsData.map(rv=>`
-  <div class="review-card">
-    <div class="review-top">
-      <div class="review-avatar">${rv.name.charAt(0)}</div>
-      <div>
-        <div class="review-name">${rv.name} — ${rv.city}</div>
-        <div class="review-stars">★★★★★</div>
-      </div>
-    </div>
-    <p class="review-text">${rv.text}</p>
-  </div>
-`).join('');
 
 /* ---------- floating quick-order bar visibility ---------- */
 const quickOrder = document.getElementById('quickOrder');
