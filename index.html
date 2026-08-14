@@ -394,6 +394,46 @@ textarea{min-height:88px;resize:vertical;}
   border:1px solid rgba(255,90,90,.3);
 }
 
+
+/* ORDER CONFIRMATION POPUP — added only for successful order confirmation */
+.order-confirmation{
+  display:none;
+  position:fixed;
+  inset:0;
+  z-index:2000;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  background:rgba(15,12,24,.58);
+  backdrop-filter:blur(7px);
+  -webkit-backdrop-filter:blur(7px);
+}
+.order-confirmation.open{display:flex;}
+.order-confirmation-card{
+  width:min(420px,100%);
+  background:#fff;
+  border-radius:24px;
+  padding:32px 24px 26px;
+  text-align:center;
+  box-shadow:0 30px 80px rgba(0,0,0,.25);
+  direction:rtl;
+  animation:orderConfirmIn .22s ease-out;
+}
+.order-confirmation-icon{
+  width:64px;height:64px;border-radius:50%;
+  margin:0 auto 18px;
+  display:flex;align-items:center;justify-content:center;
+  background:#f0e7ff;color:#6d35d8;
+  font-size:32px;font-weight:800;
+}
+.order-confirmation-card h3{margin:0 0 10px;color:#17121f;font-size:25px;}
+.order-confirmation-card p{margin:0 0 22px;color:#666;font-size:16px;line-height:1.8;}
+.order-confirmation-close{
+  width:100%;border:0;border-radius:13px;padding:14px 18px;
+  background:#6d35d8;color:#fff;font-size:17px;font-weight:800;cursor:pointer;
+}
+@keyframes orderConfirmIn{from{opacity:0;transform:translateY(10px) scale(.97)}to{opacity:1;transform:translateY(0) scale(1)}}
+
 /* ============ FLOATING QUICK-ORDER BAR ============ */
 .quick-order{
   position:fixed;left:0;right:0;bottom:0;z-index:50;
@@ -1034,6 +1074,27 @@ const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx8Azpl1MMJ8SBZhAYPo
 
 let isSubmitting = false; // prevents the order from being sent twice
 
+
+function showOrderConfirmation(){
+  const popup = document.getElementById('orderConfirmation');
+  if(!popup) return;
+  popup.classList.add('open');
+  popup.setAttribute('aria-hidden','false');
+  document.body.classList.add('modal-open');
+}
+
+function closeOrderConfirmation(){
+  const popup = document.getElementById('orderConfirmation');
+  if(!popup) return;
+  popup.classList.remove('open');
+  popup.setAttribute('aria-hidden','true');
+  document.body.classList.remove('modal-open');
+}
+
+document.getElementById('orderConfirmation')?.addEventListener('click', function(e){
+  if(e.target === this) closeOrderConfirmation();
+});
+
 form.addEventListener('submit', function(e){
   e.preventDefault();
 
@@ -1071,13 +1132,24 @@ form.addEventListener('submit', function(e){
     fbq('track', 'Purchase');
   }
 
-  successMsg.style.display = 'block';
+  successMsg.style.display = 'none';
   form.reset();
   document.getElementById('color').value = COLORS[selectedColorIndex].name;
-  openCheckout();
-  document.querySelector('.checkout-modal .wrap').scrollTop = 0;
+  closeCheckout();
+  showOrderConfirmation();
 });
 </script>
+
+
+<!-- ============ ORDER SENT CONFIRMATION POPUP ============ -->
+<div class="order-confirmation" id="orderConfirmation" aria-hidden="true">
+  <div class="order-confirmation-card" role="dialog" aria-modal="true" aria-labelledby="orderConfirmationTitle">
+    <div class="order-confirmation-icon">✓</div>
+    <h3 id="orderConfirmationTitle">توصلنا بالطلب ديالك</h3>
+    <p>شكراً ليك ❤️<br>غادي نتصلو بيك قريب باش نأكدو معاك الطلب.</p>
+    <button type="button" class="order-confirmation-close" onclick="closeOrderConfirmation()">مزيان</button>
+  </div>
+</div>
 
 </body>
 </html>
