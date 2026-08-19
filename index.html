@@ -210,7 +210,7 @@ document.getElementById('leadForm').addEventListener('submit',function(e){
  const quantityField=document.getElementById('quantity');
  const url=SCRIPT_URL+'?full_name='+encodeURIComponent(fullName)+'&phone='+encodeURIComponent(phone)+'&city='+encodeURIComponent(city)+'&address='+encodeURIComponent(address)+'&quantity='+encodeURIComponent(quantityField.value)+'&price='+encodeURIComponent(PRODUCT_PRICE)+'&color='+encodeURIComponent(document.getElementById('color').value);
  fetch(url).catch(()=>{});
- if(typeof fbq!=='undefined'){fbq('track','Lead');fbq('track','Purchase');}
+ if(typeof fbq!=='undefined'){fbq('track','Lead');fbq('track','Purchase',{value:199,currency:'MAD'});}
  document.getElementById('successMsg').style.display='none';
  this.reset(); document.getElementById('quantity').value='خزانة تخزين عمودية 6 أدراج — قطعة واحدة'; document.getElementById('color').value='أبيض';
  btn.disabled=false;btn.textContent='دير الطلب دابا — 199 DH';isSubmitting=false;
