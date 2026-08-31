@@ -85,8 +85,8 @@ footer{border-top:1px solid var(--line);padding:22px 0;text-align:center;color:#
 <div class="quick-order"><div><span class="qo-name">كابل شحن مع حامل هاتف</span><span class="qo-price">129 DH</span></div><button class="qo-btn" onclick="openOrder()">اطلب دابا</button></div>
 <div class="modal" id="orderModal" aria-hidden="true"><div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="orderTitle"><div class="modal-head"><h2 id="orderTitle">دير الطلب ديالك</h2><button class="modal-close" type="button" onclick="closeOrder()">×</button></div><div class="order-price-box"><span>الثمن • التوصيل بالمجان • الدفع عند الاستلام</span><strong>129 DH</strong></div><form id="leadForm"><div class="form-grid">
 <div class="field"><label for="full_name">الاسم الكامل</label><input id="full_name" autocomplete="name" placeholder="مثال: محمد العلوي" required/></div>
-<div class="field"><label for="phone">رقم الهاتف</label><input id="phone" inputmode="numeric" autocomplete="tel" placeholder="06XXXXXXXX" required/></div>
-<div class="field"><label for="city">المدينة</label><select id="city" required><option value="">اختار المدينة</option><option>الدار البيضاء</option><option>الرباط</option><option>سلا</option><option>مراكش</option><option>طنجة</option><option>فاس</option><option>مكناس</option><option>أكادير</option><option>وجدة</option><option>القنيطرة</option><option>تطوان</option><option>الجديدة</option><option>آسفي</option><option>بني ملال</option><option>خريبكة</option><option>الناظور</option><option>الحسيمة</option><option>العيون</option><option>الداخلة</option><option>أخرى</option></select></div>
+<div class="field"><label for="phone">رقم الهاتف</label><input id="phone" inputmode="numeric" autocomplete="tel" placeholder="06XXXXXXXX" maxlength="10" required/></div>
+<div class="field"><label for="city">المدينة</label><select id="city" required><option value="">اختار المدينة</option><option>الدار البيضاء</option><option>الرباط</option><option>سلا</option><option>مراكش</option><option>طنجة</option><option>فاس</option><option>مكناس</option><option>أكادير</option><option>وجدة</option><option>القنيطرة</option><option>تطوان</option><option>الجديدة</option><option>آسفي</option><option>بني ملال</option><option>خريبكة</option><option>الناظور</option><option>الحسيمة</option><option>العيون</option><option>الداخلة</option><option>تازة</option><option>سطات</option><option>برشيد</option><option>الخميسات</option><option>ورزازات</option><option>تارودانت</option><option>كلميم</option><option>الرشيدية</option><option>بركان</option><option>تاوريرت</option><option>سيدي قاسم</option><option>سيدي سليمان</option><option>سيدي بنور</option><option>العرائش</option><option>الفقيه بن صالح</option><option>مولاي يعقوب</option><option>إفران</option><option>أزيلال</option><option>شفشاون</option><option>الصويرة</option><option>ميدلت</option><option>زاكورة</option><option>طانطان</option><option>السمارة</option><option>أخرى</option></select></div>
 <div class="field"><label for="quantity">الكمية</label><select id="quantity"><option value="كابل شحن مع حامل هاتف — قطعة واحدة">1 قطعة — 129 DH</option></select></div>
 <div class="field full"><label for="address">العنوان</label><textarea id="address" placeholder="الحي، الشارع، رقم المنزل..." required></textarea></div>
 <input id="color" type="hidden" value="أسود"/>
@@ -110,6 +110,31 @@ function closeOrderConfirmation(){const p=document.getElementById('orderConfirma
 document.getElementById('orderModal').addEventListener('click',e=>{if(e.target.id==='orderModal')closeOrder()});
 document.getElementById('orderConfirmation').addEventListener('click',e=>{if(e.target.id==='orderConfirmation')closeOrderConfirmation()});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeOrder();closeOrderConfirmation()}});
+const nameField=document.getElementById('full_name');
+const phoneField=document.getElementById('phone');
+nameField.addEventListener('input',function(){
+ const cleaned=this.value.replace(/[^A-Za-zÀ-ÿ\u0600-\u06FF\s]/g,'');
+ if(cleaned!==this.value)this.value=cleaned;
+});
+nameField.addEventListener('keypress',function(e){
+ if(!/^[A-Za-zÀ-ÿ\u0600-\u06FF\s]$/.test(e.key)){e.preventDefault();}
+});
+nameField.addEventListener('paste',function(e){
+ e.preventDefault();
+ const text=(e.clipboardData||window.clipboardData).getData('text');
+ const cleaned=text.replace(/[^A-Za-zÀ-ÿ\u0600-\u06FF\s]/g,'');
+ const start=this.selectionStart,end=this.selectionEnd;
+ this.value=this.value.slice(0,start)+cleaned+this.value.slice(end);
+ const pos=start+cleaned.length;
+ this.setSelectionRange(pos,pos);
+});
+phoneField.addEventListener('input',function(){
+ const cleaned=this.value.replace(/[^0-9]/g,'').slice(0,10);
+ if(cleaned!==this.value)this.value=cleaned;
+});
+phoneField.addEventListener('keypress',function(e){
+ if(!/^[0-9]$/.test(e.key)||this.value.length>=10){e.preventDefault();}
+});
 let isSubmitting=false;
 document.getElementById('leadForm').addEventListener('submit',function(e){
  e.preventDefault(); if(isSubmitting)return;
