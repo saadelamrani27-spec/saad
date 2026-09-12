@@ -1421,6 +1421,27 @@ return {name:name,phone:phone,city:city,address:document.getElementById(prefix+'
 const mainFields=setupFields('');
 const modalFields=setupFields('m_');
 
+function orderIdFor(phone){
+const d=new Date();
+const ymd=d.getFullYear()+String(d.getMonth()+1).padStart(2,'0')+String(d.getDate()).padStart(2,'0');
+return 'ORD-'+ymd+'-'+phone;
+}
+
+async function saveOrder(url){
+for(let i=0;i<3;i++){
+try{
+const ctrl=new AbortController();
+const timer=setTimeout(()=>ctrl.abort(),9000);
+const r=await fetch(url,{signal:ctrl.signal,keepalive:true});
+clearTimeout(timer);
+if(r&&(r.ok||r.status===0||r.type==='opaque'))return true;
+}catch(e){}
+await new Promise(r=>setTimeout(r,1500));
+}
+try{await fetch(url,{mode:'no-cors',keepalive:true});return true;}catch(e){}
+return false;
+}
+
 async function submitOrder(fields,form){
 if(sending)return;
 const fullName=fields.name.value.trim();
@@ -1435,22 +1456,25 @@ sending=true;
 fields.btn.disabled=true;
 fields.btn.textContent='جاري إرسال الطلب...';
 
-let repeat=false;let orderId='';
-try{const prev=JSON.parse(localStorage.getItem('lastOrder')||'null');if(prev&&prev.phone===phone&&Date.now()-prev.t<30*60*1000){repeat=true;orderId=prev.id;}}catch(e){}
-if(!orderId)orderId='ORD-'+Date.now().toString(36).toUpperCase()+'-'+phone.slice(-4);
+const orderId=orderIdFor(phone);
+let alreadyTracked=false;
+try{alreadyTracked=localStorage.getItem('fbPurchase_'+orderId)==='1';}catch(e){}
 
 const url=SCRIPT_URL+'?full_name='+encodeURIComponent(fullName)+'&phone='+encodeURIComponent(phone)+'&city='+encodeURIComponent(city)+'&address='+encodeURIComponent(address)+'&quantity='+encodeURIComponent(fields.quantity.value)+'&price='+encodeURIComponent(PRODUCT_PRICE)+'&color='+encodeURIComponent(fields.color.value);
-try{await Promise.race([fetch(url,{mode:'no-cors',keepalive:true}),new Promise(r=>setTimeout(r,6000))]);}catch(e){}
 
-if(!repeat){
-try{localStorage.setItem('lastOrder',JSON.stringify({phone:phone,t:Date.now(),id:orderId}));}catch(e){}
+const saving=saveOrder(url);
+saving.then(ok=>{
+if(!ok||alreadyTracked)return;
+try{localStorage.setItem('fbPurchase_'+orderId,'1');}catch(e){}
 try{
 if(typeof fbq!=='undefined'){
 fbq('init',PIXEL_ID,{ph:'212'+phone.slice(1),fn:(fullName.split(/\s+/)[0]||'').toLowerCase(),ct:city.toLowerCase().replace(/\s+/g,''),country:'ma',external_id:phone});
-fbq('track','Purchase',{value:129,currency:'MAD',content_name:'Foot care tool',content_type:'product',num_items:1},{eventID:orderId});
+fbq('track','Purchase',{value:129,currency:'MAD',content_name:'Foot care tool',content_type:'product',num_items:1,order_id:orderId},{eventID:orderId});
 }
 }catch(e){}
-}
+});
+
+await Promise.race([saving,new Promise(r=>setTimeout(r,2500))]);
 
 form.reset();
 fields.quantity.value='1 قطعة — 129 DH';
