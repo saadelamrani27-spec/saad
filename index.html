@@ -1460,7 +1460,7 @@ const orderId=orderIdFor(phone);
 let alreadyTracked=false;
 try{alreadyTracked=localStorage.getItem('fbPurchase_'+orderId)==='1';}catch(e){}
 
-const url=SCRIPT_URL+'?full_name='+encodeURIComponent(fullName)+'&phone='+encodeURIComponent(phone)+'&city='+encodeURIComponent(city)+'&address='+encodeURIComponent(address)+'&quantity='+encodeURIComponent(fields.quantity.value)+'&price='+encodeURIComponent(PRODUCT_PRICE)+'&color='+encodeURIComponent(fields.color.value);
+const url=SCRIPT_URL+'?full_name='+encodeURIComponent(fullName)+'&phone='+encodeURIComponent(phone)+'&city='+encodeURIComponent(city)+'&address='+encodeURIComponent(address)+'&quantity='+encodeURIComponent('FOOT CARE '+fields.quantity.value)+'&price='+encodeURIComponent(PRODUCT_PRICE)+'&color='+encodeURIComponent(fields.color.value);
 
 const saving=saveOrder(url);
 saving.then(ok=>{
