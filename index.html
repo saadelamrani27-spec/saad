@@ -796,6 +796,7 @@ padding:9px 14px
 
 }
 /* ==== CRO pass ==== */
+.opt{font-weight:700;color:#8a8a8a;font-size:11px}
 .demo-band{padding:4px 0 24px}
 .demo-band .gif-wrap{max-width:400px;margin:0 auto;overflow:hidden;border-radius:18px;background:#fff;border:1px solid var(--line)}
 .demo-band .demo-cap{text-align:center;font-size:13px;font-weight:800;color:#666;margin:0 0 10px}
@@ -1087,14 +1088,13 @@ id="quantity">
 <div class="field full">
 
 <label for="address">
-العنوان
+العنوان <span class="opt">(اختياري)</span>
 </label>
 
 <textarea
 id="address"
 autocomplete="street-address"
-placeholder="الحي، الشارع، رقم المنزل..."
-required></textarea>
+placeholder="إلا بغيتي — نأكدوه معاك فالتيليفون"></textarea>
 
 </div>
 
@@ -1312,13 +1312,12 @@ id="m_quantity">
 <div class="field full">
 
 <label for="m_address">
-العنوان
+العنوان <span class="opt">(اختياري)</span>
 </label>
 
 <textarea
 id="m_address"
-required
-placeholder="الحي، الشارع، رقم المنزل..."></textarea>
+placeholder="إلا بغيتي — نأكدوه معاك فالتيليفون"></textarea>
 
 </div>
 
@@ -1571,7 +1570,6 @@ const address=fields.address.value.trim();
 if(!/^[A-Za-zÀ-ÿ؀-ۿ\s'’.\-]{2,}$/.test(fullName)){fieldError(fields.name,'المرجو إدخال الاسم ديالك.');return;}
 if(!/^0[5-7][0-9]{8}$/.test(phone)){fieldError(fields.phone,'رقم غير صحيح. مثال: 0612345678');return;}
 if(!city){fieldError(fields.city,'المرجو إدخال المدينة.');return;}
-if(!address){fieldError(fields.address,'المرجو إدخال العنوان.');return;}
 sending=true;
 fields.btn.disabled=true;
 fields.btn.textContent='جاري إرسال الطلب...';
