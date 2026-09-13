@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>غين مشدود • 199 درهم • الدفع عند الاستلام</title>
+<meta name="description" content="غين مشدود ما كيبانش تحت اللباس. خطاطيف كتشد على القياس ديالك. 199 درهم بدلا من 249. التوصيل لجميع المدن، الخلاص عند الاستلام.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#fff;--ink:#15161a;--muted:#6b6f76;--line:#e8e9ec;--pink:#e6186b;--green:#12a150;--green-dark:#0e8442;--soft:#fdf2f6}
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{margin:0;padding:0}
+  body{font-family:'Cairo',system-ui,-apple-system,'Segoe UI',Tahoma,sans-serif;background:var(--bg);color:var(--ink);font-size:17px;line-height:1.75;overflow-x:hidden}
+  img,video{max-width:100%;display:block}
+  .wrap{max-width:560px;margin:0 auto;padding:0 16px 120px}
+  .topbar{background:var(--pink);color:#fff;text-align:center;padding:9px 16px;font-weight:700;font-size:15px}
+  .hero{margin:16px 0 0;border-radius:18px;overflow:hidden;background:#000}
+  .hero video{width:100%;height:auto;display:block}
+  h1{font-size:29px;line-height:1.4;font-weight:900;margin:20px 0 6px}
+  .sub{color:var(--muted);font-size:18px;margin:0 0 18px;font-weight:600}
+  .pricebox{background:var(--soft);border:1.5px solid #f7cddd;border-radius:16px;padding:18px;text-align:center;margin:18px 0}
+  .price-now{font-size:40px;font-weight:900;color:var(--pink);line-height:1.1}
+  .price-old{font-size:20px;color:var(--muted);text-decoration:line-through;margin-inline-start:10px;font-weight:600}
+  .price-note{font-size:15px;color:var(--muted);margin-top:6px;font-weight:600}
+  ul.benefits{list-style:none;padding:0;margin:22px 0}
+  ul.benefits li{display:flex;gap:12px;align-items:flex-start;padding:13px 0;border-bottom:1px solid var(--line);font-weight:600}
+  ul.benefits li:last-child{border-bottom:none}
+  .tick{flex:0 0 26px;height:26px;border-radius:50%;background:var(--green);color:#fff;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:900;margin-top:3px}
+  .media{margin:22px 0;border-radius:16px;overflow:hidden;background:#000}
+  .media video,.media img{width:100%}
+  h2{font-size:23px;font-weight:900;margin:32px 0 10px}
+  .trust{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:22px 0}
+  .trust div{border:1.5px solid var(--line);border-radius:14px;padding:14px 10px;text-align:center;font-size:14.5px;font-weight:700;line-height:1.5}
+  .trust span{display:block;font-size:23px;margin-bottom:4px}
+  .form-card{border:2px solid var(--pink);border-radius:18px;padding:20px 18px 22px;margin:26px 0;background:#fff}
+  .form-card h2{margin:0 0 4px;text-align:center;font-size:24px}
+  .form-card .hint{text-align:center;color:var(--muted);font-size:15px;margin:0 0 18px;font-weight:600}
+  label{display:block;font-weight:700;margin:14px 0 6px;font-size:16px}
+  input,select{width:100%;padding:14px 15px;font-family:inherit;font-size:17px;border:1.5px solid var(--line);border-radius:12px;background:#fff;color:var(--ink);font-weight:600}
+  input:focus,select:focus{outline:none;border-color:var(--pink)}
+  input::placeholder{color:#b3b6bc;font-weight:500}
+  .sizes{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:6px}
+  .sizes input{position:absolute;opacity:0;pointer-events:none}
+  .sizes label{margin:0;text-align:center;padding:13px 0;border:1.5px solid var(--line);border-radius:12px;cursor:pointer;font-weight:800;font-size:17px}
+  .sizes input:checked + label{background:var(--pink);border-color:var(--pink);color:#fff}
+  .err{color:#d01b3c;font-size:14.5px;font-weight:700;margin-top:6px;display:none}
+  .err.show{display:block}
+  button.cta{width:100%;margin-top:22px;padding:18px;border:none;border-radius:14px;background:var(--green);color:#fff;font-family:inherit;font-size:21px;font-weight:900;cursor:pointer}
+  button.cta:active{background:var(--green-dark)}
+  button.cta:disabled{opacity:.65}
+  .sticky{position:fixed;inset-inline:0;bottom:0;z-index:50;background:rgba(255,255,255,.97);border-top:1px solid var(--line);padding:10px 16px}
+  .sticky-in{max-width:560px;margin:0 auto;display:flex;gap:12px;align-items:center}
+  .sticky .p{font-weight:900;font-size:21px;color:var(--pink);white-space:nowrap}
+  .sticky button{flex:1;padding:15px;border:none;border-radius:12px;background:var(--green);color:#fff;font-family:inherit;font-size:18px;font-weight:900;cursor:pointer}
+  .thanks{display:none;text-align:center;padding:46px 18px}
+  .thanks.show{display:block}
+  .thanks .big{font-size:60px;line-height:1;margin-bottom:14px}
+  .thanks h2{margin:0 0 12px;font-size:27px}
+  .thanks p{color:var(--muted);font-size:18px;margin:0 auto;max-width:400px;font-weight:600}
+  footer{text-align:center;color:var(--muted);font-size:14px;padding:26px 16px 10px;border-top:1px solid var(--line);margin-top:34px;font-weight:600}
+  @media(max-width:380px){h1{font-size:25px}.price-now{font-size:34px}}
+</style>
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init','1327371405934124');
+fbq('track','PageView');
+fbq('track','ViewContent',{content_name:'Gaine',content_type:'product',value:199,currency:'MAD'});
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1327371405934124&ev=PageView&noscript=1"/></noscript>
+</head>
+<body>
+<div class="topbar">🔥 عرض خاص — التوصيل مجاني لجميع المدن</div>
+<div class="wrap">
+  <main id="page">
+    <div class="hero">
+      <video src="/ads/gaine15.mp4" poster="/ads/gaine.jpg" autoplay muted loop playsinline preload="metadata"></video>
+    </div>
+    <h1>غين مشدود من أول لبسة • ما كيبانش تحت اللباس</h1>
+    <p class="sub">خطاطيف كتشد على القياس ديالك، كيخبي الكرش و كيشد الخصر</p>
+    <div class="pricebox">
+      <div><span class="price-now">199 درهم</span><span class="price-old">249 درهم</span></div>
+      <div class="price-note">الخلاص عند الاستلام • التوصيل مجاني</div>
+    </div>
+    <button class="cta" onclick="goToForm()">صيفطي الطلب ديالك دابا</button>
+    <ul class="benefits">
+      <li><span class="tick">✓</span><span>خطاطيف كتشد على القياس ديالك، كتبدليه كيف ما بغيتي</span></li>
+      <li><span class="tick">✓</span><span>كيخبي الكرش و كيشد الخصر من أول لبسة</span></li>
+      <li><span class="tick">✓</span><span>ما كيبانش تحت اللباس، حتى مع الحوايج الرقيقة</span></li>
+      <li><span class="tick">✓</span><span>قماش خفيف كيتنفس، ما كيحكش و ما كيضايقش</span></li>
+      <li><span class="tick">✓</span><span>كيتغسل بسهولة و كيبقى على حالو</span></li>
+    </ul>
+    <h2>شوفيه بعينيك</h2>
+    <div class="media"><video src="/ads/gaineB.mp4" poster="/ads/gaine.jpg" controls muted playsinline preload="none"></video></div>
+    <div class="media"><img src="/ads/gaine.jpg" alt="الغين" loading="lazy"></div>
+    <div class="trust">
+      <div><span>💵</span>الخلاص عند الاستلام</div>
+      <div><span>🚚</span>التوصيل لجميع المدن</div>
+      <div><span>📞</span>كنعيطو ليك باش نأكدو الطلب</div>
+      <div><span>🔒</span>المعلومات ديالك محفوظة</div>
+    </div>
+    <div class="form-card" id="form-card">
+      <h2>عمري الطلب ديالك</h2>
+      <p class="hint">عمري المعلومات و غانعيطو ليك باش نأكدو الطلب</p>
+      <form id="order-form" novalidate>
+        <label for="full_name">الاسم الكامل</label>
+        <input type="text" id="full_name" name="full_name" placeholder="مثال: فاطمة بنعلي" autocomplete="name">
+        <div class="err" id="e-name">عافاك كتبي الاسم ديالك</div>
+        <label for="phone">رقم الهاتف</label>
+        <input type="tel" id="phone" name="phone" placeholder="06XXXXXXXX" inputmode="numeric" maxlength="10" autocomplete="tel">
+        <div class="err" id="e-phone">الرقم خاصو يكون 10 أرقام بالضبط و كيبدا ب 06 ولا 07</div>
+        <label for="city">المدينة</label>
+        <input type="text" id="city" name="city" placeholder="مثال: الدار البيضاء" autocomplete="address-level2">
+        <div class="err" id="e-city">عافاك كتبي المدينة ديالك</div>
+        <label for="address">العنوان</label>
+        <input type="text" id="address" name="address" placeholder="الحي، الزنقة، الرقم" autocomplete="street-address">
+        <div class="err" id="e-address">عافاك كتبي العنوان ديالك</div>
+        <label>القياس</label>
+        <div class="sizes">
+          <input type="radio" name="size" id="s-m" value="M"><label for="s-m">M</label>
+          <input type="radio" name="size" id="s-l" value="L"><label for="s-l">L</label>
+          <input type="radio" name="size" id="s-xl" value="XL"><label for="s-xl">XL</label>
+          <input type="radio" name="size" id="s-xxl" value="XXL"><label for="s-xxl">XXL</label>
+        </div>
+        <div class="err" id="e-size">عافاك ختاري القياس</div>
+        <label for="quantity">الكمية</label>
+        <select id="quantity" name="quantity">
+          <option value="1">1 — 199 درهم</option>
+          <option value="2">2 — 259 درهم</option>
+          <option value="3">3 — 319 درهم</option>
+        </select>
+        <button type="submit" class="cta" id="submit-btn">أكدي الطلب — الخلاص عند الاستلام</button>
+      </form>
+    </div>
+  </main>
+  <div class="thanks" id="thanks">
+    <div class="big">✅</div>
+    <h2>تسجل الطلب ديالك</h2>
+    <p>شكرا بزاف! غانعيطو ليك ف أقرب وقت باش نأكدو الطلب و العنوان. الخلاص غادي يكون عند الاستلام.</p>
+  </div>
+  <footer>Elite Shop © 2026</footer>
+</div>
+<div class="sticky" id="sticky">
+  <div class="sticky-in"><div class="p">199 درهم</div><button onclick="goToForm()">اطلبي دابا</button></div>
+</div>
+<script>
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx8Azpl1MMJ8SBZhAYPoQ3xni-1ojmcwKKIaxfRkJ5foqGNYK6xW2AgTBpVtICS0bpbJA/exec";
+const TOTALS = {1:199, 2:259, 3:319};
+let checkoutTracked = false;
+function goToForm(){
+  if(!checkoutTracked){ fbq('track','InitiateCheckout',{value:199,currency:'MAD',num_items:1}); checkoutTracked = true; }
+  document.getElementById('form-card').scrollIntoView({behavior:'smooth',block:'start'});
+  setTimeout(function(){document.getElementById('full_name').focus({preventScroll:true});}, 600);
+}
+function showErr(id,on){document.getElementById(id).classList.toggle('show',on);}
+function orderId(){ return 'G' + Date.now().toString(36).toUpperCase() + Math.random().toString(36).slice(2,6).toUpperCase(); }
+document.getElementById('phone').addEventListener('input', function(){
+  this.value = this.value.replace(/[^0-9]/g,'').slice(0,10);
+});
+async function saveOrder(params){
+  const url = SCRIPT_URL + '?' + new URLSearchParams(params).toString();
+  for(let attempt=0; attempt<3; attempt++){
+    try{
+      const ctrl = new AbortController();
+      const timer = setTimeout(function(){ctrl.abort();}, 9000);
+      await fetch(url,{method:'GET',mode:'no-cors',signal:ctrl.signal,cache:'no-store'});
+      clearTimeout(timer);
+      return true;
+    }catch(e){
+      if(attempt===2) return false;
+      await new Promise(function(r){setTimeout(r,1200);});
+    }
+  }
+  return false;
+}
+document.getElementById('order-form').addEventListener('submit', async function(ev){
+  ev.preventDefault();
+  const name = document.getElementById('full_name').value.trim();
+  const phone = document.getElementById('phone').value.replace(/[^0-9]/g,'');
+  const city = document.getElementById('city').value.trim();
+  const addr = document.getElementById('address').value.trim();
+  const qty = document.getElementById('quantity').value;
+  const sizeEl = document.querySelector('input[name="size"]:checked');
+  const okName = name.length >= 3;
+  const okPhone = phone.length === 10 && /^0[67][0-9]{8}$/.test(phone);
+  const okCity = city.length >= 2;
+  const okAddr = addr.length >= 4;
+  const okSize = !!sizeEl;
+  showErr('e-name',!okName); showErr('e-phone',!okPhone); showErr('e-city',!okCity);
+  showErr('e-address',!okAddr); showErr('e-size',!okSize);
+  if(!(okName && okPhone && okCity && okAddr && okSize)){
+    document.querySelector('.err.show').scrollIntoView({behavior:'smooth',block:'center'});
+    return;
+  }
+  const btn = document.getElementById('submit-btn');
+  btn.disabled = true; btn.textContent = 'كنسجلو الطلب ديالك...';
+  const id = orderId();
+  const total = TOTALS[qty];
+  await saveOrder({
+    full_name:'[GAINE] ' + name, phone:phone, city:city, address:addr,
+    quantity:qty, price:total, color:'GAINE 199 / Taille ' + sizeEl.value,
+    product:'GAINE 199', order_id:id
+  });
+  fbq('track','Purchase',{value:total,currency:'MAD',content_name:'Gaine',content_type:'product',num_items:Number(qty),order_id:id},{eventID:id});
+  document.getElementById('page').style.display='none';
+  document.getElementById('sticky').style.display='none';
+  document.getElementById('thanks').classList.add('show');
+  window.scrollTo({top:0,behavior:'smooth'});
+});
+const obs = new IntersectionObserver(function(entries){
+  entries.forEach(function(e){ document.getElementById('sticky').style.display = e.isIntersecting ? 'none' : 'block'; });
+},{threshold:0.25});
+obs.observe(document.getElementById('form-card'));
+</script>
+</body>
+</html>
