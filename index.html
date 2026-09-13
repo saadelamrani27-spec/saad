@@ -146,6 +146,7 @@ position:relative
 
 .main-product{
 width:100%;
+height:auto;
 aspect-ratio:1/1;
 object-fit:contain;
 border-radius:20px
@@ -794,6 +795,40 @@ padding:9px 14px
 }
 
 }
+/* ==== CRO pass ==== */
+.demo-band{padding:4px 0 24px}
+.demo-band .gif-wrap{max-width:400px;margin:0 auto;overflow:hidden;border-radius:18px;background:#fff;border:1px solid var(--line)}
+.demo-band .demo-cap{text-align:center;font-size:13px;font-weight:800;color:#666;margin:0 0 10px}
+
+.qty-opts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.qty-opt{display:flex;flex-direction:column;gap:3px;align-items:center;justify-content:center;padding:10px 8px;border:2px solid var(--line);border-radius:14px;background:#fff;cursor:pointer;font-family:inherit;text-align:center;transition:.15s}
+.qty-opt .q-t{font-size:12px;font-weight:800;color:#444}
+.qty-opt .q-t b{display:inline-block;background:#ffe9c9;color:#8a5300;border-radius:999px;padding:1px 7px;font-size:10px;margin-inline-start:4px}
+.qty-opt .q-p{font-size:16px;font-weight:900;color:#111}
+.qty-opt .q-p small{font-size:10px;color:#0a8a4a;font-weight:800}
+.qty-opt.is-on{border-color:#111;background:#fafafa;box-shadow:0 0 0 3px rgba(0,0,0,.06)}
+.qty-opts+select{display:none}
+
+.err{color:#d13b3b;font-size:12px;font-weight:800;margin-top:5px;min-height:0}
+input.bad,textarea.bad{border-color:#d13b3b!important;background:#fff6f6!important}
+
+@media(max-width:850px){
+.copy{display:flex;flex-direction:column}
+.eyebrow{order:1;align-self:center}
+h1{order:2}
+.lead{order:3}
+.offer{order:4}
+.main-btn{order:5}
+.bullets{order:6;grid-template-columns:1fr 1fr}
+.main-product{max-height:34vh}
+}
+
+@media(max-width:600px){
+.bullets{grid-template-columns:1fr 1fr;gap:8px}
+.main-product{max-height:31vh}
+.hero{padding-top:12px}
+.hero-grid{gap:14px}
+}
 </style>
 </head>
 
@@ -836,9 +871,6 @@ alt="أداة العناية بالقدمين">
 
 </button>
 
-<div class="gif-wrap">
-<video class="product-gif" src="demo.mp4" poster="demo-poster.jpg" autoplay muted loop playsinline preload="auto" width="420" height="746" style="aspect-ratio:420/746" aria-label="طريقة استعمال المنتج"></video>
-</div>
 
 </div>
 
@@ -952,48 +984,6 @@ onclick="openOrder()">
 </section>
 
 
-<section class="section">
-
-<div class="container">
-
-<div class="section-title">
-<h2>علاش غادي تعجبك؟</h2>
-<p>كلشي باش تخلي العناية بالقدمين أسهل</p>
-</div>
-
-<div class="benefits">
-
-<div class="benefit">
-<div class="icon">🦶</div>
-<h3>نعومة أفضل</h3>
-<p>
-كتعاون على إزالة الخشونة والجلد الميت من القدمين.
-</p>
-</div>
-
-<div class="benefit">
-<div class="icon">🔋</div>
-<h3>عملية وقابلة للشحن</h3>
-<p>
-استعمال مريح بلا الحاجة لأسلاك أثناء العناية.
-</p>
-</div>
-
-<div class="benefit">
-<div class="icon">✨</div>
-<h3>سهلة فالروتين اليومي</h3>
-<p>
-خدي دقائق قليلة للعناية برجليك فالدار.
-</p>
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-
 <section class="order-section" id="order">
 
 <div class="container">
@@ -1053,7 +1043,7 @@ id="phone"
 inputmode="tel"
 autocomplete="tel"
 placeholder="06XXXXXXXX"
-maxlength="10"
+maxlength="16"
 required>
 
 </div>
@@ -1079,6 +1069,11 @@ required>
 <label for="quantity">
 الكمية
 </label>
+
+<div class="qty-opts">
+<button type="button" class="qty-opt is-on" data-q="1"><span class="q-t">قطعة وحدة</span><span class="q-p">129 DH</span></button>
+<button type="button" class="qty-opt" data-q="2"><span class="q-t">2 قطع <b>الأكثر طلباً</b></span><span class="q-p">229 DH <small>وفّري 29</small></span></button>
+</div>
 
 <select
 id="quantity">
@@ -1130,6 +1125,58 @@ type="submit">
 </div>
 
 </section>
+
+<section class="demo-band">
+<div class="container">
+<p class="demo-cap">شوفي كيفاش كتخدم 👇</p>
+<div class="gif-wrap">
+<video class="product-gif" src="demo.mp4" poster="demo-poster.jpg" autoplay muted loop playsinline preload="auto" width="420" height="746" style="aspect-ratio:420/746" aria-label="طريقة استعمال المنتج"></video>
+</div>
+</div>
+</section>
+
+
+<section class="section">
+
+<div class="container">
+
+<div class="section-title">
+<h2>علاش غادي تعجبك؟</h2>
+<p>كلشي باش تخلي العناية بالقدمين أسهل</p>
+</div>
+
+<div class="benefits">
+
+<div class="benefit">
+<div class="icon">🦶</div>
+<h3>نعومة أفضل</h3>
+<p>
+كتعاون على إزالة الخشونة والجلد الميت من القدمين.
+</p>
+</div>
+
+<div class="benefit">
+<div class="icon">🔋</div>
+<h3>عملية وقابلة للشحن</h3>
+<p>
+استعمال مريح بلا الحاجة لأسلاك أثناء العناية.
+</p>
+</div>
+
+<div class="benefit">
+<div class="icon">✨</div>
+<h3>سهلة فالروتين اليومي</h3>
+<p>
+خدي دقائق قليلة للعناية برجليك فالدار.
+</p>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
 
 </main>
 
@@ -1221,7 +1268,7 @@ placeholder="مثال: محمد العلوي">
 <input
 id="m_phone"
 inputmode="tel"
-maxlength="10"
+maxlength="16"
 required
 placeholder="06XXXXXXXX">
 
@@ -1247,6 +1294,11 @@ placeholder="مثال: الرباط">
 <label for="m_quantity">
 الكمية
 </label>
+
+<div class="qty-opts">
+<button type="button" class="qty-opt is-on" data-q="1"><span class="q-t">قطعة وحدة</span><span class="q-p">129 DH</span></button>
+<button type="button" class="qty-opt" data-q="2"><span class="q-t">2 قطع <b>الأكثر طلباً</b></span><span class="q-p">229 DH <small>وفّري 29</small></span></button>
+</div>
 
 <select
 id="m_quantity">
@@ -1415,11 +1467,56 @@ if(d.length===9&&/^[5-7]/.test(d))d='0'+d;
 return d;
 }
 
+function clearErr(el){
+if(!el)return;
+el.classList.remove('bad');
+const f=el.closest('.field');
+const e=f&&f.querySelector('.err');
+if(e)e.textContent='';
+}
+function fieldError(el,msg){
+if(!el)return;
+const f=el.closest('.field')||el.parentElement;
+let e=f.querySelector('.err');
+if(!e){e=document.createElement('div');e.className='err';f.appendChild(e);}
+e.textContent=msg;
+el.classList.add('bad');
+try{el.focus({preventScroll:true});el.scrollIntoView({block:'center',behavior:'smooth'});}catch(err){el.focus();}
+}
+function syncQty(box){
+const sel=box.parentElement.querySelector('select');
+if(!sel)return;
+const on=box.querySelector('.qty-opt.is-on');
+sel.value=on?on.dataset.q:'1';
+const price=QTY_PRICES[sel.value]||PRODUCT_PRICE;
+const form=box.closest('form');
+const btn=form&&form.querySelector('.buy-btn');
+if(btn&&!btn.disabled)btn.textContent='دير الطلب دابا — '+price+' DH';
+}
+document.querySelectorAll('.qty-opts').forEach(box=>{
+box.addEventListener('click',e=>{
+const b=e.target.closest('.qty-opt');
+if(!b)return;
+box.querySelectorAll('.qty-opt').forEach(x=>x.classList.remove('is-on'));
+b.classList.add('is-on');
+syncQty(box);
+});
+});
+function resetQty(form){
+const box=form.querySelector('.qty-opts');
+if(!box)return;
+box.querySelectorAll('.qty-opt').forEach((x,i)=>x.classList.toggle('is-on',i===0));
+const sel=box.parentElement.querySelector('select');
+if(sel)sel.value='1';
+}
+
 function setupFields(prefix){
 const name=document.getElementById(prefix+'full_name');
 const phone=document.getElementById(prefix+'phone');
 const city=document.getElementById(prefix+'city');
-name.addEventListener('input',()=>{name.value=name.value.replace(/[^A-Za-zÀ-ÿ؀-ۿ\s]/g,'');});
+name.addEventListener('input',()=>{name.value=name.value.replace(/[^A-Za-zÀ-ÿ؀-ۿ\s'’.\-]/g,'');clearErr(name);});
+phone.addEventListener('input',()=>clearErr(phone));
+city.addEventListener('input',()=>clearErr(city));
 phone.addEventListener('input',()=>{phone.value=phone.value.replace(/[^0-9+ ]/g,'').slice(0,16);});
 return {name:name,phone:phone,city:city,address:document.getElementById(prefix+'address'),quantity:document.getElementById(prefix+'quantity'),color:document.getElementById(prefix+'color'),btn:document.getElementById(prefix+'submitBtn')};
 }
@@ -1453,10 +1550,10 @@ const fullName=fields.name.value.trim();
 const phone=normalizePhone(fields.phone.value);
 const city=fields.city.value.trim();
 const address=fields.address.value.trim();
-if(!/^[A-Za-zÀ-ÿ؀-ۿ\s]+$/.test(fullName)){alert('المرجو إدخال الاسم بالحروف فقط.');return;}
-if(!/^0[5-7][0-9]{8}$/.test(phone)){alert('المرجو إدخال رقم هاتف مغربي صحيح. مثال: 0612345678');return;}
-if(!city){alert('المرجو إدخال المدينة.');return;}
-if(!address){alert('المرجو إدخال العنوان.');return;}
+if(!/^[A-Za-zÀ-ÿ؀-ۿ\s'’.\-]{2,}$/.test(fullName)){fieldError(fields.name,'المرجو إدخال الاسم ديالك.');return;}
+if(!/^0[5-7][0-9]{8}$/.test(phone)){fieldError(fields.phone,'رقم غير صحيح. مثال: 0612345678');return;}
+if(!city){fieldError(fields.city,'المرجو إدخال المدينة.');return;}
+if(!address){fieldError(fields.address,'المرجو إدخال العنوان.');return;}
 sending=true;
 fields.btn.disabled=true;
 fields.btn.textContent='جاري إرسال الطلب...';
@@ -1482,6 +1579,7 @@ fbq('track','Purchase',{value:(QTY_PRICES[fields.quantity.value]||129),currency:
 await Promise.race([saving,new Promise(r=>setTimeout(r,2500))]);
 
 form.reset();
+resetQty(form);
 fields.quantity.value='1';
 fields.color.value='أسود';
 fields.btn.disabled=false;
