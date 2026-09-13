@@ -9,10 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --bg:#ffffff; --ink:#15161a; --muted:#6b6f76; --line:#e8e9ec;
-    --pink:#e6186b; --pink-dark:#c2125a; --green:#12a150; --green-dark:#0e8442; --soft:#fdf2f6;
-  }
+  :root{--bg:#fff;--ink:#15161a;--muted:#6b6f76;--line:#e8e9ec;--pink:#e6186b;--green:#12a150;--green-dark:#0e8442;--soft:#fdf2f6}
   *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
   html,body{margin:0;padding:0}
   body{font-family:'Cairo',system-ui,-apple-system,'Segoe UI',Tahoma,sans-serif;background:var(--bg);color:var(--ink);font-size:17px;line-height:1.75;overflow-x:hidden}
@@ -46,14 +43,14 @@
   input::placeholder{color:#b3b6bc;font-weight:500}
   .sizes{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:6px}
   .sizes input{position:absolute;opacity:0;pointer-events:none}
-  .sizes label{margin:0;text-align:center;padding:13px 0;border:1.5px solid var(--line);border-radius:12px;cursor:pointer;font-weight:800;font-size:17px;transition:.15s}
+  .sizes label{margin:0;text-align:center;padding:13px 0;border:1.5px solid var(--line);border-radius:12px;cursor:pointer;font-weight:800;font-size:17px}
   .sizes input:checked + label{background:var(--pink);border-color:var(--pink);color:#fff}
   .err{color:#d01b3c;font-size:14.5px;font-weight:700;margin-top:6px;display:none}
   .err.show{display:block}
-  button.cta{width:100%;margin-top:22px;padding:18px;border:none;border-radius:14px;background:var(--green);color:#fff;font-family:inherit;font-size:21px;font-weight:900;cursor:pointer;transition:.15s}
+  button.cta{width:100%;margin-top:22px;padding:18px;border:none;border-radius:14px;background:var(--green);color:#fff;font-family:inherit;font-size:21px;font-weight:900;cursor:pointer}
   button.cta:active{background:var(--green-dark)}
-  button.cta:disabled{opacity:.65;cursor:default}
-  .sticky{position:fixed;inset-inline:0;bottom:0;z-index:50;background:rgba(255,255,255,.97);border-top:1px solid var(--line);padding:10px 16px;backdrop-filter:blur(8px)}
+  button.cta:disabled{opacity:.65}
+  .sticky{position:fixed;inset-inline:0;bottom:0;z-index:50;background:rgba(255,255,255,.97);border-top:1px solid var(--line);padding:10px 16px}
   .sticky-in{max-width:560px;margin:0 auto;display:flex;gap:12px;align-items:center}
   .sticky .p{font-weight:900;font-size:21px;color:var(--pink);white-space:nowrap}
   .sticky button{flex:1;padding:15px;border:none;border-radius:12px;background:var(--green);color:#fff;font-family:inherit;font-size:18px;font-weight:900;cursor:pointer}
@@ -115,8 +112,8 @@ fbq('track','ViewContent',{content_name:'Gaine',content_type:'product',value:199
         <input type="text" id="full_name" name="full_name" placeholder="مثال: فاطمة بنعلي" autocomplete="name">
         <div class="err" id="e-name">عافاك كتبي الاسم ديالك</div>
         <label for="phone">رقم الهاتف</label>
-        <input type="tel" id="phone" name="phone" placeholder="06XXXXXXXX" inputmode="numeric" autocomplete="tel">
-        <div class="err" id="e-phone">عافاك كتبي رقم صحيح (10 أرقام، كيبدا ب 06 ولا 07)</div>
+        <input type="tel" id="phone" name="phone" placeholder="06XXXXXXXX" inputmode="numeric" maxlength="10" autocomplete="tel">
+        <div class="err" id="e-phone">الرقم خاصو يكون 10 أرقام بالضبط و كيبدا ب 06 ولا 07</div>
         <label for="city">المدينة</label>
         <input type="text" id="city" name="city" placeholder="مثال: الدار البيضاء" autocomplete="address-level2">
         <div class="err" id="e-city">عافاك كتبي المدينة ديالك</div>
@@ -134,8 +131,8 @@ fbq('track','ViewContent',{content_name:'Gaine',content_type:'product',value:199
         <label for="quantity">الكمية</label>
         <select id="quantity" name="quantity">
           <option value="1">1 — 199 درهم</option>
-          <option value="2">2 — 380 درهم</option>
-          <option value="3">3 — 550 درهم</option>
+          <option value="2">2 — 249 درهم</option>
+          <option value="3">3 — 339 درهم</option>
         </select>
         <button type="submit" class="cta" id="submit-btn">أكدي الطلب — الخلاص عند الاستلام</button>
       </form>
@@ -149,28 +146,22 @@ fbq('track','ViewContent',{content_name:'Gaine',content_type:'product',value:199
   <footer>Elite Shop © 2026</footer>
 </div>
 <div class="sticky" id="sticky">
-  <div class="sticky-in">
-    <div class="p">199 درهم</div>
-    <button onclick="goToForm()">اطلبي دابا</button>
-  </div>
+  <div class="sticky-in"><div class="p">199 درهم</div><button onclick="goToForm()">اطلبي دابا</button></div>
 </div>
 <script>
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx8Azpl1MMJ8SBZhAYPoQ3xni-1ojmcwKKIaxfRkJ5foqGNYK6xW2AgTBpVtICS0bpbJA/exec";
-const UNIT_PRICE = 199;
-const TOTALS = {1:199, 2:380, 3:550};
+const TOTALS = {1:199, 2:249, 3:339};
 let checkoutTracked = false;
 function goToForm(){
-  if(!checkoutTracked){
-    fbq('track','InitiateCheckout',{value:UNIT_PRICE,currency:'MAD',num_items:1});
-    checkoutTracked = true;
-  }
+  if(!checkoutTracked){ fbq('track','InitiateCheckout',{value:199,currency:'MAD',num_items:1}); checkoutTracked = true; }
   document.getElementById('form-card').scrollIntoView({behavior:'smooth',block:'start'});
   setTimeout(function(){document.getElementById('full_name').focus({preventScroll:true});}, 600);
 }
 function showErr(id,on){document.getElementById(id).classList.toggle('show',on);}
-function orderId(){
-  return 'G' + Date.now().toString(36).toUpperCase() + Math.random().toString(36).slice(2,6).toUpperCase();
-}
+function orderId(){ return 'G' + Date.now().toString(36).toUpperCase() + Math.random().toString(36).slice(2,6).toUpperCase(); }
+document.getElementById('phone').addEventListener('input', function(){
+  this.value = this.value.replace(/[^0-9]/g,'').slice(0,10);
+});
 async function saveOrder(params){
   const url = SCRIPT_URL + '?' + new URLSearchParams(params).toString();
   for(let attempt=0; attempt<3; attempt++){
@@ -196,7 +187,7 @@ document.getElementById('order-form').addEventListener('submit', async function(
   const qty = document.getElementById('quantity').value;
   const sizeEl = document.querySelector('input[name="size"]:checked');
   const okName = name.length >= 3;
-  const okPhone = /^0[67][0-9]{8}$/.test(phone);
+  const okPhone = phone.length === 10 && /^0[67][0-9]{8}$/.test(phone);
   const okCity = city.length >= 2;
   const okAddr = addr.length >= 4;
   const okSize = !!sizeEl;
@@ -207,14 +198,13 @@ document.getElementById('order-form').addEventListener('submit', async function(
     return;
   }
   const btn = document.getElementById('submit-btn');
-  btn.disabled = true;
-  btn.textContent = 'كنسجلو الطلب ديالك...';
+  btn.disabled = true; btn.textContent = 'كنسجلو الطلب ديالك...';
   const id = orderId();
-  const total = TOTALS[qty] || (UNIT_PRICE * Number(qty));
+  const total = TOTALS[qty];
   await saveOrder({
-    full_name:name, phone:phone, city:city, address:addr,
-    quantity:qty, price:total, color:'Gaine ' + sizeEl.value,
-    product:'Gaine 199', order_id:id
+    full_name:'[GAINE] ' + name, phone:phone, city:city, address:addr,
+    quantity:qty, price:total, color:'GAINE 199 / Taille ' + sizeEl.value,
+    product:'GAINE 199', order_id:id
   });
   fbq('track','Purchase',{value:total,currency:'MAD',content_name:'Gaine',content_type:'product',num_items:Number(qty),order_id:id},{eventID:id});
   document.getElementById('page').style.display='none';
@@ -223,9 +213,7 @@ document.getElementById('order-form').addEventListener('submit', async function(
   window.scrollTo({top:0,behavior:'smooth'});
 });
 const obs = new IntersectionObserver(function(entries){
-  entries.forEach(function(e){
-    document.getElementById('sticky').style.display = e.isIntersecting ? 'none' : 'block';
-  });
+  entries.forEach(function(e){ document.getElementById('sticky').style.display = e.isIntersecting ? 'none' : 'block'; });
 },{threshold:0.25});
 obs.observe(document.getElementById('form-card'));
 </script>
