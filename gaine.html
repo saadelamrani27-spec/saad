@@ -202,8 +202,8 @@ document.getElementById('order-form').addEventListener('submit', async function(
   const id = orderId();
   const total = TOTALS[qty];
   await saveOrder({
-    full_name:'[GAINE] ' + name, phone:phone, city:city, address:addr,
-    quantity:qty, price:total, color:'GAINE 199 / Taille ' + sizeEl.value,
+    full_name:name, phone:phone, city:city, address:addr,
+    quantity:'GAINE ' + qty + ' قطعة — Taille ' + sizeEl.value, price:total, color:'GAINE 199 / Taille ' + sizeEl.value,
     product:'GAINE 199', order_id:id
   });
   fbq('track','Purchase',{value:total,currency:'MAD',content_name:'Gaine',content_type:'product',num_items:Number(qty),order_id:id},{eventID:id});
