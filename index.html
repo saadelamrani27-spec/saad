@@ -1415,6 +1415,7 @@ const SCRIPT_URL="https://script.google.com/macros/s/AKfycbx8Azpl1MMJ8SBZhAYPoQ3
 const PRODUCT_PRICE="129";
 const QTY_PRICES={1:129,2:229};
 const PIXEL_ID="1327371405934124";
+const CAPI_URL="https://script.google.com/macros/s/AKfycbxDz9wtREuqxax5-XfYOs34bzZ1q3f8hQW9yOdMgyM5VfhU-VLZCe8NWPjYZHV2Zveh/exec";
 let checkoutTracked=false;
 let sending=false;
 
@@ -1529,6 +1530,23 @@ const ymd=d.getFullYear()+String(d.getMonth()+1).padStart(2,'0')+String(d.getDat
 return 'ORD-'+ymd+'-'+phone;
 }
 
+function cookieVal(n){
+const parts=(document.cookie||'').split('; ');
+for(var i=0;i<parts.length;i++){
+const p=parts[i].split('=');
+if(p[0]===n)return decodeURIComponent(p.slice(1).join('='));
+}
+return '';
+}
+
+function sendCapi(p){
+if(!CAPI_URL)return;
+try{
+const qs=Object.keys(p).map(function(k){return encodeURIComponent(k)+'='+encodeURIComponent(p[k]==null?'':p[k]);}).join('&');
+fetch(CAPI_URL+'?'+qs,{mode:'no-cors',keepalive:true}).catch(function(){});
+}catch(e){}
+}
+
 async function saveOrder(url){
 for(let i=0;i<3;i++){
 try{
@@ -1558,6 +1576,8 @@ sending=true;
 fields.btn.disabled=true;
 fields.btn.textContent='جاري إرسال الطلب...';
 
+const qty=Number(fields.quantity.value)||1;
+const price=QTY_PRICES[fields.quantity.value]||PRODUCT_PRICE;
 const orderId=orderIdFor(phone);
 let alreadyTracked=false;
 try{alreadyTracked=localStorage.getItem('fbPurchase_'+orderId)==='1';}catch(e){}
@@ -1571,9 +1591,10 @@ try{localStorage.setItem('fbPurchase_'+orderId,'1');}catch(e){}
 try{
 if(typeof fbq!=='undefined'){
 fbq('init',PIXEL_ID,{ph:'212'+phone.slice(1),fn:(fullName.split(/\s+/)[0]||'').toLowerCase(),ct:city.toLowerCase().replace(/\s+/g,''),country:'ma',external_id:phone});
-fbq('track','Purchase',{value:(QTY_PRICES[fields.quantity.value]||129),currency:'MAD',content_name:'Foot care tool',content_type:'product',num_items:Number(fields.quantity.value)||1,order_id:orderId},{eventID:orderId});
+fbq('track','Purchase',{value:price,currency:'MAD',content_name:'Foot care tool',content_type:'product',num_items:qty,order_id:orderId},{eventID:orderId});
 }
 }catch(e){}
+sendCapi({event_id:orderId,phone:phone,fn:fullName,ct:city,value:price,currency:'MAD',num_items:qty,fbp:cookieVal('_fbp'),fbc:cookieVal('_fbc'),ua:navigator.userAgent,url:location.href});
 });
 
 await Promise.race([saving,new Promise(r=>setTimeout(r,2500))]);
