@@ -460,6 +460,7 @@ margin-bottom:6px
 }
 
 .field input,
+.field select,
 .field textarea{
 width:100%;
 border:1px solid #d8d8d8;
@@ -471,6 +472,7 @@ outline:none
 }
 
 .field input:focus,
+.field select:focus,
 .field textarea:focus{
 border-color:#111;
 box-shadow:0 0 0 3px rgba(0,0,0,.06)
@@ -1051,7 +1053,7 @@ id="phone"
 inputmode="tel"
 autocomplete="tel"
 placeholder="06XXXXXXXX"
-maxlength="16"
+maxlength="10"
 required>
 
 </div>
@@ -1078,10 +1080,11 @@ required>
 الكمية
 </label>
 
-<input
-id="quantity"
-value="1 قطعة — 129 DH"
-readonly>
+<select
+id="quantity">
+<option value="1">1 قطعة — 129 درهم</option>
+<option value="2">2 قطعة — 229 درهم • وفري 29 درهم</option>
+</select>
 
 </div>
 
@@ -1218,7 +1221,7 @@ placeholder="مثال: محمد العلوي">
 <input
 id="m_phone"
 inputmode="tel"
-maxlength="16"
+maxlength="10"
 required
 placeholder="06XXXXXXXX">
 
@@ -1245,10 +1248,11 @@ placeholder="مثال: الرباط">
 الكمية
 </label>
 
-<input
-id="m_quantity"
-value="1 قطعة — 129 DH"
-readonly>
+<select
+id="m_quantity">
+<option value="1">1 قطعة — 129 درهم</option>
+<option value="2">2 قطعة — 229 درهم • وفري 29 درهم</option>
+</select>
 
 </div>
 
@@ -1357,6 +1361,7 @@ onclick="closeOrderConfirmation()">
 <script>
 const SCRIPT_URL="https://script.google.com/macros/s/AKfycbx8Azpl1MMJ8SBZhAYPoQ3xni-1ojmcwKKIaxfRkJ5foqGNYK6xW2AgTBpVtICS0bpbJA/exec";
 const PRODUCT_PRICE="129";
+const QTY_PRICES={1:129,2:229};
 const PIXEL_ID="1327371405934124";
 let checkoutTracked=false;
 let sending=false;
@@ -1460,7 +1465,7 @@ const orderId=orderIdFor(phone);
 let alreadyTracked=false;
 try{alreadyTracked=localStorage.getItem('fbPurchase_'+orderId)==='1';}catch(e){}
 
-const url=SCRIPT_URL+'?full_name='+encodeURIComponent(fullName)+'&phone='+encodeURIComponent(phone)+'&city='+encodeURIComponent(city)+'&address='+encodeURIComponent(address)+'&quantity='+encodeURIComponent('FOOT CARE '+fields.quantity.value)+'&price='+encodeURIComponent(PRODUCT_PRICE)+'&color='+encodeURIComponent(fields.color.value);
+const url=SCRIPT_URL+'?full_name='+encodeURIComponent(fullName)+'&phone='+encodeURIComponent(phone)+'&city='+encodeURIComponent(city)+'&address='+encodeURIComponent(address)+'&quantity='+encodeURIComponent('FOOT CARE '+fields.quantity.value+' قطعة')+'&price='+encodeURIComponent(QTY_PRICES[fields.quantity.value]||PRODUCT_PRICE)+'&color='+encodeURIComponent(fields.color.value);
 
 const saving=saveOrder(url);
 saving.then(ok=>{
@@ -1469,7 +1474,7 @@ try{localStorage.setItem('fbPurchase_'+orderId,'1');}catch(e){}
 try{
 if(typeof fbq!=='undefined'){
 fbq('init',PIXEL_ID,{ph:'212'+phone.slice(1),fn:(fullName.split(/\s+/)[0]||'').toLowerCase(),ct:city.toLowerCase().replace(/\s+/g,''),country:'ma',external_id:phone});
-fbq('track','Purchase',{value:129,currency:'MAD',content_name:'Foot care tool',content_type:'product',num_items:1,order_id:orderId},{eventID:orderId});
+fbq('track','Purchase',{value:(QTY_PRICES[fields.quantity.value]||129),currency:'MAD',content_name:'Foot care tool',content_type:'product',num_items:Number(fields.quantity.value)||1,order_id:orderId},{eventID:orderId});
 }
 }catch(e){}
 });
@@ -1477,7 +1482,7 @@ fbq('track','Purchase',{value:129,currency:'MAD',content_name:'Foot care tool',c
 await Promise.race([saving,new Promise(r=>setTimeout(r,2500))]);
 
 form.reset();
-fields.quantity.value='1 قطعة — 129 DH';
+fields.quantity.value='1';
 fields.color.value='أسود';
 fields.btn.disabled=false;
 fields.btn.textContent='دير الطلب دابا — 129 DH';
