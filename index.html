@@ -1591,6 +1591,14 @@ try{return localStorage.getItem('ttclid')||'';}catch(e){return '';}
 }catch(e){return '';}
 }
 
+function srcTag(){
+try{
+const u=new URLSearchParams(location.search).get('src');
+if(u){try{localStorage.setItem('src',u);}catch(e){}return u;}
+try{return localStorage.getItem('src')||'';}catch(e){return '';}
+}catch(e){return '';}
+}
+
 function sendTtapi(p){
 if(!TT_CAPI_URL)return;
 try{
@@ -1634,7 +1642,7 @@ const orderId=orderIdFor(phone);
 let alreadyTracked=false;
 try{alreadyTracked=localStorage.getItem('fbPurchase_'+orderId)==='1';}catch(e){}
 
-const url=SCRIPT_URL+'?full_name='+encodeURIComponent(fullName)+'&phone='+encodeURIComponent(phone)+'&city='+encodeURIComponent(city)+'&address='+encodeURIComponent(address)+'&quantity='+encodeURIComponent('FOOT CARE '+fields.quantity.value+' قطعة')+'&price='+encodeURIComponent(QTY_PRICES[fields.quantity.value]||PRODUCT_PRICE)+'&color='+encodeURIComponent(fields.color.value);
+const url=SCRIPT_URL+'?full_name='+encodeURIComponent(fullName)+'&phone='+encodeURIComponent(phone)+'&city='+encodeURIComponent(city)+'&address='+encodeURIComponent(address)+'&quantity='+encodeURIComponent('FOOT CARE '+fields.quantity.value+' قطعة')+'&price='+encodeURIComponent(QTY_PRICES[fields.quantity.value]||PRODUCT_PRICE)+'&color='+encodeURIComponent(fields.color.value)+'&src='+encodeURIComponent(srcTag());
 
 const saving=saveOrder(url);
 saving.then(ok=>{
