@@ -1595,6 +1595,14 @@ try{return localStorage.getItem('ttclid')||'';}catch(e){return '';}
 }catch(e){return '';}
 }
 
+function utmTag(key){
+try{
+const u=new URLSearchParams(location.search).get(key);
+if(u){try{localStorage.setItem(key,u);}catch(e){}return u;}
+try{return localStorage.getItem(key)||'';}catch(e){return '';}
+}catch(e){return '';}
+}
+
 const DEFAULT_SRC='meta-gaine';
 function srcTag(){
 try{
@@ -1650,7 +1658,7 @@ const orderId=orderIdFor(phone);
 let alreadyTracked=false;
 try{alreadyTracked=localStorage.getItem('fbPurchase_'+orderId)==='1';}catch(e){}
 
-const url=SCRIPT_URL+'?full_name='+encodeURIComponent(fullName)+'&phone='+encodeURIComponent(phone)+'&city='+encodeURIComponent(city)+'&address='+encodeURIComponent(address)+'&quantity='+encodeURIComponent('GAINE ('+size+') '+fields.quantity.value+' قطعة')+'&price='+encodeURIComponent(QTY_PRICES[fields.quantity.value]||PRODUCT_PRICE)+'&color='+encodeURIComponent('Taille '+size)+'&src='+encodeURIComponent(srcTag());
+const url=SCRIPT_URL+'?full_name='+encodeURIComponent(fullName)+'&phone='+encodeURIComponent(phone)+'&city='+encodeURIComponent(city)+'&address='+encodeURIComponent(address)+'&quantity='+encodeURIComponent('GAINE ('+size+') '+fields.quantity.value+' قطعة')+'&price='+encodeURIComponent(QTY_PRICES[fields.quantity.value]||PRODUCT_PRICE)+'&color='+encodeURIComponent('Taille '+size)+'&src='+encodeURIComponent(srcTag())+'&ad='+encodeURIComponent(utmTag('utm_content'))+'&camp='+encodeURIComponent(utmTag('utm_campaign'));
 
 const saving=saveOrder(url);
 saving.then(ok=>{
