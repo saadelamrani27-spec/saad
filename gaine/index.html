@@ -1060,8 +1060,8 @@ id="quantity">
 
 <div class="field">
 <label>القياس</label>
-<div class="size-opts"><button type="button" class="qty-opt" data-s="M"><span class="q-p">M</span></button><button type="button" class="qty-opt" data-s="L"><span class="q-p">L</span></button><button type="button" class="qty-opt" data-s="XL"><span class="q-p">XL</span></button><button type="button" class="qty-opt" data-s="XXL"><span class="q-p">XXL</span></button></div>
-<input id="size" type="hidden" value="">
+<div class="size-opts"><button type="button" class="qty-opt" data-s="M"><span class="q-p">M</span></button><button type="button" class="qty-opt is-on" data-s="L"><span class="q-p">L</span></button><button type="button" class="qty-opt" data-s="XL"><span class="q-p">XL</span></button><button type="button" class="qty-opt" data-s="XXL"><span class="q-p">XXL</span></button></div>
+<input id="size" type="hidden" value="L">
 <div class="size-help">ما عرفتيش القياس ديالك؟ غادي نعاونوك فالتأكيد 📞</div>
 </div>
 
@@ -1326,8 +1326,8 @@ id="m_quantity">
 
 <div class="field">
 <label>القياس</label>
-<div class="size-opts"><button type="button" class="qty-opt" data-s="M"><span class="q-p">M</span></button><button type="button" class="qty-opt" data-s="L"><span class="q-p">L</span></button><button type="button" class="qty-opt" data-s="XL"><span class="q-p">XL</span></button><button type="button" class="qty-opt" data-s="XXL"><span class="q-p">XXL</span></button></div>
-<input id="m_size" type="hidden" value="">
+<div class="size-opts"><button type="button" class="qty-opt" data-s="M"><span class="q-p">M</span></button><button type="button" class="qty-opt is-on" data-s="L"><span class="q-p">L</span></button><button type="button" class="qty-opt" data-s="XL"><span class="q-p">XL</span></button><button type="button" class="qty-opt" data-s="XXL"><span class="q-p">XXL</span></button></div>
+<input id="m_size" type="hidden" value="L">
 <div class="size-help">ما عرفتيش القياس ديالك؟ غادي نعاونوك فالتأكيد 📞</div>
 </div>
 
@@ -1539,8 +1539,8 @@ if(inp){inp.value=b.dataset.s;clearErr(inp);const er=box.parentElement.querySele
 });
 });
 function resetSize(form){
-form.querySelectorAll('.size-opts .qty-opt').forEach(x=>x.classList.remove('is-on'));
-form.querySelectorAll('.size-opts').forEach(box=>{const inp=box.parentElement.querySelector('input[type=hidden]');if(inp)inp.value='';});
+form.querySelectorAll('.size-opts .qty-opt').forEach(x=>x.classList.toggle('is-on',x.dataset.s==='L'));
+form.querySelectorAll('.size-opts').forEach(box=>{const inp=box.parentElement.querySelector('input[type=hidden]');if(inp)inp.value='L';});
 }
 function resetQty(form){
 const box=form.querySelector('.qty-opts');
