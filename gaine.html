@@ -163,6 +163,22 @@ function orderId(){ return 'G' + Date.now().toString(36).toUpperCase() + Math.ra
 document.getElementById('phone').addEventListener('input', function(){
   this.value = this.value.replace(/[^0-9]/g,'').slice(0,10);
 });
+const CAPI_URL="https://script.google.com/macros/s/AKfycbxDz9wtREuqxax5-XfYOs34bzZ1q3f8hQW9yOdMgyM5VfhU-VLZCe8NWPjYZHV2Zveh/exec";
+function cookieVal(n){
+const parts=(document.cookie||'').split('; ');
+for(var i=0;i<parts.length;i++){
+const p=parts[i].split('=');
+if(p[0]===n)return decodeURIComponent(p.slice(1).join('='));
+}
+return '';
+}
+function sendCapi(p){
+if(!CAPI_URL)return;
+try{
+const qs=Object.keys(p).map(function(k){return encodeURIComponent(k)+'='+encodeURIComponent(p[k]==null?'':p[k]);}).join('&');
+fetch(CAPI_URL+'?'+qs,{mode:'no-cors',keepalive:true}).catch(function(){});
+}catch(e){}
+}
 function utmTag(key){
 try{
 const u=new URLSearchParams(location.search).get(key);
@@ -223,6 +239,7 @@ document.getElementById('order-form').addEventListener('submit', async function(
     product:'GAINE 199', order_id:id, src:srcTag(), ad:utmTag('utm_content'), camp:utmTag('utm_campaign')
   });
   fbq('track','Purchase',{value:total,currency:'MAD',content_name:'Gaine',content_type:'product',num_items:Number(qty),order_id:id},{eventID:id});
+  sendCapi({event_id:id,phone:phone,fn:name,ct:city,value:total,currency:'MAD',num_items:Number(qty),fbp:cookieVal('_fbp'),fbc:cookieVal('_fbc'),ua:navigator.userAgent,url:location.href});
   document.getElementById('page').style.display='none';
   document.getElementById('sticky').style.display='none';
   document.getElementById('thanks').classList.add('show');
