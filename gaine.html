@@ -124,7 +124,7 @@ fbq('track','ViewContent',{content_name:'Gaine',content_type:'product',value:199
         <label>القياس</label>
         <div class="sizes">
           <input type="radio" name="size" id="s-m" value="M"><label for="s-m">M</label>
-          <input type="radio" name="size" id="s-l" value="L"><label for="s-l">L</label>
+          <input type="radio" name="size" id="s-l" value="L" checked><label for="s-l">L</label>
           <input type="radio" name="size" id="s-xl" value="XL"><label for="s-xl">XL</label>
           <input type="radio" name="size" id="s-xxl" value="XXL"><label for="s-xxl">XXL</label>
         </div>
@@ -163,6 +163,21 @@ function orderId(){ return 'G' + Date.now().toString(36).toUpperCase() + Math.ra
 document.getElementById('phone').addEventListener('input', function(){
   this.value = this.value.replace(/[^0-9]/g,'').slice(0,10);
 });
+function utmTag(key){
+try{
+const u=new URLSearchParams(location.search).get(key);
+if(u){try{localStorage.setItem(key,u);}catch(e){}return u;}
+try{return localStorage.getItem(key)||'';}catch(e){return '';}
+}catch(e){return '';}
+}
+function srcTag(){
+try{
+const q=new URLSearchParams(location.search);
+const u=q.get('src')||q.get('utm_source');
+if(u){try{localStorage.setItem('src',u);}catch(e){}return u;}
+try{return localStorage.getItem('src')||'meta-gaine';}catch(e){return 'meta-gaine';}
+}catch(e){return 'meta-gaine';}
+}
 async function saveOrder(params){
   const url = SCRIPT_URL + '?' + new URLSearchParams(params).toString();
   for(let attempt=0; attempt<3; attempt++){
@@ -205,7 +220,7 @@ document.getElementById('order-form').addEventListener('submit', async function(
   await saveOrder({
     full_name:name, phone:phone, city:city, address:addr,
     quantity:'GAINE ' + qty + ' قطعة — Taille ' + sizeEl.value, price:total, color:'GAINE 199 / Taille ' + sizeEl.value,
-    product:'GAINE 199', order_id:id
+    product:'GAINE 199', order_id:id, src:srcTag(), ad:utmTag('utm_content'), camp:utmTag('utm_campaign')
   });
   fbq('track','Purchase',{value:total,currency:'MAD',content_name:'Gaine',content_type:'product',num_items:Number(qty),order_id:id},{eventID:id});
   document.getElementById('page').style.display='none';
