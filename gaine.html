@@ -182,16 +182,16 @@ fetch(CAPI_URL+'?'+qs,{mode:'no-cors',keepalive:true}).catch(function(){});
 function utmTag(key){
 try{
 const u=new URLSearchParams(location.search).get(key);
-if(u){try{localStorage.setItem(key,u);}catch(e){}return u;}
-try{return localStorage.getItem(key)||'';}catch(e){return '';}
+if(u){try{localStorage.setItem('gn_'+key,u);}catch(e){}return u;}
+try{return localStorage.getItem('gn_'+key)||'';}catch(e){return '';}
 }catch(e){return '';}
 }
 function srcTag(){
 try{
 const q=new URLSearchParams(location.search);
 const u=q.get('src')||q.get('utm_source');
-if(u){try{localStorage.setItem('src',u);}catch(e){}return u;}
-try{return localStorage.getItem('src')||'meta-gaine';}catch(e){return 'meta-gaine';}
+if(u){try{localStorage.setItem('gn_src',u);}catch(e){}return u;}
+try{return localStorage.getItem('gn_src')||'meta-gaine';}catch(e){return 'meta-gaine';}
 }catch(e){return 'meta-gaine';}
 }
 async function saveOrder(params){

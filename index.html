@@ -1586,24 +1586,24 @@ fetch(CAPI_URL+'?'+qs,{mode:'no-cors',keepalive:true}).catch(function(){});
 function ttClickId(){
 try{
 const u=new URLSearchParams(location.search).get('ttclid');
-if(u){try{localStorage.setItem('ttclid',u);}catch(e){}return u;}
-try{return localStorage.getItem('ttclid')||'';}catch(e){return '';}
+if(u){try{localStorage.setItem('fc_ttclid',u);}catch(e){}return u;}
+try{return localStorage.getItem('fc_ttclid')||'';}catch(e){return '';}
 }catch(e){return '';}
 }
 
 function srcTag(){
 try{
 const u=new URLSearchParams(location.search).get('src');
-if(u){try{localStorage.setItem('src',u);}catch(e){}return u;}
-try{return localStorage.getItem('src')||'';}catch(e){return '';}
+if(u){try{localStorage.setItem('fc_src',u);}catch(e){}return u;}
+try{return localStorage.getItem('fc_src')||'';}catch(e){return '';}
 }catch(e){return '';}
 }
 
 function utmTag(key){
 try{
 const u=new URLSearchParams(location.search).get(key);
-if(u){try{localStorage.setItem(key,u);}catch(e){}return u;}
-try{return localStorage.getItem(key)||'';}catch(e){return '';}
+if(u){try{localStorage.setItem('fc_'+key,u);}catch(e){}return u;}
+try{return localStorage.getItem('fc_'+key)||'';}catch(e){return '';}
 }catch(e){return '';}
 }
 
