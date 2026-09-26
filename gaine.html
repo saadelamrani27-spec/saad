@@ -18,6 +18,8 @@
   .topbar{background:var(--pink);color:#fff;text-align:center;padding:9px 16px;font-weight:700;font-size:15px}
   .hero{margin:16px 0 0;border-radius:18px;overflow:hidden;background:#000}
   .hero video{width:100%;height:auto;display:block}
+  .hero-vid{width:100%;object-fit:cover;object-position:center 62%}
+  @media(max-width:600px){.hero-vid{height:36vh;max-height:320px}}
   h1{font-size:29px;line-height:1.4;font-weight:900;margin:20px 0 6px}
   .sub{color:var(--muted);font-size:18px;margin:0 0 18px;font-weight:600}
   .pricebox{background:var(--soft);border:1.5px solid #f7cddd;border-radius:16px;padding:18px;text-align:center;margin:18px 0}
@@ -41,7 +43,7 @@
   input,select{width:100%;padding:14px 15px;font-family:inherit;font-size:17px;border:1.5px solid var(--line);border-radius:12px;background:#fff;color:var(--ink);font-weight:600}
   input:focus,select:focus{outline:none;border-color:var(--pink)}
   input::placeholder{color:#b3b6bc;font-weight:500}
-  .sizes{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:6px}
+  .sizes{position:relative;display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:6px}
   .sizes input{position:absolute;opacity:0;pointer-events:none}
   .sizes label{margin:0;text-align:center;padding:13px 0;border:1.5px solid var(--line);border-radius:12px;cursor:pointer;font-weight:800;font-size:17px}
   .sizes input:checked + label{background:var(--pink);border-color:var(--pink);color:#fff}
@@ -96,7 +98,7 @@ fbq('track','ViewContent',{content_name:'Gaine',content_type:'product',value:199
 <div class="wrap">
   <main id="page">
     <div class="hero">
-      <video src="/gaine/gaine-demo-7s.mp4" poster="/gaine/demo-poster.jpg" controls autoplay muted loop playsinline preload="metadata" width="1080" height="1920" aria-label="فيديو الغاين الشورت بخصر عالي مع شرح بالدارجة"></video>
+      <video class="hero-vid" src="/gaine/gaine-demo-7s.mp4" poster="/gaine/demo-poster.jpg" autoplay muted loop playsinline preload="auto" width="1080" height="1920" aria-label="فيديو الغاين الشورت بخصر عالي مع شرح بالدارجة"></video>
     </div>
     <h1>غاين شورت بخصر عالي • السرّ تحت اللبسة</h1>
     <p class="sub">نفس الغاين اللي فالفيديو: شورت بخصر عالي وقماش كيتمدد، كتلبسيها تحت الحوايج.</p>
@@ -294,10 +296,15 @@ document.getElementById('order-form').addEventListener('submit', async function(
   document.getElementById('thanks').classList.add('show');
   window.scrollTo({top:0,behavior:'smooth'});
 });
-const obs = new IntersectionObserver(function(entries){
-  entries.forEach(function(e){ document.getElementById('sticky').style.display = e.isIntersecting ? 'none' : 'block'; });
-},{threshold:0.25});
-obs.observe(document.getElementById('form-card'));
+(function(){
+  var st=document.getElementById('sticky'), seen=new Set();
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting) seen.add(e.target); else seen.delete(e.target); });
+    st.style.display = seen.size>0 ? 'none' : 'block';
+  },{threshold:0.25});
+  io.observe(document.getElementById('form-card'));
+  var heroCta=document.querySelector('main .cta'); if(heroCta) io.observe(heroCta);
+})();
 </script>
 </body>
 </html>
