@@ -45,6 +45,14 @@
   .sizes input{position:absolute;opacity:0;pointer-events:none}
   .sizes label{margin:0;text-align:center;padding:13px 0;border:1.5px solid var(--line);border-radius:12px;cursor:pointer;font-weight:800;font-size:17px}
   .sizes input:checked + label{background:var(--pink);border-color:var(--pink);color:#fff}
+  .qty-opts{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:6px}
+  .qty-opt{display:flex;flex-direction:column;gap:3px;align-items:center;justify-content:center;padding:12px 8px;border:2px solid var(--line);border-radius:14px;background:#fff;cursor:pointer;font-family:inherit;text-align:center;transition:.15s}
+  .qty-opt .q-t{font-size:13px;font-weight:800;color:#444}
+  .qty-opt .q-t b{display:inline-block;background:#ffe9c9;color:#8a5300;border-radius:999px;padding:1px 7px;font-size:10px;margin-inline-start:4px}
+  .qty-opt .q-p{font-size:17px;font-weight:900;color:#111}
+  .qty-opt .q-p small{font-size:11px;color:#0a8a4a;font-weight:800}
+  .qty-opt.is-on{border-color:var(--pink);background:var(--soft);box-shadow:0 0 0 3px rgba(230,24,107,.10)}
+  .qty-opts+select{display:none}
   .err{color:#d01b3c;font-size:14.5px;font-weight:700;margin-top:6px;display:none}
   .err.show{display:block}
   button.cta{width:100%;margin-top:22px;padding:18px;border:none;border-radius:14px;background:var(--green);color:#fff;font-family:inherit;font-size:21px;font-weight:900;cursor:pointer}
@@ -95,10 +103,6 @@ fbq('track','ViewContent',{content_name:'Gaine',content_type:'product',value:199
       <li><span class="tick">✓</span><span>قماش كيتمدد، المرونة ديالو باينة فالفيديو</span></li>
       <li><span class="tick">✓</span><span>ختاري القياس ديالك، وغادي نتاصلو بيك لتأكيد الطلب</span></li>
     </ul>
-    <h2>شوفيها فالحركة</h2>
-    <p class="hint">فعّلي الصوت باش تسمعي الشرح بالدارجة</p>
-    <div class="media"><video src="/gaine/gaine-demo-7s.mp4" poster="/gaine/demo-poster.jpg" controls playsinline preload="none" width="1080" height="1920" aria-label="شوفي الغاين فالفيديو مع شرح بالدارجة"></video></div>
-    <div class="media"><img src="/gaine/product.jpg" alt="غاين شورت بخصر عالي باللون الأسود، نفس الموديل اللي فالفيديو" loading="lazy"></div>
     <div class="trust">
       <div><span>💵</span>الخلاص عند الاستلام</div>
       <div><span>🚚</span>التوصيل لجميع المدن</div>
@@ -130,14 +134,21 @@ fbq('track','ViewContent',{content_name:'Gaine',content_type:'product',value:199
         </div>
         <div class="err" id="e-size">عافاك ختاري القياس</div>
         <label for="quantity">الكمية</label>
+        <div class="qty-opts" id="qty-opts">
+          <button type="button" class="qty-opt is-on" data-q="1"><span class="q-t">قطعة وحدة</span><span class="q-p">199 درهم</span></button>
+          <button type="button" class="qty-opt" data-q="2"><span class="q-t">2 قطع <b>الأكثر طلباً</b></span><span class="q-p">349 درهم <small>وفّري 49</small></span></button>
+        </div>
         <select id="quantity" name="quantity">
           <option value="1">1 — 199 درهم</option>
-          <option value="2">2 — 249 درهم</option>
-          <option value="3">3 — 339 درهم</option>
+          <option value="2">2 — 349 درهم</option>
         </select>
         <button type="submit" class="cta" id="submit-btn">أكدي الطلب — الخلاص عند الاستلام</button>
       </form>
     </div>
+    <h2>شوفيها فالحركة</h2>
+    <p class="hint">فعّلي الصوت باش تسمعي الشرح بالدارجة</p>
+    <div class="media"><video src="/gaine/gaine-demo-7s.mp4" poster="/gaine/demo-poster.jpg" controls playsinline preload="none" width="1080" height="1920" aria-label="شوفي الغاين فالفيديو مع شرح بالدارجة"></video></div>
+    <div class="media"><img src="/gaine/product.jpg" alt="غاين شورت بخصر عالي باللون الأسود، نفس الموديل اللي فالفيديو" loading="lazy"></div>
   </main>
   <div class="thanks" id="thanks">
     <div class="big">✅</div>
@@ -151,13 +162,24 @@ fbq('track','ViewContent',{content_name:'Gaine',content_type:'product',value:199
 </div>
 <script>
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx8Azpl1MMJ8SBZhAYPoQ3xni-1ojmcwKKIaxfRkJ5foqGNYK6xW2AgTBpVtICS0bpbJA/exec";
-const TOTALS = {1:199, 2:249, 3:339};
+const TOTALS = {1:199, 2:349};
 let checkoutTracked = false;
 function goToForm(){
   if(!checkoutTracked){ fbq('track','InitiateCheckout',{value:199,currency:'MAD',num_items:1}); checkoutTracked = true; }
   document.getElementById('form-card').scrollIntoView({behavior:'smooth',block:'start'});
   setTimeout(function(){document.getElementById('full_name').focus({preventScroll:true});}, 600);
 }
+(function(){
+  var opts=document.querySelectorAll('#qty-opts .qty-opt');
+  var sel=document.getElementById('quantity');
+  opts.forEach(function(b){
+    b.addEventListener('click',function(){
+      opts.forEach(function(x){x.classList.remove('is-on');});
+      b.classList.add('is-on');
+      sel.value=b.getAttribute('data-q');
+    });
+  });
+})();
 function showErr(id,on){document.getElementById(id).classList.toggle('show',on);}
 function orderId(){ return 'G' + Date.now().toString(36).toUpperCase() + Math.random().toString(36).slice(2,6).toUpperCase(); }
 document.getElementById('phone').addEventListener('input', function(){
