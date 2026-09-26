@@ -867,6 +867,14 @@ h1{order:2}
 .confirm-card .phone-back{font-size:16px;margin:6px 0 4px;color:#333}
 .confirm-card .phone-back b{font-size:18px;letter-spacing:.5px}
 .confirm-card .phone-wrong{font-size:13px;color:#888;margin:0 0 12px}
+
+/* ==== hero proof pass ==== */
+.hero-video{display:block;width:100%;aspect-ratio:1/1;object-fit:cover;object-position:center 38%;border-radius:20px;background:#111}
+@media(max-width:850px){.hero-video{max-height:34vh}}
+@media(max-width:600px){.hero-video{max-height:31vh}}
+.demo-band .main-product{max-height:none}
+.quick{transition:opacity .2s,transform .2s}
+.quick.is-hidden{opacity:0;pointer-events:none;transform:translateX(-50%) translateY(140%)}
 </style>
 </head>
 
@@ -892,22 +900,12 @@ h1{order:2}
 
 <div class="product-card">
 
-<button class="zoom-trigger"
-type="button"
-onclick="openImageZoom()"
-aria-label="تكبير صورة المنتج">
-
-<img
-class="main-product"
-src="product.jpg"
-width="900" height="900" fetchpriority="high"
-alt="أداة العناية بالقدمين">
-
-<span class="zoom-hint">
-⌕ اضغط للتكبير
-</span>
-
-</button>
+<video class="hero-video"
+src="demo.mp4"
+poster="demo-poster.jpg"
+autoplay muted loop playsinline preload="auto"
+width="420" height="746"
+aria-label="أداة العناية بالقدمين وهي كتزيل الجلد الميت"></video>
 
 
 </div>
@@ -1166,9 +1164,21 @@ type="submit">
 
 <section class="demo-band">
 <div class="container">
-<p class="demo-cap">شوفي كيفاش كتخدم 👇</p>
+<p class="demo-cap">شوفي المنتج من قريب 👇</p>
 <div class="gif-wrap">
-<video class="product-gif" src="demo.mp4" poster="demo-poster.jpg" autoplay muted loop playsinline preload="auto" width="420" height="746" style="aspect-ratio:420/746" aria-label="طريقة استعمال المنتج"></video>
+<button class="zoom-trigger"
+type="button"
+onclick="openImageZoom()"
+aria-label="تكبير صورة المنتج">
+<img
+class="main-product"
+src="product.jpg"
+width="900" height="900" loading="lazy"
+alt="أداة العناية بالقدمين">
+<span class="zoom-hint">
+⌕ اضغط للتكبير
+</span>
+</button>
 </div>
 </div>
 </section>
@@ -1701,6 +1711,16 @@ showOrderConfirmation(phone);
 
 document.getElementById('leadForm').addEventListener('submit',e=>{e.preventDefault();submitOrder(mainFields,e.currentTarget);});
 document.getElementById('modalForm').addEventListener('submit',e=>{e.preventDefault();submitOrder(modalFields,e.currentTarget);});
+
+(function(){
+  var q=document.querySelector('.quick'); if(!q||!('IntersectionObserver' in window)) return;
+  var seen=new Set();
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting) seen.add(e.target); else seen.delete(e.target); });
+    q.classList.toggle('is-hidden', seen.size>0);
+  },{threshold:0.2});
+  ['.main-btn','#order'].forEach(function(sel){ var el=document.querySelector(sel); if(el) io.observe(el); });
+})();
 </script>
 
 </body>
