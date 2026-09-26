@@ -53,6 +53,7 @@
   .qty-opt .q-p small{font-size:11px;color:#0a8a4a;font-weight:800}
   .qty-opt.is-on{border-color:var(--pink);background:var(--soft);box-shadow:0 0 0 3px rgba(230,24,107,.10)}
   .qty-opts+select{display:none}
+  .size-help{font-size:14px;color:var(--muted);font-weight:600;margin-top:8px;line-height:1.6}
   .err{color:#d01b3c;font-size:14.5px;font-weight:700;margin-top:6px;display:none}
   .err.show{display:block}
   button.cta{width:100%;margin-top:22px;padding:18px;border:none;border-radius:14px;background:var(--green);color:#fff;font-family:inherit;font-size:21px;font-weight:900;cursor:pointer}
@@ -67,6 +68,14 @@
   .thanks .big{font-size:60px;line-height:1;margin-bottom:14px}
   .thanks h2{margin:0 0 12px;font-size:27px}
   .thanks p{color:var(--muted);font-size:18px;margin:0 auto;max-width:400px;font-weight:600}
+  .thanks .call-note{background:var(--soft);border:1.5px solid #f7cddd;border-radius:14px;padding:14px 16px;margin:0 auto 18px;max-width:420px;font-size:16.5px;color:var(--ink);font-weight:700;line-height:1.7}
+  .recap{max-width:420px;margin:0 auto;border:1.5px solid var(--line);border-radius:14px;overflow:hidden}
+  .recap-row{display:flex;justify-content:space-between;gap:12px;padding:11px 14px;border-bottom:1px solid var(--line);font-size:15.5px}
+  .recap-row:last-child{border-bottom:none}
+  .recap-row span{color:var(--muted);font-weight:600}
+  .recap-row b{font-weight:800;direction:ltr}
+  .thanks .wrong-note{font-size:14.5px;margin-top:14px;color:var(--muted)}
+  .thanks .wrong-note a{color:var(--pink);font-weight:800}
   footer{text-align:center;color:var(--muted);font-size:14px;padding:26px 16px 10px;border-top:1px solid var(--line);margin-top:34px;font-weight:600}
   @media(max-width:380px){h1{font-size:25px}.price-now{font-size:34px}}
 </style>
@@ -128,10 +137,11 @@ fbq('track','ViewContent',{content_name:'Gaine',content_type:'product',value:199
         <label>القياس</label>
         <div class="sizes">
           <input type="radio" name="size" id="s-m" value="M"><label for="s-m">M</label>
-          <input type="radio" name="size" id="s-l" value="L" checked><label for="s-l">L</label>
+          <input type="radio" name="size" id="s-l" value="L"><label for="s-l">L</label>
           <input type="radio" name="size" id="s-xl" value="XL"><label for="s-xl">XL</label>
           <input type="radio" name="size" id="s-xxl" value="XXL"><label for="s-xxl">XXL</label>
         </div>
+        <div class="size-help">ماعرفتيش القياس ديالك؟ ختاري الأقرب ليك، و غانعاونوك تأكديه فالتيليفون 📞</div>
         <div class="err" id="e-size">عافاك ختاري القياس</div>
         <label for="quantity">الكمية</label>
         <div class="qty-opts" id="qty-opts">
@@ -153,7 +163,14 @@ fbq('track','ViewContent',{content_name:'Gaine',content_type:'product',value:199
   <div class="thanks" id="thanks">
     <div class="big">✅</div>
     <h2>تسجل الطلب ديالك</h2>
-    <p>شكرا بزاف! غانعيطو ليك ف أقرب وقت باش نأكدو الطلب و العنوان. الخلاص غادي يكون عند الاستلام.</p>
+    <p class="call-note">📞 <b>غانعيطو ليك خلال 15 دقيقة</b> باش نأكدو الطلب و العنوان.<br>عافاك جاوبي حتى إلا كان الرقم ماشي معروف عندك.</p>
+    <div class="recap">
+      <div class="recap-row"><span>الرقم ديالك</span><b id="t-phone">—</b></div>
+      <div class="recap-row"><span>القياس</span><b id="t-size">—</b></div>
+      <div class="recap-row"><span>المجموع</span><b id="t-total">—</b></div>
+      <div class="recap-row"><span>رقم الطلب</span><b id="t-id">—</b></div>
+    </div>
+    <p class="wrong-note">الرقم ماشي صحيح؟ عاودي عمري الطلب <a href="" onclick="location.reload();return false;">من هنا</a>.</p>
   </div>
   <footer>Elite Shop © 2026</footer>
 </div>
@@ -260,8 +277,17 @@ document.getElementById('order-form').addEventListener('submit', async function(
     quantity:'GAINE ' + qty + ' قطعة — Taille ' + sizeEl.value, price:total, color:'GAINE 199 / Taille ' + sizeEl.value,
     product:'GAINE 199', order_id:id, src:srcTag(), ad:utmTag('utm_content'), camp:utmTag('utm_campaign')
   });
-  fbq('track','Purchase',{value:total,currency:'MAD',content_name:'Gaine',content_type:'product',num_items:Number(qty),order_id:id},{eventID:id});
-  sendCapi({event_id:id,phone:phone,fn:name,ct:city,value:total,currency:'MAD',num_items:Number(qty),fbp:cookieVal('_fbp'),fbc:cookieVal('_fbc'),ua:navigator.userAgent,url:location.href});
+  var fired=false;
+  try{ fired = !!localStorage.getItem('fbPurchase_'+id); }catch(e){}
+  if(!fired){
+    fbq('track','Purchase',{value:total,currency:'MAD',content_name:'Gaine',content_type:'product',num_items:Number(qty),order_id:id},{eventID:id});
+    sendCapi({event_id:id,phone:phone,fn:name,ct:city,value:total,currency:'MAD',num_items:Number(qty),fbp:cookieVal('_fbp'),fbc:cookieVal('_fbc'),ua:navigator.userAgent,url:location.href});
+    try{ localStorage.setItem('fbPurchase_'+id,'1'); }catch(e){}
+  }
+  document.getElementById('t-phone').textContent = phone;
+  document.getElementById('t-size').textContent = sizeEl.value;
+  document.getElementById('t-total').textContent = total + ' DH';
+  document.getElementById('t-id').textContent = id;
   document.getElementById('page').style.display='none';
   document.getElementById('sticky').style.display='none';
   document.getElementById('thanks').classList.add('show');
