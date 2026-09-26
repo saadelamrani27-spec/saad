@@ -862,6 +862,11 @@ h1{order:2}
 .hero{padding-top:12px}
 .hero-grid{gap:14px}
 }
+
+.confirm-card .call-note{background:#fff7e6;border:1.5px solid #ffd99a;border-radius:14px;padding:12px 14px;margin:10px 0 12px;font-size:15.5px;line-height:1.7;color:#222}
+.confirm-card .phone-back{font-size:16px;margin:6px 0 4px;color:#333}
+.confirm-card .phone-back b{font-size:18px;letter-spacing:.5px}
+.confirm-card .phone-wrong{font-size:13px;color:#888;margin:0 0 12px}
 </style>
 </head>
 
@@ -1418,11 +1423,20 @@ aria-hidden="true">
 </div>
 
 <h3>
-تم تأكيد طلبك بنجاح!
+تسجل الطلب ديالك ✓
 </h3>
 
-<p>
-غادي نتاصلوا بك قريباً 📞
+<p class="call-note">
+📞 <b>غانعيطو ليك خلال 15 دقيقة</b> باش نأكدو الطلب.<br>
+عافاك جاوب حتى إلا كان الرقم ماشي معروف عندك.
+</p>
+
+<p class="phone-back">
+الرقم ديالك: <b id="confirmPhone" dir="ltr">—</b>
+</p>
+
+<p class="phone-wrong">
+الرقم غالط؟ عاود دير الطلب بالرقم الصحيح.
 </p>
 
 <button
@@ -1468,7 +1482,8 @@ m.classList.remove('open');
 m.setAttribute('aria-hidden','true');
 document.body.style.overflow='';
 }
-function showOrderConfirmation(){
+function showOrderConfirmation(phone){
+try{ if(phone){ document.getElementById('confirmPhone').textContent = phone; } }catch(e){}
 const m=document.getElementById('orderConfirmation');
 m.classList.add('open');
 m.setAttribute('aria-hidden','false');
@@ -1681,7 +1696,7 @@ fields.btn.disabled=false;
 fields.btn.textContent='دير الطلب دابا — 129 DH';
 sending=false;
 if(form.id==='modalForm')closeOrder();
-showOrderConfirmation();
+showOrderConfirmation(phone);
 }
 
 document.getElementById('leadForm').addEventListener('submit',e=>{e.preventDefault();submitOrder(mainFields,e.currentTarget);});
