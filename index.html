@@ -1682,24 +1682,18 @@ const orderId=orderIdFor(phone);
 let alreadyTracked=false;
 try{alreadyTracked=localStorage.getItem('fbPurchase_'+orderId)==='1';}catch(e){}
 
-const url=SCRIPT_URL+'?full_name='+encodeURIComponent(fullName)+'&phone='+encodeURIComponent(phone)+'&city='+encodeURIComponent(city)+'&address='+encodeURIComponent(address)+'&quantity='+encodeURIComponent('FOOT CARE '+fields.quantity.value+' قطعة')+'&price='+encodeURIComponent(SHEET_PRICES[fields.quantity.value]||SHEET_PRICES[1])+'&color='+encodeURIComponent(fields.color.value)+'&src='+encodeURIComponent(srcTag())+'&ad='+encodeURIComponent(utmTag('utm_content'))+'&camp='+encodeURIComponent(utmTag('utm_campaign'));
+const url=SCRIPT_URL+'?full_name='+encodeURIComponent(fullName)+'&phone='+encodeURIComponent(phone)+'&city='+encodeURIComponent(city)+'&address='+encodeURIComponent(address)+'&quantity='+encodeURIComponent('FOOT CARE '+fields.quantity.value+' قطعة')+'&price='+encodeURIComponent(SHEET_PRICES[fields.quantity.value]||SHEET_PRICES[1])+'&color='+encodeURIComponent(fields.color.value)+'&src='+encodeURIComponent(srcTag())+'&ad='+encodeURIComponent(utmTag('utm_content'))+'&camp='+encodeURIComponent(utmTag('utm_campaign'))+'&fbp='+encodeURIComponent(cookieVal('_fbp'))+'&fbc='+encodeURIComponent(cookieVal('_fbc'))+'&ua='+encodeURIComponent(navigator.userAgent)+'&page_url='+encodeURIComponent(location.href)+'&ttclid='+encodeURIComponent(ttClickId());
 
 const saving=saveOrder(url);
 saving.then(ok=>{
 if(!ok||alreadyTracked)return;
 try{localStorage.setItem('fbPurchase_'+orderId,'1');}catch(e){}
-try{
-if(typeof fbq!=='undefined'){
-fbq('init',PIXEL_ID,{ph:'212'+phone.slice(1),fn:(fullName.split(/\s+/)[0]||'').toLowerCase(),ct:city.toLowerCase().replace(/\s+/g,''),country:'ma',external_id:phone});
-fbq('track','Purchase',{value:price,currency:'MAD',content_name:'Foot care tool',content_type:'product',num_items:qty,order_id:orderId},{eventID:orderId});
-}
-}catch(e){}
+/* Meta Purchase is now sent ONLY by the order script (server), once per real order saved in the sheet. */
 try{
 if(typeof ttq!=='undefined'&&typeof ttIdentifyThenTrack==='function'){
 ttIdentifyThenTrack(phone,fullName,city,price,qty,orderId);
 }
 }catch(e){}
-sendCapi({event_id:orderId,phone:phone,fn:fullName,ct:city,value:price,currency:'MAD',num_items:qty,fbp:cookieVal('_fbp'),fbc:cookieVal('_fbc'),ua:navigator.userAgent,url:location.href});
 sendTtapi({event:'CompletePayment',event_id:orderId,phone:phone,value:price,currency:'MAD',num_items:qty,ttclid:ttClickId(),ttp:cookieVal('_ttp'),ua:navigator.userAgent,url:location.href});
 });
 
