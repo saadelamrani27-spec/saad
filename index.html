@@ -1654,7 +1654,7 @@ const ctrl=new AbortController();
 const timer=setTimeout(()=>ctrl.abort(),9000);
 const r=await fetch(url,{signal:ctrl.signal,keepalive:true});
 clearTimeout(timer);
-if(r&&(r.ok||r.status===0||r.type==='opaque'))return true;
+if(r&&(r.ok||r.status===0||r.type==='opaque')){let t='';try{if(r.type!=='opaque')t=await r.text();}catch(e){}return t||true;}
 }catch(e){}
 await new Promise(r=>setTimeout(r,1500));
 }
@@ -1682,13 +1682,18 @@ const orderId=orderIdFor(phone);
 let alreadyTracked=false;
 try{alreadyTracked=localStorage.getItem('fbPurchase_'+orderId)==='1';}catch(e){}
 
-const url=SCRIPT_URL+'?full_name='+encodeURIComponent(fullName)+'&phone='+encodeURIComponent(phone)+'&city='+encodeURIComponent(city)+'&address='+encodeURIComponent(address)+'&quantity='+encodeURIComponent('FOOT CARE '+fields.quantity.value+' قطعة')+'&price='+encodeURIComponent(SHEET_PRICES[fields.quantity.value]||SHEET_PRICES[1])+'&color='+encodeURIComponent(fields.color.value)+'&src='+encodeURIComponent(srcTag())+'&ad='+encodeURIComponent(utmTag('utm_content'))+'&camp='+encodeURIComponent(utmTag('utm_campaign'))+'&fbp='+encodeURIComponent(cookieVal('_fbp'))+'&fbc='+encodeURIComponent(cookieVal('_fbc'))+'&ua='+encodeURIComponent(navigator.userAgent)+'&page_url='+encodeURIComponent(location.href)+'&ttclid='+encodeURIComponent(ttClickId());
+const url=SCRIPT_URL+'?full_name='+encodeURIComponent(fullName)+'&phone='+encodeURIComponent(phone)+'&city='+encodeURIComponent(city)+'&address='+encodeURIComponent(address)+'&quantity='+encodeURIComponent('FOOT CARE '+fields.quantity.value+' قطعة')+'&price='+encodeURIComponent(SHEET_PRICES[fields.quantity.value]||SHEET_PRICES[1])+'&color='+encodeURIComponent(fields.color.value)+'&src='+encodeURIComponent(srcTag())+'&ad='+encodeURIComponent(utmTag('utm_content'))+'&camp='+encodeURIComponent(utmTag('utm_campaign'))+'&fbp='+encodeURIComponent(cookieVal('_fbp'))+'&fbc='+encodeURIComponent(cookieVal('_fbc'))+'&ua='+encodeURIComponent(navigator.userAgent)+'&page_url='+encodeURIComponent(location.href)+'&ttclid='+encodeURIComponent(ttClickId())+'&value='+encodeURIComponent(price);
 
 const saving=saveOrder(url);
 saving.then(ok=>{
 if(!ok||alreadyTracked)return;
 try{localStorage.setItem('fbPurchase_'+orderId,'1');}catch(e){}
-/* Meta Purchase is now sent ONLY by the order script (server), once per real order saved in the sheet. */
+/* Meta Purchase: ONLY when the order script answers that a NEW order from a Meta ad was saved (never for duplicates or TikTok/organic orders).
+   Same event_id as the server Purchase, so Meta always counts it ONCE. */
+try{
+const mm=(typeof ok==='string')?ok.match(/OK META (ORD-[0-9]{8}-0[0-9]{9})/):null;
+if(mm&&typeof fbq==='function'){fbq('track','Purchase',{value:price,currency:'MAD',content_name:'FOOT CARE',content_type:'product',num_items:qty},{eventID:mm[1]});}
+}catch(e){}
 try{
 if(typeof ttq!=='undefined'&&typeof ttIdentifyThenTrack==='function'){
 ttIdentifyThenTrack(phone,fullName,city,price,qty,orderId);
