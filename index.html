@@ -3,15 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>العناية بالقدمين | عرض خاص 139 DH</title>
-<meta name="description" content="أداة عملية للعناية بالقدمين وإزالة الجلد الميت والخشونة. عرض محدود: 139 درهم مع التوصيل والدفع عند الاستلام.">
+<title>العناية بالقدمين | عرض خاص 129 DH</title>
+<meta name="description" content="أداة عملية للعناية بالقدمين وإزالة الجلد الميت والخشونة. عرض محدود: 129 درهم مع التوصيل والدفع عند الاستلام.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preconnect" href="https://connect.facebook.net">
-<link rel="dns-prefetch" href="https://connect.facebook.net">
-<!-- Font loads without blocking the page: text shows instantly, Cairo swaps in when ready -->
-<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap" onload="this.onload=null;this.rel='stylesheet'">
-<noscript><link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"></noscript>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
 <!-- Meta Pixel — preserved -->
 <script>
@@ -22,7 +18,7 @@ t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}
 (window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
 fbq('init','1327371405934124');
 fbq('track','PageView');
-fbq('track','ViewContent',{content_name:'Foot care tool',content_type:'product',value:139,currency:'MAD'});
+fbq('track','ViewContent',{content_name:'Foot care tool',content_type:'product',value:129,currency:'MAD'});
 </script>
 
 <noscript>
@@ -38,7 +34,7 @@ w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","ide
 
   ttq.load('D9PO1V3C77U4UUP3J3QG');
   ttq.page();
-  ttq.track('ViewContent', {contents:[{content_id:'foot-care-tool',content_type:'product',content_name:'Foot care tool',quantity:1,price:139}], value:139, currency:'MAD'});
+  ttq.track('ViewContent', {contents:[{content_id:'foot-care-tool',content_type:'product',content_name:'Foot care tool',quantity:1,price:129}], value:129, currency:'MAD'});
 }(window, document, 'ttq');
 
 /* Advanced matching + purchase helper (SHA-256 hashed, mirrors the Meta setup) */
@@ -335,7 +331,6 @@ font-size:12px;
 color:#d8d8d8;
 margin-top:7px
 }
-.offer-note.offer-gift{color:#ffd166;font-weight:800;font-size:13px;margin-top:4px}
 
 .main-btn{
 width:100%;
@@ -844,7 +839,6 @@ padding:9px 14px
 .qty-opt .q-t b{display:inline-block;background:#ffe9c9;color:#8a5300;border-radius:999px;padding:1px 7px;font-size:10px;margin-inline-start:4px}
 .qty-opt .q-p{font-size:16px;font-weight:900;color:#111}
 .qty-opt .q-p small{font-size:10px;color:#0a8a4a;font-weight:800}
-.qty-opt .q-gift{font-size:11px;font-weight:900;color:#c2185b}
 .qty-opt.is-on{border-color:#111;background:#fafafa;box-shadow:0 0 0 3px rgba(0,0,0,.06)}
 .qty-opts+select{display:none}
 
@@ -868,19 +862,6 @@ h1{order:2}
 .hero{padding-top:12px}
 .hero-grid{gap:14px}
 }
-
-.confirm-card .call-note{background:#fff7e6;border:1.5px solid #ffd99a;border-radius:14px;padding:12px 14px;margin:10px 0 12px;font-size:15.5px;line-height:1.7;color:#222}
-.confirm-card .phone-back{font-size:16px;margin:6px 0 4px;color:#333}
-.confirm-card .phone-back b{font-size:18px;letter-spacing:.5px}
-.confirm-card .phone-wrong{font-size:13px;color:#888;margin:0 0 12px}
-
-/* ==== hero proof pass ==== */
-.hero-video{display:block;width:100%;aspect-ratio:1/1;object-fit:cover;object-position:center 38%;border-radius:20px;background:#111}
-@media(max-width:850px){.hero-video{max-height:34vh}}
-@media(max-width:600px){.hero-video{max-height:31vh}}
-.demo-band .main-product{max-height:none}
-.quick{transition:opacity .2s,transform .2s}
-.quick.is-hidden{opacity:0;pointer-events:none;transform:translateX(-50%) translateY(140%)}
 </style>
 </head>
 
@@ -906,12 +887,22 @@ h1{order:2}
 
 <div class="product-card">
 
-<video class="hero-video"
-src="demo.mp4"
-poster="demo-poster.jpg"
-autoplay muted loop playsinline preload="auto"
-width="420" height="746"
-aria-label="أداة العناية بالقدمين وهي كتزيل الجلد الميت"></video>
+<button class="zoom-trigger"
+type="button"
+onclick="openImageZoom()"
+aria-label="تكبير صورة المنتج">
+
+<img
+class="main-product"
+src="product.jpg"
+width="900" height="900" fetchpriority="high"
+alt="أداة العناية بالقدمين">
+
+<span class="zoom-hint">
+⌕ اضغط للتكبير
+</span>
+
+</button>
 
 
 </div>
@@ -958,17 +949,17 @@ aria-label="أداة العناية بالقدمين وهي كتزيل الجل�
 
 <div class="offer-top">
 <span>🔥 العرض لفترة محدودة</span>
-<span class="limited">خصم 30%</span>
+<span class="limited">خصم أكثر من 30%</span>
 </div>
 
 <div class="price-line">
 
 <span class="old">199 DH</span>
 
-<span class="new">139 DH</span>
+<span class="new">129 DH</span>
 
 <span class="save">
-وفّري 60 DH
+وفّري 70 DH
 </span>
 
 </div>
@@ -977,17 +968,13 @@ aria-label="أداة العناية بالقدمين وهي كتزيل الجل�
 التوصيل بالمجان • الدفع عند الاستلام
 </div>
 
-<div class="offer-note offer-gift">
-🎁 عرض 2 قطع بـ 229 DH + كريم العكر الفاسي هدية
-</div>
-
 </div>
 
 <button
 class="main-btn"
 onclick="openOrder()">
 
-🛒 طلبيها دابا بـ 139 DH
+🛒 طلبيها دابا بـ 129 DH
 
 </button>
 
@@ -1040,7 +1027,7 @@ onclick="openOrder()">
 
 <p class="order-sub">
 العرض الحالي:
-<b>139 DH</b>
+<b>129 DH</b>
 بدل
 <s>199 DH</s>
 •
@@ -1054,7 +1041,7 @@ onclick="openOrder()">
 </small>
 
 <strong>
-139 DH
+129 DH
 </strong>
 
 </div>
@@ -1117,14 +1104,14 @@ required>
 </label>
 
 <div class="qty-opts">
-<button type="button" class="qty-opt is-on" data-q="1"><span class="q-t">قطعة وحدة</span><span class="q-p">139 DH</span></button>
-<button type="button" class="qty-opt" data-q="2"><span class="q-t">2 قطع <b>الأكثر طلباً</b></span><span class="q-p">229 DH <small>وفّري 49</small></span><span class="q-gift">🎁 + كريم العكر الفاسي هدية</span></button>
+<button type="button" class="qty-opt is-on" data-q="1"><span class="q-t">قطعة وحدة</span><span class="q-p">129 DH</span></button>
+<button type="button" class="qty-opt" data-q="2"><span class="q-t">2 قطع <b>الأكثر طلباً</b></span><span class="q-p">229 DH <small>وفّري 29</small></span></button>
 </div>
 
 <select
 id="quantity">
-<option value="1">1 قطعة — 139 درهم</option>
-<option value="2">2 قطعة — 229 درهم • وفري 49 درهم + كريم العكر الفاسي هدية 🎁</option>
+<option value="1">1 قطعة — 129 درهم</option>
+<option value="2">2 قطعة — 229 درهم • وفري 29 درهم</option>
 </select>
 
 </div>
@@ -1154,7 +1141,7 @@ class="buy-btn"
 id="submitBtn"
 type="submit">
 
-دير الطلب دابا — 139 DH
+دير الطلب دابا — 129 DH
 
 </button>
 
@@ -1174,21 +1161,9 @@ type="submit">
 
 <section class="demo-band">
 <div class="container">
-<p class="demo-cap">شوفي المنتج من قريب 👇</p>
+<p class="demo-cap">شوفي كيفاش كتخدم 👇</p>
 <div class="gif-wrap">
-<button class="zoom-trigger"
-type="button"
-onclick="openImageZoom()"
-aria-label="تكبير صورة المنتج">
-<img
-class="main-product"
-src="product.jpg"
-width="900" height="900" loading="lazy"
-alt="أداة العناية بالقدمين">
-<span class="zoom-hint">
-⌕ اضغط للتكبير
-</span>
-</button>
+<video class="product-gif" src="demo.mp4" poster="demo-poster.jpg" autoplay muted loop playsinline preload="auto" width="420" height="746" style="aspect-ratio:420/746" aria-label="طريقة استعمال المنتج"></video>
 </div>
 </div>
 </section>
@@ -1248,7 +1223,7 @@ alt="أداة العناية بالقدمين">
 </span>
 
 <span class="quick-price">
-139 DH
+129 DH
 </span>
 
 </div>
@@ -1289,11 +1264,11 @@ onclick="closeOrder()">
 <div class="order-price">
 
 <small>
-139 DH • التوصيل بالمجان • الدفع عند الاستلام
+129 DH • التوصيل بالمجان • الدفع عند الاستلام
 </small>
 
 <strong>
-139 DH
+129 DH
 </strong>
 
 </div>
@@ -1354,14 +1329,14 @@ placeholder="مثال: الرباط">
 </label>
 
 <div class="qty-opts">
-<button type="button" class="qty-opt is-on" data-q="1"><span class="q-t">قطعة وحدة</span><span class="q-p">139 DH</span></button>
-<button type="button" class="qty-opt" data-q="2"><span class="q-t">2 قطع <b>الأكثر طلباً</b></span><span class="q-p">229 DH <small>وفّري 49</small></span><span class="q-gift">🎁 + كريم العكر الفاسي هدية</span></button>
+<button type="button" class="qty-opt is-on" data-q="1"><span class="q-t">قطعة وحدة</span><span class="q-p">129 DH</span></button>
+<button type="button" class="qty-opt" data-q="2"><span class="q-t">2 قطع <b>الأكثر طلباً</b></span><span class="q-p">229 DH <small>وفّري 29</small></span></button>
 </div>
 
 <select
 id="m_quantity">
-<option value="1">1 قطعة — 139 درهم</option>
-<option value="2">2 قطعة — 229 درهم • وفري 49 درهم + كريم العكر الفاسي هدية 🎁</option>
+<option value="1">1 قطعة — 129 درهم</option>
+<option value="2">2 قطعة — 229 درهم • وفري 29 درهم</option>
 </select>
 
 </div>
@@ -1390,7 +1365,7 @@ class="buy-btn"
 id="m_submitBtn"
 type="submit">
 
-دير الطلب دابا — 139 DH
+دير الطلب دابا — 129 DH
 
 </button>
 
@@ -1443,20 +1418,11 @@ aria-hidden="true">
 </div>
 
 <h3>
-تسجل الطلب ديالك ✓
+تم تأكيد طلبك بنجاح!
 </h3>
 
-<p class="call-note">
-📞 <b>غانعيطو ليك خلال 15 دقيقة</b> باش نأكدو الطلب.<br>
-عافاك جاوب حتى إلا كان الرقم ماشي معروف عندك.
-</p>
-
-<p class="phone-back">
-الرقم ديالك: <b id="confirmPhone" dir="ltr">—</b>
-</p>
-
-<p class="phone-wrong">
-الرقم غالط؟ عاود دير الطلب بالرقم الصحيح.
+<p>
+غادي نتاصلوا بك قريباً 📞
 </p>
 
 <button
@@ -1479,9 +1445,9 @@ onclick="closeOrderConfirmation()">
 
 <script>
 const SCRIPT_URL="https://script.google.com/macros/s/AKfycbx8Azpl1MMJ8SBZhAYPoQ3xni-1ojmcwKKIaxfRkJ5foqGNYK6xW2AgTBpVtICS0bpbJA/exec";
-const PRODUCT_PRICE="139";
-const QTY_PRICES={1:139,2:229};
-const SHEET_PRICES={1:140,2:230};
+const PRODUCT_PRICE="129";
+const QTY_PRICES={1:129,2:229};
+const SHEET_PRICES={1:130,2:230};
 const PIXEL_ID="1327371405934124";
 const CAPI_URL="https://script.google.com/macros/s/AKfycbxDz9wtREuqxax5-XfYOs34bzZ1q3f8hQW9yOdMgyM5VfhU-VLZCe8NWPjYZHV2Zveh/exec";
 const TT_CAPI_URL="https://script.google.com/macros/s/AKfycbyqh0KFB14wj54qupUby3NCrfepMnl_NM7jLOAUBuEC24eD53pEh94ZTS-CoGQRPUGh_A/exec";
@@ -1493,8 +1459,8 @@ const m=document.getElementById('orderModal');
 m.classList.add('open');
 m.setAttribute('aria-hidden','false');
 document.body.style.overflow='hidden';
-if(!checkoutTracked&&typeof fbq!=='undefined'){checkoutTracked=true;fbq('track','InitiateCheckout',{value:139,currency:'MAD',num_items:1});}
-if(!window.__ttCheckout&&typeof ttq!=='undefined'){window.__ttCheckout=true;ttq.track('InitiateCheckout',{contents:[{content_id:'foot-care-tool',content_type:'product',content_name:'Foot care tool',quantity:1,price:139}],value:139,currency:'MAD'});}
+if(!checkoutTracked&&typeof fbq!=='undefined'){checkoutTracked=true;fbq('track','InitiateCheckout',{value:129,currency:'MAD',num_items:1});}
+if(!window.__ttCheckout&&typeof ttq!=='undefined'){window.__ttCheckout=true;ttq.track('InitiateCheckout',{contents:[{content_id:'foot-care-tool',content_type:'product',content_name:'Foot care tool',quantity:1,price:129}],value:129,currency:'MAD'});}
 setTimeout(()=>document.getElementById('m_full_name').focus(),80);
 }
 function closeOrder(){
@@ -1503,8 +1469,7 @@ m.classList.remove('open');
 m.setAttribute('aria-hidden','true');
 document.body.style.overflow='';
 }
-function showOrderConfirmation(phone){
-try{ if(phone){ document.getElementById('confirmPhone').textContent = phone; } }catch(e){}
+function showOrderConfirmation(){
 const m=document.getElementById('orderConfirmation');
 m.classList.add('open');
 m.setAttribute('aria-hidden','false');
@@ -1691,18 +1656,21 @@ const url=SCRIPT_URL+'?full_name='+encodeURIComponent(fullName)+'&phone='+encode
 const saving=saveOrder(url);
 saving.then(ok=>{
 if(!ok||alreadyTracked)return;
-try{localStorage.setItem('fbPurchase_'+orderId,'1');}catch(e){}
-/* Meta Purchase: ONLY when the order script answers that a NEW order from a Meta ad was saved (never for duplicates or TikTok/organic orders).
-   Same event_id as the server Purchase, so Meta always counts it ONCE. */
-try{
 const mm=(typeof ok==='string')?ok.match(/OK META (ORD-[0-9]{8}-0[0-9]{9})/):null;
-if(mm&&typeof fbq==='function'){fbq('track','Purchase',{value:price,currency:'MAD',content_name:'FOOT CARE',content_type:'product',num_items:qty},{eventID:mm[1]});}
+const evId=mm?mm[1]:orderId;
+try{localStorage.setItem('fbPurchase_'+orderId,'1');}catch(e){}
+try{
+if(typeof fbq!=='undefined'){
+fbq('init',PIXEL_ID,{ph:'212'+phone.slice(1),fn:(fullName.split(/\s+/)[0]||'').toLowerCase(),ct:city.toLowerCase().replace(/\s+/g,''),country:'ma',external_id:phone});
+fbq('track','Purchase',{value:price,currency:'MAD',content_name:'Foot care tool',content_type:'product',num_items:qty,order_id:evId},{eventID:evId});
+}
 }catch(e){}
 try{
 if(typeof ttq!=='undefined'&&typeof ttIdentifyThenTrack==='function'){
 ttIdentifyThenTrack(phone,fullName,city,price,qty,orderId);
 }
 }catch(e){}
+if(!mm)sendCapi({event_id:orderId,phone:phone,fn:fullName,ct:city,value:price,currency:'MAD',num_items:qty,fbp:cookieVal('_fbp'),fbc:cookieVal('_fbc'),ua:navigator.userAgent,url:location.href});
 sendTtapi({event:'CompletePayment',event_id:orderId,phone:phone,value:price,currency:'MAD',num_items:qty,ttclid:ttClickId(),ttp:cookieVal('_ttp'),ua:navigator.userAgent,url:location.href});
 });
 
@@ -1713,24 +1681,14 @@ resetQty(form);
 fields.quantity.value='1';
 fields.color.value='أسود';
 fields.btn.disabled=false;
-fields.btn.textContent='دير الطلب دابا — 139 DH';
+fields.btn.textContent='دير الطلب دابا — 129 DH';
 sending=false;
 if(form.id==='modalForm')closeOrder();
-showOrderConfirmation(phone);
+showOrderConfirmation();
 }
 
 document.getElementById('leadForm').addEventListener('submit',e=>{e.preventDefault();submitOrder(mainFields,e.currentTarget);});
 document.getElementById('modalForm').addEventListener('submit',e=>{e.preventDefault();submitOrder(modalFields,e.currentTarget);});
-
-(function(){
-  var q=document.querySelector('.quick'); if(!q||!('IntersectionObserver' in window)) return;
-  var seen=new Set();
-  var io=new IntersectionObserver(function(es){
-    es.forEach(function(e){ if(e.isIntersecting) seen.add(e.target); else seen.delete(e.target); });
-    q.classList.toggle('is-hidden', seen.size>0);
-  },{threshold:0.2});
-  ['.main-btn','#order'].forEach(function(sel){ var el=document.querySelector(sel); if(el) io.observe(el); });
-})();
 </script>
 
 </body>
