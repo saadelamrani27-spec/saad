@@ -1105,7 +1105,7 @@ required>
 
 <div class="qty-opts">
 <button type="button" class="qty-opt is-on" data-q="1"><span class="q-t">قطعة وحدة</span><span class="q-p">129 DH</span></button>
-<button type="button" class="qty-opt" data-q="2"><span class="q-t">2 قطع <b>الأكثر طلباً</b></span><span class="q-p">229 DH <small>وفّري 29</small></span></button>
+<button type="button" class="qty-opt" data-q="2"><span class="q-t">2 قطع <b>وفّري مع جوج</b></span><span class="q-p">229 DH <small>وفّري 29</small></span></button>
 </div>
 
 <select
@@ -1330,7 +1330,7 @@ placeholder="مثال: الرباط">
 
 <div class="qty-opts">
 <button type="button" class="qty-opt is-on" data-q="1"><span class="q-t">قطعة وحدة</span><span class="q-p">129 DH</span></button>
-<button type="button" class="qty-opt" data-q="2"><span class="q-t">2 قطع <b>الأكثر طلباً</b></span><span class="q-p">229 DH <small>وفّري 29</small></span></button>
+<button type="button" class="qty-opt" data-q="2"><span class="q-t">2 قطع <b>وفّري مع جوج</b></span><span class="q-p">229 DH <small>وفّري 29</small></span></button>
 </div>
 
 <select
@@ -1418,7 +1418,7 @@ aria-hidden="true">
 </div>
 
 <h3>
-تم تأكيد طلبك بنجاح!
+تم التوصل بطلبك بنجاح!
 </h3>
 
 <p>
@@ -1529,6 +1529,11 @@ const price=QTY_PRICES[sel.value]||PRODUCT_PRICE;
 const form=box.closest('form');
 const btn=form&&form.querySelector('.buy-btn');
 if(btn&&!btn.disabled)btn.textContent='دير الطلب دابا — '+price+' DH';
+const card=form&&form.closest('.order-card,.modal-card');
+const total=card&&card.querySelector('.order-price strong');
+if(total)total.textContent=price+' DH';
+const detail=card&&card.querySelector('.order-price small');
+if(detail)detail.textContent=(sel.value==='2'?'جوج قطع':'قطعة وحدة')+' • التوصيل بالمجان • الدفع عند الاستلام';
 }
 document.querySelectorAll('.qty-opts').forEach(box=>{
 box.addEventListener('click',e=>{
@@ -1545,6 +1550,7 @@ if(!box)return;
 box.querySelectorAll('.qty-opt').forEach((x,i)=>x.classList.toggle('is-on',i===0));
 const sel=box.parentElement.querySelector('select');
 if(sel)sel.value='1';
+syncQty(box);
 }
 
 function setupFields(prefix){
@@ -1594,7 +1600,8 @@ try{return localStorage.getItem('fc_ttclid')||'';}catch(e){return '';}
 
 function srcTag(){
 try{
-const u=new URLSearchParams(location.search).get('src');
+const params=new URLSearchParams(location.search);
+const u=params.get('src')||params.get('utm_source')||(params.get('fbclid')?'fb':'');
 if(u){try{localStorage.setItem('fc_src',u);}catch(e){}return u;}
 try{return localStorage.getItem('fc_src')||'';}catch(e){return '';}
 }catch(e){return '';}
@@ -1618,16 +1625,19 @@ fetch(TT_CAPI_URL+'?'+qs,{mode:'no-cors',keepalive:true}).catch(function(){});
 
 async function saveOrder(url){
 for(let i=0;i<3;i++){
-try{
 const ctrl=new AbortController();
 const timer=setTimeout(()=>ctrl.abort(),9000);
+try{
 const r=await fetch(url,{signal:ctrl.signal,keepalive:true});
-clearTimeout(timer);
-if(r&&(r.ok||r.status===0||r.type==='opaque')){let t='';try{if(r.type!=='opaque')t=await r.text();}catch(e){}return t||true;}
-}catch(e){}
-await new Promise(r=>setTimeout(r,1500));
+if(r&&r.ok&&r.type!=='opaque'){
+const text=(await r.text()).trim();
+if(/^OK(?: META ORD-[0-9]{8}-0[0-9]{9})?$/.test(text))return text;
 }
-try{await fetch(url,{mode:'no-cors',keepalive:true});return true;}catch(e){}
+}catch(e){}
+finally{clearTimeout(timer);}
+if(i<2)await new Promise(resolve=>setTimeout(resolve,1500));
+}
+// An unreadable response is not proof that an order was accepted.
 return false;
 }
 
@@ -1653,34 +1663,43 @@ try{alreadyTracked=localStorage.getItem('fbPurchase_'+orderId)==='1';}catch(e){}
 
 const url=SCRIPT_URL+'?full_name='+encodeURIComponent(fullName)+'&phone='+encodeURIComponent(phone)+'&city='+encodeURIComponent(city)+'&address='+encodeURIComponent(address)+'&quantity='+encodeURIComponent('FOOT CARE '+fields.quantity.value+' قطعة')+'&price='+encodeURIComponent(SHEET_PRICES[fields.quantity.value]||SHEET_PRICES[1])+'&color='+encodeURIComponent(fields.color.value)+'&src='+encodeURIComponent(srcTag())+'&ad='+encodeURIComponent(utmTag('utm_content'))+'&camp='+encodeURIComponent(utmTag('utm_campaign'))+'&fbp='+encodeURIComponent(cookieVal('_fbp'))+'&fbc='+encodeURIComponent(cookieVal('_fbc'))+'&ua='+encodeURIComponent(navigator.userAgent)+'&page_url='+encodeURIComponent(location.href)+'&ttclid='+encodeURIComponent(ttClickId())+'&value='+encodeURIComponent(price);
 
-const saving=saveOrder(url);
-saving.then(ok=>{
-if(!ok||alreadyTracked)return;
-const mm=(typeof ok==='string')?ok.match(/OK META (ORD-[0-9]{8}-0[0-9]{9})/):null;
-const evId=mm?mm[1]:orderId;
-try{localStorage.setItem('fbPurchase_'+orderId,'1');}catch(e){}
+const ok=await saveOrder(url);
+if(!ok){
+fields.btn.disabled=false;
+fields.btn.textContent='دير الطلب دابا — '+price+' DH';
+sending=false;
+fieldError(fields.address,'تعذر التحقق من إرسال الطلب. المعلومات ديالك باقية، عاودي المحاولة من فضلك.');
+return;
+}
+
+// Only the order server can acknowledge a new Meta order. It already sends CAPI.
+// A plain OK can be a duplicate or a non-Meta order; neither fires browser Purchase.
+const mm=ok.match(/^OK META (ORD-[0-9]{8}-0[0-9]{9})$/);
+if(!alreadyTracked&&mm){
+const evId=mm[1];
 try{
 if(typeof fbq!=='undefined'){
 fbq('init',PIXEL_ID,{ph:'212'+phone.slice(1),fn:(fullName.split(/\s+/)[0]||'').toLowerCase(),ct:city.toLowerCase().replace(/\s+/g,''),country:'ma',external_id:phone});
-fbq('track','Purchase',{value:price,currency:'MAD',content_name:'Foot care tool',content_type:'product',num_items:qty,order_id:evId},{eventID:evId});
+fbq('track','Purchase',{value:Number(price),currency:'MAD',content_name:'Foot care tool',content_type:'product',num_items:qty,order_id:evId},{eventID:evId});
+try{localStorage.setItem('fbPurchase_'+orderId,'1');}catch(e){}
 }
 }catch(e){}
+}
+// Existing TikTok integration is preserved after server acknowledgement.
+if(!alreadyTracked){
 try{
 if(typeof ttq!=='undefined'&&typeof ttIdentifyThenTrack==='function'){
 ttIdentifyThenTrack(phone,fullName,city,price,qty,orderId);
 }
 }catch(e){}
-if(!mm)sendCapi({event_id:orderId,phone:phone,fn:fullName,ct:city,value:price,currency:'MAD',num_items:qty,fbp:cookieVal('_fbp'),fbc:cookieVal('_fbc'),ua:navigator.userAgent,url:location.href});
 sendTtapi({event:'CompletePayment',event_id:orderId,phone:phone,value:price,currency:'MAD',num_items:qty,ttclid:ttClickId(),ttp:cookieVal('_ttp'),ua:navigator.userAgent,url:location.href});
-});
-
-await Promise.race([saving,new Promise(r=>setTimeout(r,2500))]);
+}
 
 form.reset();
+fields.btn.disabled=false;
 resetQty(form);
 fields.quantity.value='1';
 fields.color.value='أسود';
-fields.btn.disabled=false;
 fields.btn.textContent='دير الطلب دابا — 129 DH';
 sending=false;
 if(form.id==='modalForm')closeOrder();
@@ -1693,3 +1712,4 @@ document.getElementById('modalForm').addEventListener('submit',e=>{e.preventDefa
 
 </body>
 </html>
+
