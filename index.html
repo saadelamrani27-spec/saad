@@ -862,6 +862,15 @@ h1{order:2}
 .hero{padding-top:12px}
 .hero-grid{gap:14px}
 }
+/* ==== conversion pass 2 ==== */
+.hero-media{position:relative}
+.hero-vid{object-fit:cover;display:block;background:#111}
+.open-note{margin-top:8px;text-align:center;font-weight:900;font-size:13.5px;color:#0b7a3b;background:#eaf8ef;border:1px dashed #12a150;border-radius:12px;padding:7px 10px}
+.order-card .open-note{grid-column:1/-1}
+small.opt{font-weight:600;color:#888;font-size:11px}
+.quick{transition:opacity .2s ease,transform .2s ease}
+.quick.hide{opacity:0;pointer-events:none;transform:translate(-50%,24px)}
+@media(max-width:600px){.hero-vid{max-height:28vh}}
 </style>
 </head>
 
@@ -885,26 +894,9 @@ h1{order:2}
 
 <div class="media">
 
-<div class="product-card">
-
-<button class="zoom-trigger"
-type="button"
-onclick="openImageZoom()"
-aria-label="تكبير صورة المنتج">
-
-<img
-class="main-product"
-src="product.jpg"
-width="900" height="900" fetchpriority="high"
-alt="أداة العناية بالقدمين">
-
-<span class="zoom-hint">
-⌕ اضغط للتكبير
-</span>
-
-</button>
-
-
+<div class="product-card hero-media">
+<video class="main-product hero-vid" src="hero-loop.mp4" poster="hero-poster.jpg" autoplay muted loop playsinline preload="auto" width="640" height="640" aria-label="النتيجة: قبل وبعد"></video>
+<span class="zoom-hint">🎥 شوفي النتيجة</span>
 </div>
 
 </div>
@@ -967,6 +959,7 @@ alt="أداة العناية بالقدمين">
 <div class="offer-note">
 التوصيل بالمجان • الدفع عند الاستلام
 </div>
+<div class="open-note">📦 حلّي الكولي وشوفيها قبل ما تخلصي</div>
 
 </div>
 
@@ -981,39 +974,6 @@ onclick="openOrder()">
 </div>
 
 </div>
-</section>
-
-
-<section class="trust">
-
-<div class="container trust-grid">
-
-<div class="trust-item">
-<div class="trust-icon">🚚</div>
-<strong>التوصيل للمغرب كامل</strong>
-<span>لجميع المدن</span>
-</div>
-
-<div class="trust-item">
-<div class="trust-icon">💵</div>
-<strong>الدفع عند الاستلام</strong>
-<span>خلص ملي توصلك</span>
-</div>
-
-<div class="trust-item">
-<div class="trust-icon">📞</div>
-<strong>تأكيد الطلب</strong>
-<span>غادي نتاصلو بيك</span>
-</div>
-
-<div class="trust-item">
-<div class="trust-icon">⚡</div>
-<strong>استعمال سهل</strong>
-<span>روتين عملي فالدار</span>
-</div>
-
-</div>
-
 </section>
 
 
@@ -1120,14 +1080,13 @@ id="quantity">
 <div class="field full">
 
 <label for="address">
-العنوان
+العنوان <small class="opt">(اختياري)</small>
 </label>
 
 <textarea
 id="address"
 autocomplete="street-address"
-placeholder="الحي، الشارع، رقم المنزل..."
-required></textarea>
+placeholder="الحي، الشارع، رقم المنزل… ولا نسولوك عليه فالتيليفون"></textarea>
 
 </div>
 
@@ -1145,6 +1104,7 @@ type="submit">
 
 </button>
 
+<div class="open-note">📦 حلّي الكولي وشوفيها قبل ما تخلصي</div>
 <div class="form-note">
 غادي نتاصلو بيك هاتفياً لتأكيد الطلب قبل الإرسال 📞
 </div>
@@ -1159,11 +1119,50 @@ type="submit">
 
 </section>
 
+
+<section class="trust">
+
+<div class="container trust-grid">
+
+<div class="trust-item">
+<div class="trust-icon">🚚</div>
+<strong>التوصيل للمغرب كامل</strong>
+<span>لجميع المدن</span>
+</div>
+
+<div class="trust-item">
+<div class="trust-icon">💵</div>
+<strong>الدفع عند الاستلام</strong>
+<span>حلّي وشوفي قبل ما تخلصي</span>
+</div>
+
+<div class="trust-item">
+<div class="trust-icon">📞</div>
+<strong>تأكيد الطلب</strong>
+<span>غادي نتاصلو بيك</span>
+</div>
+
+<div class="trust-item">
+<div class="trust-icon">⚡</div>
+<strong>استعمال سهل</strong>
+<span>روتين عملي فالدار</span>
+</div>
+
+</div>
+
+</section>
+
+
+
+
 <section class="demo-band">
 <div class="container">
-<p class="demo-cap">شوفي كيفاش كتخدم 👇</p>
+<p class="demo-cap">هادشي اللي غادي يوصلك 📦</p>
 <div class="gif-wrap">
-<video class="product-gif" src="demo.mp4" poster="demo-poster.jpg" autoplay muted loop playsinline preload="auto" width="420" height="746" style="aspect-ratio:420/746" aria-label="طريقة استعمال المنتج"></video>
+<button class="zoom-trigger" type="button" onclick="openImageZoom()" aria-label="تكبير صورة المنتج">
+<img class="product-gif" src="product.jpg" width="900" height="900" loading="lazy" alt="أداة العناية بالقدمين">
+<span class="zoom-hint">⌕ اضغط للتكبير</span>
+</button>
 </div>
 </div>
 </section>
@@ -1345,13 +1344,12 @@ id="m_quantity">
 <div class="field full">
 
 <label for="m_address">
-العنوان
+العنوان <small class="opt">(اختياري)</small>
 </label>
 
 <textarea
 id="m_address"
-required
-placeholder="الحي، الشارع، رقم المنزل..."></textarea>
+placeholder="الحي، الشارع، رقم المنزل… ولا نسولوك عليه فالتيليفون"></textarea>
 
 </div>
 
@@ -1369,6 +1367,7 @@ type="submit">
 
 </button>
 
+<div class="open-note">📦 حلّي الكولي وشوفيها قبل ما تخلصي</div>
 <div class="form-note">
 غادي نتاصلو بيك هاتفياً لتأكيد الطلب قبل الإرسال 📞
 </div>
@@ -1650,7 +1649,6 @@ const address=fields.address.value.trim();
 if(!/^[A-Za-zÀ-ÿ؀-ۿ\s'’.\-]{2,}$/.test(fullName)){fieldError(fields.name,'المرجو إدخال الاسم ديالك.');return;}
 if(!/^0[5-7][0-9]{8}$/.test(phone)){fieldError(fields.phone,'رقم غير صحيح. مثال: 0612345678');return;}
 if(!city){fieldError(fields.city,'المرجو إدخال المدينة.');return;}
-if(!address){fieldError(fields.address,'المرجو إدخال العنوان.');return;}
 sending=true;
 fields.btn.disabled=true;
 fields.btn.textContent='جاري إرسال الطلب...';
@@ -1710,6 +1708,14 @@ document.getElementById('leadForm').addEventListener('submit',e=>{e.preventDefau
 document.getElementById('modalForm').addEventListener('submit',e=>{e.preventDefault();submitOrder(modalFields,e.currentTarget);});
 </script>
 
+<script>
+(function(){
+var q=document.querySelector('.quick');if(!q||!('IntersectionObserver' in window))return;
+var vis=new Set();
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)vis.add(e.target);else vis.delete(e.target);});q.classList.toggle('hide',vis.size>0);},{threshold:0.15});
+['.main-btn','#leadForm'].forEach(function(sel){var el=document.querySelector(sel);if(el)io.observe(el);});
+})();
+</script>
 </body>
 </html>
 
