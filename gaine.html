@@ -84,6 +84,21 @@
   .recap-row b{font-weight:800;direction:ltr}
   .thanks .wrong-note{font-size:14.5px;margin-top:14px;color:var(--muted)}
   .thanks .wrong-note a{color:var(--pink);font-weight:800}
+  .ba{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:18px 0 6px}
+  .ba figure{margin:0;position:relative;border-radius:14px;overflow:hidden;background:#000}
+  .ba img,.jeans img{width:100%;height:auto;display:block}
+  .ba figcaption{position:absolute;top:8px;inset-inline-start:8px;background:#15161a;color:#fff;font-weight:900;font-size:15px;padding:3px 14px;border-radius:999px}
+  .ba figure.after figcaption{background:var(--pink)}
+  .ba-note{text-align:center;color:var(--muted);font-size:14.5px;font-weight:700;margin:4px 0 0}
+  .jeans{margin:14px 0 0;border-radius:14px;overflow:hidden;position:relative}
+  .jeans figcaption{position:absolute;bottom:10px;left:10px;right:10px;background:rgba(255,255,255,.95);border-radius:12px;padding:8px 12px;font-weight:800;text-align:center;font-size:15.5px}
+  .faq{margin:10px 0 0}
+  .faq details{border:1.5px solid var(--line);border-radius:14px;margin:10px 0;padding:0 16px;background:#fff}
+  .faq summary{cursor:pointer;font-weight:800;padding:14px 0;list-style:none;display:flex;justify-content:space-between;gap:10px}
+  .faq summary::-webkit-details-marker{display:none}
+  .faq summary:after{content:'+';color:var(--pink);font-size:22px;line-height:1}
+  .faq details[open] summary:after{content:'−'}
+  .faq details p{margin:0 0 14px;color:var(--muted);font-weight:600;font-size:15.5px}
   footer{text-align:center;color:var(--muted);font-size:14px;padding:26px 16px 10px;border-top:1px solid var(--line);margin-top:34px;font-weight:600}
   @media(max-width:380px){h1{font-size:25px}.price-now{font-size:34px}}
 </style>
@@ -113,17 +128,25 @@ fbq('track','ViewContent',{content_name:'Gaine',content_type:'product',value:199
       <div class="price-note">الخلاص عند الاستلام • التوصيل مجاني • تبديل القياس فابور</div>
     </div>
     <button class="cta" onclick="goToForm()">صيفطي الطلب ديالك دابا</button>
+    <h2>شوفي الفرق من أول لبسة</h2>
+    <div class="ba">
+      <figure><img src="/gaine/before.jpg" alt="قبل: الكرش باين" width="480" height="442"><figcaption>قبل</figcaption></figure>
+      <figure class="after"><img src="/gaine/after.jpg" alt="بعد: الكرش مشدود بالغاين" width="480" height="442"><figcaption>بعد ✨</figcaption></figure>
+    </div>
+    <p class="ba-note">نفس البنت، نفس النهار — غير لبسات الغاين</p>
+    <figure class="jeans"><img src="/gaine/jeans.jpg" alt="الغاين تحت الجينز ما كتبانش" width="480" height="442" loading="lazy"><figcaption>وتحت الحوايج؟ ما كتبانش 👌</figcaption></figure>
     <ul class="benefits">
       <li><span class="tick">✓</span><span>كتشد الكرش والخصر من أول لبسة</span></li>
       <li><span class="tick">✓</span><span>ما كتبانش تحت الجلابة، القفطان، الجينز والحوايج الرقيقة</span></li>
       <li><span class="tick">✓</span><span>قماش خفيف كيتنفس، تلبسيها النهار كامل بلا ما تضايقك</span></li>
-      <li><span class="tick">✓</span><span>القياسات L • XL • XXL</span></li>
+      <li><span class="tick">✓</span><span>القياسات L • XL • XXL — اللون الأسود</span></li>
+      <li><span class="tick">✓</span><span>تقدري <b>تحلي الكولي وتشوفيها</b> قبل ما تخلصي</span></li>
       <li><span class="tick">✓</span><span>القياس ما جاش مزيان؟ <b>نبدلوه ليك فابور</b></span></li>
     </ul>
     <div class="trust">
       <div><span>💵</span>الخلاص عند الاستلام</div>
       <div><span>🚚</span>التوصيل لجميع المدن</div>
-      <div><span>📞</span>كنعيطو ليك باش نأكدو الطلب</div>
+      <div><span>📦</span>حلّي الكولي قبل ما تخلصي</div>
       <div><span>🔄</span>تبديل القياس فابور</div>
     </div>
     <div class="form-card" id="form-card">
@@ -162,6 +185,15 @@ fbq('track','ViewContent',{content_name:'Gaine',content_type:'product',value:199
         <button type="submit" class="cta" id="submit-btn">أكدي الطلب — الخلاص عند الاستلام</button>
       </form>
     </div>
+    <h2>أسئلة كيتسولوها البنات</h2>
+    <div class="faq">
+      <details><summary>واش كتبان تحت الحوايج؟</summary><p>لا. بخصر عالي وقماش رقيق، ما كتبانش تحت الجلابة، القفطان، الجينز ولا الحوايج الرقيقة.</p></details>
+      <details><summary>واش كتضايق ولا كتسخن؟</summary><p>قماش خفيف كيتنفس، تقدري تلبسيها النهار كامل.</p></details>
+      <details><summary>شنو القياسات؟ وإلا ما جاتنيش؟</summary><p>القياسات L • XL • XXL. فالتيليفون كنعاونوك تختاري، و إلا ما جاش القياس مزيان نبدلوه ليك فابور.</p></details>
+      <details><summary>واش نقدر نشوفها قبل ما نخلص؟</summary><p>إيه، تقدري تحلي الكولي قدام الليفرور وتشوفيها، ومن بعد تخلصي.</p></details>
+      <details><summary>شحال كياخد التوصيل؟ وكيفاش نخلص؟</summary><p>التوصيل لجميع المدن من 2 حتى 4 أيام حسب المدينة. الخلاص كاش عند الاستلام.</p></details>
+    </div>
+    <button class="cta" onclick="goToForm()">اطلبي دابا — الخلاص عند الاستلام</button>
     <h2>شوفيها فالحركة</h2>
     <p class="hint">فعّلي الصوت باش تسمعي الشرح بالدارجة</p>
     <div class="media"><video src="/gaine/gaine-demo-7s.mp4" poster="/gaine/demo-poster.jpg" controls playsinline preload="none" width="1080" height="1920" aria-label="شوفي الغاين فالفيديو مع شرح بالدارجة"></video></div>
