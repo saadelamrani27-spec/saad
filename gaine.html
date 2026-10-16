@@ -61,6 +61,11 @@
   .qty-opt .q-p small{font-size:11px;color:#0a8a4a;font-weight:800}
   .qty-opt.is-on{border-color:var(--pink);background:var(--soft);box-shadow:0 0 0 3px rgba(230,24,107,.10)}
   .qty-opts+select{display:none}
+  .colors{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:6px}
+  .colors input{position:absolute;opacity:0;pointer-events:none}
+  .colors label{margin:0;display:flex;align-items:center;gap:10px;padding:8px 10px;border:1.5px solid var(--line);border-radius:12px;cursor:pointer;font-weight:800;font-size:17px}
+  .colors label img{width:46px;height:46px;border-radius:9px;object-fit:cover;flex:0 0 46px}
+  .colors input:checked + label{border-color:var(--pink);background:var(--soft);box-shadow:0 0 0 2px var(--pink) inset}
   .size-help{font-size:14px;color:var(--muted);font-weight:600;margin-top:8px;line-height:1.6}
   .err{color:#d01b3c;font-size:14.5px;font-weight:700;margin-top:6px;display:none}
   .err.show{display:block}
@@ -120,6 +125,7 @@ fbq('track','ViewContent',{content_name:'Gaine',content_type:'product',value:199
   <main id="page">
     <div class="hero">
       <video class="hero-vid" src="/gaine/gaine-demo-7s.mp4" poster="/gaine/demo-poster.jpg" autoplay muted loop playsinline preload="auto" width="1080" height="1920" aria-label="فيديو الغاين الشورت بخصر عالي مع شرح بالدارجة"></video>
+      <script>if(/[?&]c=beige/i.test(location.search)){var hv=document.querySelector('.hero-vid');hv.poster='/gaine/beige-poster.jpg';hv.src='/gaine/gaine-beige.mp4';hv.style.objectPosition='center 38%';}</script>
     </div>
     <h1>كرش مشدود تحت أي لبسة • غاين بخصر عالي</h1>
     <p class="sub">لبسيها تحت الجلابة، القفطان ولا الجينز… ما كتبانش، وكتشد الكرش والخصر من أول لبسة.</p>
@@ -151,6 +157,12 @@ fbq('track','ViewContent',{content_name:'Gaine',content_type:'product',value:199
         </div>
         <div class="size-help">ماعرفتيش القياس ديالك؟ ختاري الأقرب ليك، وفالتيليفون كنعاونوك تأكديه 📞</div>
         <div class="err" id="e-size">عافاك ختاري القياس</div>
+        <label>اللون</label>
+        <div class="colors">
+          <input type="radio" name="color" id="c-noir" value="Noir"><label for="c-noir"><img src="/gaine/after.jpg" alt="الأسود" width="46" height="46">الأسود</label>
+          <input type="radio" name="color" id="c-beige" value="Beige"><label for="c-beige"><img src="/gaine/after-b.jpg" alt="البيج" width="46" height="46">البيج</label>
+        </div>
+        <div class="err" id="e-color">عافاك ختاري اللون</div>
         <label for="quantity">الكمية</label>
         <div class="qty-opts" id="qty-opts">
           <button type="button" class="qty-opt is-on" data-q="1"><span class="q-t">قطعة وحدة</span><span class="q-p">199 درهم</span></button>
@@ -179,7 +191,7 @@ fbq('track','ViewContent',{content_name:'Gaine',content_type:'product',value:199
       <li><span class="tick">✓</span><span>كتشد الكرش والخصر من أول لبسة</span></li>
       <li><span class="tick">✓</span><span>ما كتبانش تحت الجلابة، القفطان، الجينز والحوايج الرقيقة</span></li>
       <li><span class="tick">✓</span><span>قماش خفيف كيتنفس، تلبسيها النهار كامل بلا ما تضايقك</span></li>
-      <li><span class="tick">✓</span><span>القياسات L • XL • XXL — اللون الأسود</span></li>
+      <li><span class="tick">✓</span><span>القياسات L • XL • XXL — متوفرة بالأسود والبيج</span></li>
       <li><span class="tick">✓</span><span>تقدري <b>تحلي الكولي وتشوفيها</b> قبل ما تخلصي</span></li>
     </ul>
     <figure class="jeans"><img src="/gaine/jeans.jpg" alt="الغاين تحت الجينز ما كتبانش" width="480" height="442" loading="lazy"><figcaption>وتحت الحوايج؟ ما كتبانش 👌</figcaption></figure>
@@ -204,6 +216,7 @@ fbq('track','ViewContent',{content_name:'Gaine',content_type:'product',value:199
     <div class="recap">
       <div class="recap-row"><span>الرقم ديالك</span><b id="t-phone">—</b></div>
       <div class="recap-row"><span>القياس</span><b id="t-size">—</b></div>
+      <div class="recap-row"><span>اللون</span><b id="t-color">—</b></div>
       <div class="recap-row"><span>المجموع</span><b id="t-total">—</b></div>
       <div class="recap-row"><span>رقم الطلب</span><b id="t-id">—</b></div>
     </div>
@@ -234,6 +247,14 @@ function goToForm(){
     });
   });
 })();
+(function(){
+  if(!/[?&]c=beige/i.test(location.search)) return;
+  var b=document.querySelector('.ba img[src="/gaine/before.jpg"]'); if(b) b.src='/gaine/before-b.jpg';
+  var a=document.querySelector('.ba img[src="/gaine/after.jpg"]'); if(a) a.src='/gaine/after-b.jpg';
+  var c=document.getElementById('c-beige'); if(c) c.checked=true;
+})();
+document.querySelectorAll('input[name="color"]').forEach(function(r){r.addEventListener('change',function(){showErr('e-color',false);});});
+document.querySelectorAll('input[name="size"]').forEach(function(r){r.addEventListener('change',function(){showErr('e-size',false);});});
 function showErr(id,on){document.getElementById(id).classList.toggle('show',on);}
 function orderId(){ return 'G' + Date.now().toString(36).toUpperCase() + Math.random().toString(36).slice(2,6).toUpperCase(); }
 document.getElementById('phone').addEventListener('input', function(){
@@ -294,14 +315,16 @@ document.getElementById('order-form').addEventListener('submit', async function(
   const addr = document.getElementById('address').value.trim();
   const qty = document.getElementById('quantity').value;
   const sizeEl = document.querySelector('input[name="size"]:checked');
+  const colorEl = document.querySelector('input[name="color"]:checked');
   const okName = name.length >= 3;
   const okPhone = phone.length === 10 && /^0[67][0-9]{8}$/.test(phone);
   const okCity = city.length >= 2;
   const okAddr = addr.length >= 4;
   const okSize = !!sizeEl;
+  const okColor = !!colorEl;
   showErr('e-name',!okName); showErr('e-phone',!okPhone); showErr('e-city',!okCity);
-  showErr('e-address',!okAddr); showErr('e-size',!okSize);
-  if(!(okName && okPhone && okCity && okAddr && okSize)){
+  showErr('e-address',!okAddr); showErr('e-size',!okSize); showErr('e-color',!okColor);
+  if(!(okName && okPhone && okCity && okAddr && okSize && okColor)){
     document.querySelector('.err.show').scrollIntoView({behavior:'smooth',block:'center'});
     return;
   }
@@ -311,7 +334,7 @@ document.getElementById('order-form').addEventListener('submit', async function(
   const total = TOTALS[qty];
   const saved = await saveOrder({
     full_name:name, phone:phone, city:city, address:addr,
-    quantity:'GAINE ' + qty + ' قطعة — Taille ' + sizeEl.value, price:total, color:'GAINE 199 / Taille ' + sizeEl.value,
+    quantity:'GAINE ' + qty + ' قطعة — Taille ' + sizeEl.value + ' — ' + colorEl.value, price:total, color:'GAINE 199 / Taille ' + sizeEl.value + ' / ' + colorEl.value,
     product:'GAINE 199', order_id:id, src:srcTag(), ad:utmTag('utm_content'), camp:utmTag('utm_campaign'), fbp:cookieVal('_fbp'), fbc:cookieVal('_fbc'), ua:navigator.userAgent, page_url:location.href
   });
   var fired=false;
@@ -323,6 +346,7 @@ document.getElementById('order-form').addEventListener('submit', async function(
   }
   document.getElementById('t-phone').textContent = phone;
   document.getElementById('t-size').textContent = sizeEl.value;
+  document.getElementById('t-color').textContent = colorEl.value==='Beige' ? 'البيج' : 'الأسود';
   document.getElementById('t-total').textContent = total + ' DH';
   document.getElementById('t-id').textContent = id;
   document.getElementById('page').style.display='none';
