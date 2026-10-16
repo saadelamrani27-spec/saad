@@ -20,9 +20,9 @@
   .hero video{width:100%;height:auto;display:block}
   .hero-vid{width:100%;object-fit:cover;object-position:center 62%}
   @media(max-width:600px){.hero-vid{height:36vh;max-height:320px}}
-  h1{font-size:29px;line-height:1.4;font-weight:900;margin:20px 0 6px}
-  .sub{color:var(--muted);font-size:18px;margin:0 0 18px;font-weight:600}
-  .pricebox{background:var(--soft);border:1.5px solid #f7cddd;border-radius:16px;padding:18px;text-align:center;margin:18px 0}
+  h1{font-size:25px;line-height:1.35;font-weight:900;margin:12px 0 4px}
+  .sub{color:var(--muted);font-size:16px;margin:0 0 8px;font-weight:600}
+  .pricebox{background:var(--soft);border:1.5px solid #f7cddd;border-radius:16px;padding:10px 12px;text-align:center;margin:10px 0}
   .price-now{font-size:40px;font-weight:900;color:var(--pink);line-height:1.1}
   .price-old{font-size:20px;color:var(--muted);text-decoration:line-through;margin-inline-start:10px;font-weight:600}
   .price-note{font-size:15px;color:var(--muted);margin-top:6px;font-weight:600}
@@ -36,9 +36,9 @@
   .trust{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:22px 0}
   .trust div{border:1.5px solid var(--line);border-radius:14px;padding:14px 10px;text-align:center;font-size:14.5px;font-weight:700;line-height:1.5}
   .trust span{display:block;font-size:23px;margin-bottom:4px}
-  .form-card{border:2px solid var(--pink);border-radius:18px;padding:20px 18px 22px;margin:26px 0;background:#fff}
+  .form-card{border:2px solid var(--pink);border-radius:18px;padding:16px 16px 20px;margin:12px 0 24px;background:#fff}
   .form-card h2{margin:0 0 4px;text-align:center;font-size:24px}
-  .form-card .hint{text-align:center;color:var(--muted);font-size:15px;margin:0 0 18px;font-weight:600}
+  .form-card .hint{text-align:center;color:var(--muted);font-size:14.5px;margin:0 0 8px;font-weight:600}
   label{display:block;font-weight:700;margin:14px 0 6px;font-size:16px}
   input,select{width:100%;padding:14px 15px;font-family:inherit;font-size:17px;border:1.5px solid var(--line);border-radius:12px;background:#fff;color:var(--ink);font-weight:600}
   input:focus,select:focus{outline:none;border-color:var(--pink)}
@@ -127,28 +127,6 @@ fbq('track','ViewContent',{content_name:'Gaine',content_type:'product',value:199
       <div><span class="price-now">199 درهم</span><span class="price-old">249 درهم</span></div>
       <div class="price-note">الخلاص عند الاستلام • التوصيل مجاني • تبديل القياس فابور</div>
     </div>
-    <button class="cta" onclick="goToForm()">صيفطي الطلب ديالك دابا</button>
-    <h2>شوفي الفرق من أول لبسة</h2>
-    <div class="ba">
-      <figure><img src="/gaine/before.jpg" alt="قبل: الكرش باين" width="480" height="442"><figcaption>قبل</figcaption></figure>
-      <figure class="after"><img src="/gaine/after.jpg" alt="بعد: الكرش مشدود بالغاين" width="480" height="442"><figcaption>بعد ✨</figcaption></figure>
-    </div>
-    <p class="ba-note">نفس البنت، نفس النهار — غير لبسات الغاين</p>
-    <figure class="jeans"><img src="/gaine/jeans.jpg" alt="الغاين تحت الجينز ما كتبانش" width="480" height="442" loading="lazy"><figcaption>وتحت الحوايج؟ ما كتبانش 👌</figcaption></figure>
-    <ul class="benefits">
-      <li><span class="tick">✓</span><span>كتشد الكرش والخصر من أول لبسة</span></li>
-      <li><span class="tick">✓</span><span>ما كتبانش تحت الجلابة، القفطان، الجينز والحوايج الرقيقة</span></li>
-      <li><span class="tick">✓</span><span>قماش خفيف كيتنفس، تلبسيها النهار كامل بلا ما تضايقك</span></li>
-      <li><span class="tick">✓</span><span>القياسات L • XL • XXL — اللون الأسود</span></li>
-      <li><span class="tick">✓</span><span>تقدري <b>تحلي الكولي وتشوفيها</b> قبل ما تخلصي</span></li>
-      <li><span class="tick">✓</span><span>القياس ما جاش مزيان؟ <b>نبدلوه ليك فابور</b></span></li>
-    </ul>
-    <div class="trust">
-      <div><span>💵</span>الخلاص عند الاستلام</div>
-      <div><span>🚚</span>التوصيل لجميع المدن</div>
-      <div><span>📦</span>حلّي الكولي قبل ما تخلصي</div>
-      <div><span>🔄</span>تبديل القياس فابور</div>
-    </div>
     <div class="form-card" id="form-card">
       <h2>عمري الطلب ديالك</h2>
       <p class="hint">عمري المعلومات و غانعيطو ليك باش نأكدو الطلب</p>
@@ -185,6 +163,27 @@ fbq('track','ViewContent',{content_name:'Gaine',content_type:'product',value:199
         <button type="submit" class="cta" id="submit-btn">أكدي الطلب — الخلاص عند الاستلام</button>
       </form>
     </div>
+    <h2>شوفي الفرق من أول لبسة</h2>
+    <div class="ba">
+      <figure><img src="/gaine/before.jpg" alt="قبل: الكرش باين" width="480" height="442"><figcaption>قبل</figcaption></figure>
+      <figure class="after"><img src="/gaine/after.jpg" alt="بعد: الكرش مشدود بالغاين" width="480" height="442"><figcaption>بعد ✨</figcaption></figure>
+    </div>
+    <p class="ba-note">نفس البنت، نفس النهار — غير لبسات الغاين</p>
+    <div class="trust">
+      <div><span>💵</span>الخلاص عند الاستلام</div>
+      <div><span>🚚</span>التوصيل لجميع المدن</div>
+      <div><span>📦</span>حلّي الكولي قبل ما تخلصي</div>
+      <div><span>🔄</span>تبديل القياس فابور</div>
+    </div>
+    <ul class="benefits">
+      <li><span class="tick">✓</span><span>كتشد الكرش والخصر من أول لبسة</span></li>
+      <li><span class="tick">✓</span><span>ما كتبانش تحت الجلابة، القفطان، الجينز والحوايج الرقيقة</span></li>
+      <li><span class="tick">✓</span><span>قماش خفيف كيتنفس، تلبسيها النهار كامل بلا ما تضايقك</span></li>
+      <li><span class="tick">✓</span><span>القياسات L • XL • XXL — اللون الأسود</span></li>
+      <li><span class="tick">✓</span><span>تقدري <b>تحلي الكولي وتشوفيها</b> قبل ما تخلصي</span></li>
+      <li><span class="tick">✓</span><span>القياس ما جاش مزيان؟ <b>نبدلوه ليك فابور</b></span></li>
+    </ul>
+    <figure class="jeans"><img src="/gaine/jeans.jpg" alt="الغاين تحت الجينز ما كتبانش" width="480" height="442" loading="lazy"><figcaption>وتحت الحوايج؟ ما كتبانش 👌</figcaption></figure>
     <h2>أسئلة كيتسولوها البنات</h2>
     <div class="faq">
       <details><summary>واش كتبان تحت الحوايج؟</summary><p>لا. بخصر عالي وقماش رقيق، ما كتبانش تحت الجلابة، القفطان، الجينز ولا الحوايج الرقيقة.</p></details>
