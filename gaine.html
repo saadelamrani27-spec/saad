@@ -112,6 +112,14 @@
   section{padding:26px 16px 0}
   h2.t{font-size:25px;line-height:1.4;text-align:center;margin:0 0 4px;color:var(--noir)}
   .t-sub{text-align:center;color:var(--muted);font-weight:700;font-size:15px;margin:0 0 14px}
+  .vs{background:#fff;border:1.5px solid var(--line);border-radius:20px;overflow:hidden}
+  .vs-h,.vs-r{display:grid;grid-template-columns:78px 1fr 1fr;align-items:stretch}
+  .vs-h span{padding:10px 8px;font-weight:800;font-size:14.5px;text-align:center}
+  .vs-h .us{background:var(--noir);color:var(--gold)}.vs-h .them{background:#f3eeea;color:var(--muted)}
+  .vs-r{border-top:1px solid var(--line)}
+  .vs-r span{padding:10px 8px;font-size:14px;font-weight:700;line-height:1.5;display:flex;align-items:center}
+  .vs-r span:first-child{font-weight:800;color:var(--noir);font-size:13.5px;justify-content:center;text-align:center;background:var(--ivory)}
+  .vs-r .us{color:#0a6b37;background:#f3faf5}.vs-r .them{color:#9a8f8a;background:#fbf9f7}
   .feats{display:grid;gap:12px}
   .feat{display:grid;grid-template-columns:118px 1fr;gap:12px;align-items:center;background:#fff;border:1.5px solid var(--line);border-radius:18px;overflow:hidden}
   .feat img{width:118px;height:110px;object-fit:cover}
@@ -222,7 +230,8 @@ fbq('track','ViewContent',{content_name:'Gaine',content_type:'product',value:199
       <div class="price"><b>199 <small>درهم</small></b><span class="chip g">🚚 التوصيل مجاني</span><span class="chip n">💵 الخلاص عند الاستلام</span></div>
       <ul class="quick">
         <li>كتشد الكرش والخصر من أول لبسة</li>
-        <li>ما كتبانش تحت الجينز، الصاية، الجلابة والقفطان</li>
+        <li>ما كتبانش تحت الحوايج: بلا خطوط، بلا ما تبان</li>
+        <li>سهلة فاللبسة والتحياد: بلا خطاطيف، بلا سنسلة</li>
         <li>متوفرة بالبيج والأسود • <span dir="ltr">L • XL • XXL</span></li>
       </ul>
     </div>
@@ -271,6 +280,17 @@ fbq('track','ViewContent',{content_name:'Gaine',content_type:'product',value:199
     </div>
 
     <section>
+      <h2 class="t">علاش هادي ماشي بحال الغاينات الأخرى؟</h2>
+      <p class="t-sub">الفرق اللي غادي تحسي بيه من أول نهار</p>
+      <div class="vs">
+        <div class="vs-h"><span></span><span class="us">هاد الغاين ✨</span><span class="them">الغاين العادي</span></div>
+        <div class="vs-r"><span>اللبسة</span><span class="us">✓ كتلبسيها فثواني، بلا خطاطيف بلا سنسلة</span><span class="them">✗ خطاطيف وسنسلة، كتعذب فاللبسة</span></div>
+        <div class="vs-r"><span>تحت الحوايج</span><span class="us">✓ ما كتبانش، بلا خطوط</span><span class="them">✗ كتبان الخطاطيف والخطوط</span></div>
+        <div class="vs-r"><span>الراحة</span><span class="us">✓ قماش رقيق كيتمدد وكيتنفس</span><span class="them">✗ قماش قاصح كيسخن</span></div>
+      </div>
+    </section>
+
+    <section>
       <h2 class="t">علاش البنات كيختارو هاد الغاين؟</h2>
       <p class="t-sub">مصممة باش تبان مزيانة فأي لبسة</p>
       <div class="feats">
@@ -278,6 +298,7 @@ fbq('track','ViewContent',{content_name:'Gaine',content_type:'product',value:199
         <div class="feat"><img src="/gaine/g2-jean.webp" alt="ما كتبانش تحت الجينز" loading="lazy" width="640" height="590"><div><h3>ما كتبانش تحت الحوايج</h3><p>لبسي الجينز، الصاية، الجلابة ولا القفطان فوقها بكل راحة.</p></div></div>
         <div class="feat"><img src="/gaine/g2-tissu.webp" alt="قماش رقيق" loading="lazy" width="640" height="590"><div><h3>قماش رقيق كيتمدد وكيتنفس</h3><p>خفيفة على الجلد، تلبسيها النهار كامل بلا ما تضايقك.</p></div></div>
         <div class="feat"><img src="/gaine/g2-saya.webp" alt="الخصر مرسوم" loading="lazy" width="640" height="590"><div><h3>الحوايج كيجيو عليك مرسومين</h3><p>الخصر كيبان مرسوم والصاية ولا السروال كيسدو بلا تعب.</p></div></div>
+        <div class="feat"><img src="/gaine/g2-loop-beige.webp" alt="سهلة فاللبسة" loading="lazy" width="640" height="590"><div><h3>سهلة فاللبسة والتحياد</h3><p>بلا خطاطيف، بلا سنسلة: كتطلعيها وكتحيديها فثواني.</p></div></div>
       </div>
     </section>
 
@@ -321,6 +342,7 @@ fbq('track','ViewContent',{content_name:'Gaine',content_type:'product',value:199
 
     <section class="faq">
       <h2 class="t">أسئلة كيتسولوها البنات</h2>
+      <details><summary>واش فيها خطاطيف ولا سنسلة؟</summary><p>لا. كتلبسيها بحال الشورت، كتطلعيها حتى لتحت الصدر وكتحيديها فثواني.</p></details>
       <details><summary>واش كتبان تحت الحوايج؟</summary><p>لا. بخصر عالي وقماش رقيق، ما كتبانش تحت الجينز، الصاية، الجلابة، القفطان ولا الحوايج الرقيقة.</p></details>
       <details><summary>واش كتضايق ولا كتسخن؟</summary><p>قماش خفيف كيتمدد وكيتنفس، تقدري تلبسيها النهار كامل.</p></details>
       <details><summary>شنو القياسات؟ وكيفاش نعرف القياس ديالي؟</summary><p>القياسات L • XL • XXL. فالتيليفون كنعاونوك تختاري القياس المناسب ليك قبل ما نصيفطو الطلب.</p></details>
