@@ -92,12 +92,6 @@
   .sizes label{margin:0;text-align:center;padding:12px 0;border:2px solid var(--line);border-radius:14px;cursor:pointer;font-weight:800;font-size:18px;background:#fff;direction:ltr}
   .sizes input:checked + label{background:var(--noir);border-color:var(--noir);color:#fff}
   .size-help{font-size:14px;color:var(--muted);font-weight:700;margin-top:7px;line-height:1.6}
-  .qty-opts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-  .qty-opt{display:flex;flex-direction:column;align-items:center;gap:2px;padding:10px 6px;border:2px solid var(--line);border-radius:14px;background:#fff;cursor:pointer;font-family:inherit}
-  .qty-opt .q-t{font-size:13.5px;font-weight:800;color:#5c514d}
-  .qty-opt .q-p{font-size:18px;font-weight:800;color:var(--noir)}
-  .qty-opt.is-on{border-color:var(--noir);background:var(--nude)}
-  #quantity{display:none}
   .fld{margin-top:10px}
   .fld label{display:block;font-weight:800;font-size:15px;margin:0 0 5px}
   .fld input{width:100%;padding:14px 14px;font-family:inherit;font-size:17px;border:1.5px solid var(--line);border-radius:14px;background:var(--ivory);color:var(--ink);font-weight:700}
@@ -253,17 +247,9 @@ fbq('track','ViewContent',{content_name:'Gaine',content_type:'product',value:199
         <div class="size-help">ماعرفتيش القياس ديالك؟ ختاري الأقرب ليك، وفالتيليفون كنعاونوك تأكديه 📞</div>
         <div class="err" id="e-size">عافاك ختاري القياس</div>
 
-        <div class="step"><span class="n">3</span>الكمية</div>
-        <div class="qty-opts" id="qty-opts">
-          <button type="button" class="qty-opt is-on" data-q="1"><span class="q-t">قطعة وحدة</span><span class="q-p">199 درهم</span></button>
-          <button type="button" class="qty-opt" data-q="2"><span class="q-t">2 قطع</span><span class="q-p">398 درهم</span></button>
-        </div>
-        <select id="quantity" name="quantity" aria-hidden="true" tabindex="-1">
-          <option value="1">1</option>
-          <option value="2">2</option>
-        </select>
+        <input type="hidden" id="quantity" name="quantity" value="1">
 
-        <div class="step"><span class="n">4</span>معلومات التوصيل</div>
+        <div class="step"><span class="n">3</span>معلومات التوصيل</div>
         <div class="fld"><label for="full_name">الاسم الكامل</label>
           <input type="text" id="full_name" name="full_name" placeholder="مثال: فاطمة بنعلي" autocomplete="name">
           <div class="err" id="e-name">عافاك كتبي الاسم ديالك</div></div>
@@ -372,7 +358,7 @@ fbq('track','ViewContent',{content_name:'Gaine',content_type:'product',value:199
 </div>
 <script>
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx8Azpl1MMJ8SBZhAYPoQ3xni-1ojmcwKKIaxfRkJ5foqGNYK6xW2AgTBpVtICS0bpbJA/exec";
-const TOTALS = {1:199, 2:398};
+const TOTALS = {1:199};
 let checkoutTracked = false;
 function goToForm(){
   if(!checkoutTracked){ fbq('track','InitiateCheckout',{value:199,currency:'MAD',num_items:1}); checkoutTracked = true; }
@@ -418,19 +404,6 @@ document.querySelectorAll('#thumbs .th').forEach(function(t){ t.addEventListener
     var v=50+38*Math.sin(p*Math.PI*2); set(v); r.value=v; requestAnimationFrame(anim); }
   set(50);
   if(!window.matchMedia || !window.matchMedia('(prefers-reduced-motion: reduce)').matches){ setTimeout(function(){ requestAnimationFrame(anim); },700); }
-})();
-/* ---------- quantity ---------- */
-(function(){
-  var opts=document.querySelectorAll('#qty-opts .qty-opt');
-  var sel=document.getElementById('quantity');
-  opts.forEach(function(b){
-    b.addEventListener('click',function(){
-      opts.forEach(function(x){x.classList.remove('is-on');});
-      b.classList.add('is-on');
-      sel.value=b.getAttribute('data-q');
-      document.getElementById('sum').textContent=TOTALS[sel.value]+' درهم';
-    });
-  });
 })();
 /* ---------- beige mode from the ad link (?c=beige) ---------- */
 (function(){
