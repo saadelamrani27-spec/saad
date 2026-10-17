@@ -255,6 +255,9 @@ function goToForm(){
 })();
 document.querySelectorAll('input[name="color"]').forEach(function(r){r.addEventListener('change',function(){showErr('e-color',false);});});
 document.querySelectorAll('input[name="size"]').forEach(function(r){r.addEventListener('change',function(){showErr('e-size',false);});});
+/* Funnel tracking: AddToCart = visitor started filling the order form (once per visit) */
+(function(){var done=false;function atc(){if(done)return;done=true;try{fbq('track','AddToCart',{content_name:'Gaine',value:199,currency:'MAD'});}catch(e){}}
+  var f=document.getElementById('order-form'); if(f){f.addEventListener('focusin',atc);f.addEventListener('change',atc);}})();
 function showErr(id,on){document.getElementById(id).classList.toggle('show',on);}
 function orderId(){ return 'G' + Date.now().toString(36).toUpperCase() + Math.random().toString(36).slice(2,6).toUpperCase(); }
 document.getElementById('phone').addEventListener('input', function(){
