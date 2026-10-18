@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>غاين بخصر عالي • كرش مشدود تحت أي لبسة • 199 درهم</title>
-<meta name="description" content="غاين شورت بخصر عالي كتشد الكرش وكترسم الخصر، وما كتبانش تحت الجينز، الصاية، الجلابة والقفطان. بالبيج والأسود • L • XL • XXL. 199 درهم، الخلاص عند الاستلام والتوصيل مجاني.">
+<title>غاين بخصر عالي • كرش مشدود تحت أي لبسة • 2 قطع ب 199 درهم</title>
+<meta name="description" content="غاين شورت بخصر عالي كتشد الكرش وكترسم الخصر، وما كتبانش تحت الجينز، الصاية، الجلابة والقفطان. بالبيج والأسود • L • XL • XXL. قطعة ب 149 درهم و 2 قطع ب 199 درهم، الخلاص عند الاستلام والتوصيل مجاني.">
 <meta name="theme-color" content="#1b1718">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -68,7 +68,7 @@
   .price b{font-family:'El Messiri',serif;font-size:42px;line-height:1;color:var(--rose)}
   .price b small{font-size:22px}
   .chip{display:inline-flex;align-items:center;gap:5px;border-radius:999px;font-weight:800;font-size:13.5px;padding:4px 11px}
-  .chip.g{background:#e6f6ec;color:#0a6b37}.chip.n{background:var(--nude);color:#6e4a33}
+  .chip.g{background:#e6f6ec;color:#0a6b37}.chip.n{background:var(--nude);color:#6e4a33}.chip.r{background:var(--rose);color:#fff}
   .quick{list-style:none;padding:0;margin:0 0 6px;display:grid;gap:7px}
   .quick li{display:flex;gap:9px;align-items:flex-start;font-weight:700;font-size:16px}
   .quick li:before{content:'✓';flex:0 0 22px;height:22px;border-radius:50%;background:var(--noir);color:var(--gold);font-size:13px;display:flex;align-items:center;justify-content:center;margin-top:3px}
@@ -92,6 +92,24 @@
   .sizes label{margin:0;text-align:center;padding:12px 0;border:2px solid var(--line);border-radius:14px;cursor:pointer;font-weight:800;font-size:18px;background:#fff;direction:ltr}
   .sizes input:checked + label{background:var(--noir);border-color:var(--noir);color:#fff}
   .size-help{font-size:14px;color:var(--muted);font-weight:700;margin-top:7px;line-height:1.6}
+  .offers{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding-top:8px}
+  .of{position:relative}
+  .of input,.c2-opts input{position:absolute;opacity:0;pointer-events:none}
+  .of label{display:flex;flex-direction:column;align-items:center;gap:1px;height:100%;box-sizing:border-box;padding:16px 6px 12px;border:2px solid var(--line);border-radius:16px;background:#fff;cursor:pointer;text-align:center;transition:.15s}
+  .of .o-t{font-size:15.5px;font-weight:800;color:#5c514d}
+  .of .o-p{font-family:'El Messiri',serif;font-size:32px;line-height:1.15;color:var(--noir);font-weight:700}
+  .of .o-p small{font-size:17px}
+  .of .o-s{font-size:13px;font-weight:800;color:#0a6b37}
+  .of .o-b{position:absolute;top:-11px;left:50%;transform:translateX(-50%);white-space:nowrap;background:var(--rose);color:#fff;font-size:12.5px;font-weight:800;border-radius:999px;padding:2px 11px}
+  .of input:checked + label{border-color:var(--noir);background:var(--nude);box-shadow:0 0 0 3px rgba(27,23,24,.12)}
+  .c2{display:none;margin-top:12px}
+  .c2.show{display:block}
+  .c2-t{font-weight:800;font-size:15px;margin:0 0 6px}
+  .c2-opts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .c2-opts div{position:relative}
+  .c2-opts label{display:flex;align-items:center;justify-content:center;gap:7px;padding:11px 0;border:2px solid var(--line);border-radius:14px;cursor:pointer;font-weight:800;font-size:16px;background:#fff}
+  .c2-opts label i{display:inline-block;width:14px;height:14px;border-radius:50%;border:1px solid rgba(0,0,0,.15)}
+  .c2-opts input:checked + label{background:var(--noir);border-color:var(--noir);color:#fff}
   .fld{margin-top:10px}
   .fld label{display:block;font-weight:800;font-size:15px;margin:0 0 5px}
   .fld input{width:100%;padding:14px 14px;font-family:inherit;font-size:17px;border:1.5px solid var(--line);border-radius:14px;background:var(--ivory);color:var(--ink);font-weight:700}
@@ -227,7 +245,7 @@ fbq('track','ViewContent',{content_name:'Gaine',content_type:'product',value:199
       <span class="eyebrow">غاين شورت بخصر عالي</span>
       <h1>كرش مشدود وخصر مرسوم… تحت أي لبسة ✨</h1>
       <p class="sub">كتطلع حتى لتحت الصدر، كتجمع الكرش والجناب، وما كتبانش تحت الحوايج.</p>
-      <div class="price"><b>199 <small>درهم</small></b><span class="chip g">🚚 التوصيل مجاني</span><span class="chip n">💵 الخلاص عند الاستلام</span></div>
+      <div class="price"><b>149 <small>درهم</small></b><span class="chip r">🔥 2 قطع ب 199 درهم</span><span class="chip g">🚚 التوصيل مجاني</span><span class="chip n">💵 الخلاص عند الاستلام</span></div>
       <ul class="quick">
         <li>كتشد الكرش والخصر من أول لبسة</li>
         <li>ما كتبانش تحت الحوايج: بلا خطوط، بلا ما تبان</li>
@@ -240,14 +258,28 @@ fbq('track','ViewContent',{content_name:'Gaine',content_type:'product',value:199
       <h2>اطلبي دابا</h2>
       <p class="lead">عمّري المعلومات وغانعيطو ليك باش نأكدو الطلب 📞</p>
       <form id="order-form" novalidate>
-        <div class="step"><span class="n">1</span>ختاري اللون</div>
+        <div class="step"><span class="n">1</span>ختاري العرض</div>
+        <div class="offers">
+          <div class="of"><input type="radio" name="offer" id="q-2" value="2" checked><label for="q-2"><span class="o-b">وفري 99 درهم</span><span class="o-t">2 قطع</span><span class="o-p">199 <small>درهم</small></span><span class="o-s">التوصيل مجاني</span></label></div>
+          <div class="of"><input type="radio" name="offer" id="q-1" value="1"><label for="q-1"><span class="o-t">قطعة وحدة</span><span class="o-p">149 <small>درهم</small></span><span class="o-s">التوصيل مجاني</span></label></div>
+        </div>
+
+        <div class="step"><span class="n">2</span><span id="color-step-t">ختاري لون القطعة الأولى</span></div>
         <div class="swatches">
           <div class="sw"><input type="radio" name="color" id="c-noir" value="Noir"><label for="c-noir"><img src="/gaine/g2-noir-apres.webp" alt="الأسود" width="640" height="590"><span><i style="background:#1b1718"></i>الأسود</span></label></div>
           <div class="sw"><input type="radio" name="color" id="c-beige" value="Beige"><label for="c-beige"><img src="/gaine/g2-beige-apres.webp" alt="البيج" width="640" height="590"><span><i style="background:#e6c9ad"></i>البيج</span></label></div>
         </div>
         <div class="err" id="e-color">عافاك ختاري اللون</div>
+        <div class="c2 show" id="c2">
+          <div class="c2-t">لون القطعة الثانية</div>
+          <div class="c2-opts">
+            <div><input type="radio" name="color2" id="c2-noir" value="Noir"><label for="c2-noir"><i style="background:#1b1718"></i>الأسود</label></div>
+            <div><input type="radio" name="color2" id="c2-beige" value="Beige"><label for="c2-beige"><i style="background:#e6c9ad"></i>البيج</label></div>
+          </div>
+          <div class="err" id="e-color2">عافاك ختاري لون القطعة الثانية</div>
+        </div>
 
-        <div class="step"><span class="n">2</span>ختاري القياس</div>
+        <div class="step"><span class="n">3</span>ختاري القياس</div>
         <div class="sizes">
           <input type="radio" name="size" id="s-l" value="L"><label for="s-l">L</label>
           <input type="radio" name="size" id="s-xl" value="XL"><label for="s-xl">XL</label>
@@ -256,9 +288,9 @@ fbq('track','ViewContent',{content_name:'Gaine',content_type:'product',value:199
         <div class="size-help">ماعرفتيش القياس ديالك؟ ختاري الأقرب ليك، وفالتيليفون كنعاونوك تأكديه 📞</div>
         <div class="err" id="e-size">عافاك ختاري القياس</div>
 
-        <input type="hidden" id="quantity" name="quantity" value="1">
+        <input type="hidden" id="quantity" name="quantity" value="2">
 
-        <div class="step"><span class="n">3</span>معلومات التوصيل</div>
+        <div class="step"><span class="n">4</span>معلومات التوصيل</div>
         <div class="fld"><label for="full_name">الاسم الكامل</label>
           <input type="text" id="full_name" name="full_name" placeholder="مثال: فاطمة بنعلي" autocomplete="name">
           <div class="err" id="e-name">عافاك كتبي الاسم ديالك</div></div>
@@ -347,6 +379,7 @@ fbq('track','ViewContent',{content_name:'Gaine',content_type:'product',value:199
       <details><summary>واش كتضايق ولا كتسخن؟</summary><p>قماش خفيف كيتمدد وكيتنفس، تقدري تلبسيها النهار كامل.</p></details>
       <details><summary>شنو القياسات؟ وكيفاش نعرف القياس ديالي؟</summary><p>القياسات L • XL • XXL. فالتيليفون كنعاونوك تختاري القياس المناسب ليك قبل ما نصيفطو الطلب.</p></details>
       <details><summary>شنو الألوان اللي كاينين؟</summary><p>كاينة بالأسود وبالبيج (لون الجلد)، البيج كيجي مزيان تحت الحوايج الفاتحين.</p></details>
+      <details><summary>واش نقدر نختار جوج ألوان؟</summary><p>إيه. فعرض 2 قطع ب 199 درهم تقدري تاخدي الأسود والبيج، ولا جوج بنفس اللون.</p></details>
       <details><summary>واش نقدر نشوفها قبل ما نخلص؟</summary><p>إيه، تقدري تحلي الكولي قدام الليفرور وتشوفيها، ومن بعد تخلصي.</p></details>
       <details><summary>شحال كياخد التوصيل؟ وكيفاش نخلص؟</summary><p>التوصيل مجاني لجميع المدن، من 2 حتى 4 أيام حسب المدينة. الخلاص كاش عند الاستلام.</p></details>
     </section>
@@ -354,8 +387,8 @@ fbq('track','ViewContent',{content_name:'Gaine',content_type:'product',value:199
     <div class="final">
       <h2>كوني مرتاحة فلبستك من اليوم ✨</h2>
       <p>الغاين بخصر عالي • بالبيج والأسود</p>
-      <div class="pp">199 درهم</div>
-      <p>التوصيل مجاني • الخلاص عند الاستلام</p>
+      <div class="pp">2 قطع ب 199 درهم</div>
+      <p>ولا قطعة وحدة ب 149 درهم • التوصيل مجاني • الخلاص عند الاستلام</p>
       <button class="cta" id="final-cta" onclick="goToForm()">اطلبي دابا</button>
     </div>
   </main>
@@ -366,7 +399,8 @@ fbq('track','ViewContent',{content_name:'Gaine',content_type:'product',value:199
     <p class="call-note">📞 <b>غانعيطو ليك قريب</b> باش نأكدو الطلب والعنوان.<br>عافاك جاوبي حتى إلا كان الرقم ماشي معروف عندك.</p>
     <div class="recap">
       <div class="recap-row"><span>الرقم ديالك</span><b id="t-phone">—</b></div>
-      <div class="recap-row"><span>اللون</span><b id="t-color">—</b></div>
+      <div class="recap-row"><span>العرض</span><b id="t-offer" style="direction:rtl">—</b></div>
+      <div class="recap-row"><span>اللون</span><b id="t-color" style="direction:rtl">—</b></div>
       <div class="recap-row"><span>القياس</span><b id="t-size">—</b></div>
       <div class="recap-row"><span>المجموع</span><b id="t-total">—</b></div>
       <div class="recap-row"><span>رقم الطلب</span><b id="t-id">—</b></div>
@@ -376,14 +410,15 @@ fbq('track','ViewContent',{content_name:'Gaine',content_type:'product',value:199
   <footer>Elite Shop © 2026</footer>
 </div>
 <div class="sticky" id="sticky">
-  <div class="sticky-in"><img id="st-img" src="/gaine/g2-noir-apres.webp" alt="" width="46" height="46"><div class="p">غاين بخصر عالي<b>199 درهم</b></div><button onclick="goToForm()">اطلبي دابا</button></div>
+  <div class="sticky-in"><img id="st-img" src="/gaine/g2-noir-apres.webp" alt="" width="46" height="46"><div class="p">قطعة ب 149 درهم<b>2 قطع ب 199 درهم</b></div><button onclick="goToForm()">اطلبي دابا</button></div>
 </div>
 <script>
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx8Azpl1MMJ8SBZhAYPoQ3xni-1ojmcwKKIaxfRkJ5foqGNYK6xW2AgTBpVtICS0bpbJA/exec";
-const TOTALS = {1:199};
+const TOTALS = {1:149, 2:199};
+function curQty(){ return document.getElementById('quantity').value==='1' ? '1' : '2'; }
 let checkoutTracked = false;
 function goToForm(){
-  if(!checkoutTracked){ fbq('track','InitiateCheckout',{value:199,currency:'MAD',num_items:1}); checkoutTracked = true; }
+  if(!checkoutTracked){ fbq('track','InitiateCheckout',{value:TOTALS[curQty()],currency:'MAD',num_items:+curQty()}); checkoutTracked = true; }
   document.getElementById('form-card').scrollIntoView({behavior:'smooth',block:'start'});
 }
 /* ---------- colour: hero, swatches, sticky follow the chosen colour ---------- */
@@ -427,13 +462,27 @@ document.querySelectorAll('#thumbs .th').forEach(function(t){ t.addEventListener
   set(50);
   if(!window.matchMedia || !window.matchMedia('(prefers-reduced-motion: reduce)').matches){ setTimeout(function(){ requestAnimationFrame(anim); },700); }
 })();
+/* ---------- offer: 1 piece 149 / 2 pieces 199 ---------- */
+var c2Touched=false;
+function syncColor2(){ if(c2Touched) return; var c1=document.querySelector('input[name="color"]:checked'); if(!c1) return; var t=document.getElementById(c1.value==='Beige'?'c2-beige':'c2-noir'); if(t) t.checked=true; }
+function setOffer(q){
+  document.getElementById('quantity').value=q;
+  document.getElementById('sum').textContent=TOTALS[q]+' درهم';
+  document.getElementById('c2').classList.toggle('show', q==='2');
+  document.getElementById('color-step-t').textContent = q==='2' ? 'ختاري لون القطعة الأولى' : 'ختاري اللون';
+  if(q!=='2') showErr('e-color2',false);
+}
+document.querySelectorAll('input[name="offer"]').forEach(function(r){r.addEventListener('change',function(){setOffer(r.value);});});
+(function(){ var oc=document.querySelector('input[name="offer"]:checked'); setOffer(oc ? oc.value : '2'); window.addEventListener('pageshow',function(){ var o=document.querySelector('input[name="offer"]:checked'); if(o) setOffer(o.value); }); })();
+document.querySelectorAll('input[name="color2"]').forEach(function(r){r.addEventListener('change',function(){c2Touched=true; showErr('e-color2',false);});});
 /* ---------- beige mode from the ad link (?c=beige) ---------- */
 (function(){
   if(!/[?&]c=beige/i.test(location.search)) return;
   var c=document.getElementById('c-beige'); if(c) c.checked=true;
+  syncColor2();
   setLook('Beige');
 })();
-document.querySelectorAll('input[name="color"]').forEach(function(r){r.addEventListener('change',function(){showErr('e-color',false); setLook(r.value);});});
+document.querySelectorAll('input[name="color"]').forEach(function(r){r.addEventListener('change',function(){showErr('e-color',false); syncColor2(); setLook(r.value);});});
 document.querySelectorAll('input[name="size"]').forEach(function(r){r.addEventListener('change',function(){showErr('e-size',false);});});
 /* play the section video only when it is on screen */
 (function(){
@@ -441,7 +490,7 @@ document.querySelectorAll('input[name="size"]').forEach(function(r){r.addEventLi
   new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ v.play().catch(function(){}); } else { v.pause(); } }); },{threshold:0.4}).observe(v);
 })();
 /* Funnel tracking: AddToCart = visitor started filling the order form (once per visit) */
-(function(){var done=false;function atc(){if(done)return;done=true;try{fbq('track','AddToCart',{content_name:'Gaine',value:199,currency:'MAD'});}catch(e){}}
+(function(){var done=false;function atc(){if(done)return;done=true;try{fbq('track','AddToCart',{content_name:'Gaine',value:TOTALS[curQty()],currency:'MAD'});}catch(e){}}
   var f=document.getElementById('order-form'); if(f){f.addEventListener('focusin',atc);f.addEventListener('change',atc);f.addEventListener('click',atc);}})();
 function showErr(id,on){document.getElementById(id).classList.toggle('show',on);}
 function orderId(){ return 'G' + Date.now().toString(36).toUpperCase() + Math.random().toString(36).slice(2,6).toUpperCase(); }
@@ -510,9 +559,11 @@ document.getElementById('order-form').addEventListener('submit', async function(
   const okAddr = addr.length >= 4;
   const okSize = !!sizeEl;
   const okColor = !!colorEl;
+  const color2El = document.querySelector('input[name="color2"]:checked');
+  const okColor2 = qty!=='2' || !!color2El;
   showErr('e-name',!okName); showErr('e-phone',!okPhone); showErr('e-city',!okCity);
-  showErr('e-address',!okAddr); showErr('e-size',!okSize); showErr('e-color',!okColor);
-  if(!(okName && okPhone && okCity && okAddr && okSize && okColor)){
+  showErr('e-address',!okAddr); showErr('e-size',!okSize); showErr('e-color',!okColor); showErr('e-color2',!okColor2);
+  if(!(okName && okPhone && okCity && okAddr && okSize && okColor && okColor2)){
     document.querySelector('.err.show').scrollIntoView({behavior:'smooth',block:'center'});
     return;
   }
@@ -520,10 +571,11 @@ document.getElementById('order-form').addEventListener('submit', async function(
   btn.disabled = true; btn.textContent = 'كنسجلو الطلب ديالك...';
   const id = orderId();
   const total = TOTALS[qty];
+  const colors = qty==='2' ? colorEl.value + ' + ' + color2El.value : colorEl.value;
   const saved = await saveOrder({
     full_name:name, phone:phone, city:city, address:addr,
-    quantity:'GAINE ' + qty + ' قطعة — Taille ' + sizeEl.value + ' — ' + colorEl.value, price:total, color:'GAINE 199 / Taille ' + sizeEl.value + ' / ' + colorEl.value,
-    product:'GAINE 199', order_id:id, src:srcTag(), ad:utmTag('utm_content'), camp:utmTag('utm_campaign'), fbp:cookieVal('_fbp'), fbc:cookieVal('_fbc'), ua:navigator.userAgent, page_url:location.href
+    quantity:'GAINE ' + qty + (qty==='2' ? ' قطع' : ' قطعة') + ' — Taille ' + sizeEl.value + ' — ' + colors, price:total, color:'GAINE ' + total + ' / Taille ' + sizeEl.value + ' / ' + colors,
+    product:'GAINE ' + total, order_id:id, src:srcTag(), ad:utmTag('utm_content'), camp:utmTag('utm_campaign'), fbp:cookieVal('_fbp'), fbc:cookieVal('_fbc'), ua:navigator.userAgent, page_url:location.href
   });
   var fired=false;
   try{ fired = !!localStorage.getItem('fbPurchase_'+id); }catch(e){}
@@ -534,7 +586,9 @@ document.getElementById('order-form').addEventListener('submit', async function(
   }
   document.getElementById('t-phone').textContent = phone;
   document.getElementById('t-size').textContent = sizeEl.value;
-  document.getElementById('t-color').textContent = colorEl.value==='Beige' ? 'البيج' : 'الأسود';
+  var cn=function(v){ return v==='Beige' ? 'البيج' : 'الأسود'; };
+  document.getElementById('t-offer').textContent = qty==='2' ? '2 قطع' : 'قطعة وحدة';
+  document.getElementById('t-color').textContent = qty==='2' ? cn(colorEl.value) + ' + ' + cn(color2El.value) : cn(colorEl.value);
   document.getElementById('t-total').textContent = total + ' DH';
   document.getElementById('t-id').textContent = id;
   document.getElementById('page').style.display='none';
