@@ -294,8 +294,8 @@ document.getElementById('order-form').addEventListener('submit', async function(
   const offerTxt = qty==='2' ? 'جوج أزواج' : 'زوج واحد';
   const saved = await saveOrder({
     full_name:name, phone:phone, city:city, address:addr,
-    quantity: PRODUCT + ' — ' + offerTxt, price: total, color: PRODUCT + ' ' + total + ' / ' + offerTxt,
-    product: PRODUCT + ' ' + total, order_id:id, src:srcTag(), ad:utmTag('utm_content'), camp:utmTag('utm_campaign'),
+    quantity: qty, price: total, color: '',
+    product: PRODUCT, order_id:id, src:srcTag(), ad:utmTag('utm_content'), camp:utmTag('utm_campaign'),
     fbp:cookieVal('_fbp'), fbc:cookieVal('_fbc'), ua:navigator.userAgent, page_url:location.href
   });
   var fired=false;
