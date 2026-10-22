@@ -100,6 +100,20 @@ details p{color:var(--ink-2);margin-top:8px;font-size:15.5px}
 .final{text-align:center;margin:24px 14px 110px}
 .final p{color:var(--muted);margin:8px 0 14px}
 footer{text-align:center;color:var(--muted);font-size:13px;padding:0 0 100px}
+.media video{display:block;width:100%;height:auto;aspect-ratio:720/496;object-fit:cover;background:#111}
+.wx{display:inline-block;margin:14px 4px 0;background:#151515;color:#fff;font-weight:800;font-size:15px;padding:7px 14px;border-radius:999px}
+.trust{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 0 4px}
+.trust>div{background:#fffbe6;border:1px solid #f3e08a;border-radius:12px;padding:9px 6px;text-align:center;font-size:20px;line-height:1.2}
+.trust b{display:block;font-size:12.5px;margin-top:4px;color:#151515}
+.mats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}
+.mats figure{margin:0;background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden;text-align:center}
+.mats img{display:block;width:100%;height:auto;aspect-ratio:1}
+.mats figcaption{font-weight:800;font-size:13.5px;padding:7px 4px}
+.val{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+.val>div{border-radius:14px;padding:14px 10px;text-align:center;background:#fff;border:1px solid var(--line)}
+.val>div.us{border:2px solid #151515;background:#fffbe6}
+.val b{display:block;font-size:26px;margin:4px 0}
+.val span{display:block;color:var(--muted);font-size:13.5px;font-weight:600}
 .sticky{position:fixed;left:0;right:0;bottom:0;z-index:20;padding:10px 14px calc(10px + env(safe-area-inset-bottom));background:linear-gradient(transparent,rgba(242,246,248,.96) 30%);display:none}
 .sticky .btn{max-width:452px;margin:0 auto}
 #thanks{display:none;padding:28px 16px 60px}
@@ -132,9 +146,10 @@ fbq('track','ViewContent',{content_name:'Sneaker kit',content_type:'product',val
 
   <section class="hero">
     <div class="media" id="hero-media">
-      <img src="ba.webp" alt="صباط أبيض قبل وبعد التنظيف" width="720" height="496">
+      <video src="demo.mp4" poster="ba.webp" autoplay muted loop playsinline preload="auto" width="720" height="496" aria-label="صباط أبيض قبل وبعد التنظيف"></video>
       <span class="tag" style="background:#12a150;color:#fff">بعد ✅</span><span class="tag" style="right:auto;left:12px;background:#e03131;color:#fff">قبل ❌</span>
     </div>
+    <div class="wx">🌧️ الشتا جات… والغيس والطين فكل بلاصة؟</div>
     <h1>الصباط الأبيض صفار ولا توسخ؟ <em>رجعو بحال الجديد فدقايق</em></h1>
     <p class="sub">طقم كامل فعلبة وحدة: رغوة منظفة بريحة الليمون، جوج فرشات وفوطة مايكروفيبر. كتنقي فالدار، بلا ماكينة وبلا ما تخسر الصباط.</p>
     <div class="chips"><span>👟 السبرديلة والرياضي</span><span>⚪ الصمطة البيضا</span><span>🍋 ريحة الليمون</span><span>📦 فعلبة مرتبة</span></div>
@@ -143,6 +158,7 @@ fbq('track','ViewContent',{content_name:'Sneaker kit',content_type:'product',val
   <form class="card" id="order-form" novalidate>
     <h2>دير الطلب ديالك</h2>
     <p class="hint">عمّر المعلومات، وغانعيطو ليك باش نأكدو الطلب 📞</p>
+    <div class="trust"><div>💵<b>الدفع عند الاستلام</b></div><div>📦<b>حل وشوف قبل ما تخلص</b></div><div>🚚<b>التوصيل فابور</b></div></div>
 
     <div class="offers">
       <label class="offer"><input type="radio" name="offer" value="1" checked>
@@ -180,6 +196,23 @@ fbq('track','ViewContent',{content_name:'Sneaker kit',content_type:'product',val
   </section>
 
   <section class="sec">
+    <h2>كيخدم مع كاع الأنواع 👟</h2>
+    <div class="mats">
+      <figure><img src="m1.webp" alt="تنظيف صباط سويد" loading="lazy" width="360" height="360"><figcaption>السويد</figcaption></figure>
+      <figure><img src="m2.webp" alt="تنظيف بوط نوبوك" loading="lazy" width="360" height="360"><figcaption>النوبوك والبوط</figcaption></figure>
+      <figure><img src="m3.webp" alt="تنظيف صباط أبيض" loading="lazy" width="360" height="360"><figcaption>الجلد والقماش</figcaption></figure>
+    </div>
+  </section>
+
+  <section class="sec">
+    <h2>شحال غادي يكلفك؟</h2>
+    <div class="val">
+      <div><span>صباط جديد</span><b>+300 درهم</b><span>كل مرة يتوسخ ولا يصفار</span></div>
+      <div class="us"><span>طقم التنظيف</span><b>169 درهم</b><span>كيكفيك لبزاف ديال المرات، ولصبابط العائلة كاملة</span></div>
+    </div>
+  </section>
+
+  <section class="sec">
     <h2>كيفاش كتستعملو؟</h2>
     <div class="steps">
       <div class="step"><div><b>حيد الغبرة</b><span>دوز الفرشة ناشفة على الصباط.</span></div></div>
@@ -206,7 +239,7 @@ fbq('track','ViewContent',{content_name:'Sneaker kit',content_type:'product',val
   </section>
 
   <section class="final" id="final-cta">
-    <h2>صباطك يستاهل يبقى ديما جديد 👟</h2>
+    <h2>الشتا طويلة… خلي صباطك ديما جديد 👟</h2>
     <p>الطقم الكامل ب 169 درهم • التوصيل مجاني • الدفع عند الاستلام</p>
     <button class="btn" type="button" onclick="goToForm()">اطلب دابا</button>
   </section>
