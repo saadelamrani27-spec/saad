@@ -151,6 +151,11 @@ fbq('track','ViewContent',{content_name:'Bunion splint',content_type:'product',v
         <span class="txt"><span class="t1">جهاز الصبع الكبير</span><span class="deal">🚚 التوصيل فابور</span><span class="t2">مفصل كيتحرك + مخدة ناعمة + شريط كيتعدل</span></span>
         <span class="pr">169 <small>درهم</small></span>
       </label>
+      <label class="offer"><input type="radio" name="offer" value="2">
+        <span class="dot"></span>
+        <span class="txt"><span class="t1">جوج أجهزة • للرجلين بجوج</span><span class="deal">💰 وفري 89 درهم • التوصيل فابور</span><span class="t2">واحد لكل رجل</span></span>
+        <span class="pr">249 <small>درهم</small></span>
+      </label>
     </div>
     <input type="hidden" id="quantity" value="1">
 
@@ -217,7 +222,7 @@ fbq('track','ViewContent',{content_name:'Bunion splint',content_type:'product',v
 
   <section class="final" id="final-cta">
     <h2>خلي صبع رجلك فبلاصتو وانتي مرتاحة فالدار 👣</h2>
-    <p>جهاز الصبع الكبير ب 169 درهم • التوصيل مجاني • الدفع عند الاستلام</p>
+    <p>جهاز واحد ب 169 درهم • جوج ب 249 • التوصيل مجاني • الدفع عند الاستلام</p>
     <button class="btn" type="button" onclick="goToForm()">اطلبي دابا</button>
   </section>
   <footer>© 2026</footer>
@@ -242,8 +247,12 @@ fbq('track','ViewContent',{content_name:'Bunion splint',content_type:'product',v
 <script>
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx8Azpl1MMJ8SBZhAYPoQ3xni-1ojmcwKKIaxfRkJ5foqGNYK6xW2AgTBpVtICS0bpbJA/exec";
 const PRODUCT = 'جهاز الصبع الكبير';
-const TOTALS = {1:169};
-function curQty(){ return '1'; }
+const TOTALS = {1:169, 2:249};
+const OFFER_TXT = {1:'جهاز واحد', 2:'جوج أجهزة (للرجلين)'};
+function curQty(){ var o=document.querySelector('input[name="offer"]:checked'); return o ? o.value : '1'; }
+function setOffer(q){ document.getElementById('quantity').value=q; document.getElementById('sum').textContent=TOTALS[q]+' درهم'; }
+document.querySelectorAll('input[name="offer"]').forEach(function(r){ r.addEventListener('change',function(){ setOffer(r.value); }); });
+window.addEventListener('pageshow',function(){ setOffer(curQty()); });
 
 let checkoutTracked = false;
 function goToForm(){
@@ -304,7 +313,7 @@ document.getElementById('order-form').addEventListener('submit', async function(
   btn.disabled = true; btn.textContent = 'كنسجلو الطلب ديالك...';
   const id = orderId();
   const total = TOTALS[qty];
-  const offerTxt = 'جهاز الصبع الكبير';
+  const offerTxt = OFFER_TXT[qty];
   const saved = await saveOrder({
     full_name:name, phone:phone, city:city, address:addr,
     quantity: PRODUCT + ' ' + qty, price: total, color: '',
