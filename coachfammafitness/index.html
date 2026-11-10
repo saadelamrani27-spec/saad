@@ -194,6 +194,25 @@ footer{border-top:1px solid var(--line)}
   .cta-row .btn{flex:1 1 100%}
   .brand-name b{font-size:18px}
 }
+
+/* message form */
+.msg-dlg{width:min(520px,calc(100vw - 24px));max-height:calc(100dvh - 24px);margin:auto;padding:0;border:1px solid var(--line);background:var(--surface);color:var(--fg);overflow:auto}
+.msg-dlg::backdrop{background:rgba(0,0,0,.74)}
+.msg-in{display:flex;flex-direction:column;gap:16px;padding:30px clamp(18px,4vw,30px) 26px;position:relative;margin:0}
+.msg-in[hidden]{display:none}
+.msg-in h2{font-size:clamp(28px,5vw,36px)}
+.msg-x{position:absolute;top:8px;right:8px;width:44px;height:44px;border:0;background:none;color:var(--muted);font-size:28px;line-height:1;cursor:pointer}
+.msg-x:hover{color:var(--fg)}
+.fld{display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:700;letter-spacing:.04em;color:var(--muted)}
+.fld input,.fld select,.fld textarea{font-family:var(--font);font-size:16px;font-weight:500;letter-spacing:0;color:var(--fg);background:var(--ink);border:1px solid var(--line);border-radius:0;padding:12px 14px;min-height:50px;width:100%}
+.fld textarea{min-height:96px;resize:vertical}
+.fld input:focus,.fld select:focus,.fld textarea:focus{outline:2px solid var(--flag);outline-offset:0;border-color:transparent}
+.msg-note{margin:0;font-size:13.5px;color:var(--muted)}
+.msg-err{margin:0;font-size:14px;font-weight:600;color:#FF8A5C}
+.msg-err:empty{display:none}
+.msg-ok .msg-note{font-size:16px;color:var(--fg)}
+.msg-ok .msg-note b{color:var(--flag)}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
 </style>
 </head>
 <body>
@@ -233,7 +252,7 @@ footer{border-top:1px solid var(--line)}
         <h1>Atteins ton <span class="hl">sommet.</span></h1>
         <p class="lead">Un <strong>programme d'entraînement</strong> et un <strong>programme de nutrition</strong> faits pour toi, avec un <strong>suivi direct sur WhatsApp</strong>. Où que tu sois.</p>
         <div class="cta-row">
-          <a class="btn btn-flag" href="#contact" data-wa="Bonjour Coach Famma, je veux commencer le coaching en ligne."><svg aria-hidden="true"><use href="#chat"></use></svg>Commencer sur WhatsApp</a>
+          <a class="btn btn-flag" href="#contact" data-wa="Bonjour Coach Famma, je veux commencer le coaching en ligne."><svg aria-hidden="true"><use href="#chat"></use></svg>Commencer maintenant</a>
           <a class="btn btn-ghost" href="#tarifs">Voir les tarifs</a>
         </div>
         <ul class="hero-points">
@@ -376,8 +395,8 @@ footer{border-top:1px solid var(--line)}
     <div class="wrap final-in">
       <svg class="final-mark" viewBox="16 6 188 172" aria-hidden="true"><use href="#mark"></use></svg>
       <h2>Prêt(e) à commencer&nbsp;?</h2>
-      <p>Écris-moi sur WhatsApp avec ton objectif. Je te réponds et on choisit ta formule ensemble.</p>
-      <a class="btn btn-flag btn-lg" href="#contact" data-wa="Bonjour Coach Famma, je veux commencer le coaching en ligne."><svg aria-hidden="true"><use href="#chat"></use></svg>Écrire sur WhatsApp</a>
+      <p>Envoie-moi ton objectif en 30 secondes. Je te réponds sur WhatsApp et on choisit ta formule ensemble.</p>
+      <a class="btn btn-flag btn-lg" href="#contact" data-wa="Bonjour Coach Famma, je veux commencer le coaching en ligne."><svg aria-hidden="true"><use href="#chat"></use></svg>Envoyer un message</a>
     </div>
   </section>
 </main>
@@ -392,19 +411,139 @@ footer{border-top:1px solid var(--line)}
   </div>
 </footer>
 
-<a class="wa-float" href="#contact" data-wa="Bonjour Coach Famma, je veux commencer le coaching en ligne." aria-label="Écrire à Coach Famma sur WhatsApp"><svg aria-hidden="true"><use href="#chat"></use></svg></a>
+<a class="wa-float" href="#contact" data-wa="Bonjour Coach Famma, je veux commencer le coaching en ligne." aria-label="Envoyer un message à Coach Famma"><svg aria-hidden="true"><use href="#chat"></use></svg></a>
+
+
+<dialog class="msg-dlg" id="msg" aria-labelledby="msg-title">
+  <form class="msg-in" id="msg-form" novalidate>
+    <button type="button" class="msg-x" data-close aria-label="Fermer">×</button>
+    <p class="eyebrow">Coaching en ligne</p>
+    <h2 id="msg-title">Envoie ton message</h2>
+    <label class="fld">Formule
+      <select name="formule">
+        <option value="">Pas encore choisie / juste une question</option>
+        <option value="1">1 mois – 1200 DH</option>
+        <option value="2">2 mois – 1800 DH</option>
+        <option value="3">3 mois – 2500 DH</option>
+        <option value="6">6 mois – 3500 DH</option>
+      </select>
+    </label>
+    <label class="fld">Prénom
+      <input name="prenom" autocomplete="given-name" maxlength="60" required>
+    </label>
+    <label class="fld">Numéro WhatsApp
+      <input name="tel" type="tel" inputmode="tel" autocomplete="tel" placeholder="06 00 00 00 00" maxlength="20" required>
+    </label>
+    <label class="fld">Ton objectif ou ta question (optionnel)
+      <textarea name="texte" maxlength="1000" placeholder="Ex. perdre du ventre, prendre du muscle, une question sur les formules…"></textarea>
+    </label>
+    <input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+    <p class="msg-err" id="msg-err" role="alert"></p>
+    <button class="btn btn-flag" type="submit" id="msg-send">Envoyer mon message</button>
+    <p class="msg-note">Coach Famma te répond sur WhatsApp.</p>
+  </form>
+  <div class="msg-in msg-ok" id="msg-ok" hidden>
+    <button type="button" class="msg-x" data-close aria-label="Fermer">×</button>
+    <p class="eyebrow">Message envoyé</p>
+    <h2>Merci <span id="ok-name"></span>&nbsp;!</h2>
+    <p class="msg-note">Coach Famma te répond sur WhatsApp très vite. Ta référence&nbsp;: <b id="ok-ref"></b></p>
+    <a class="btn btn-ghost" id="ok-wa" href="#" target="_blank" rel="noopener">Écrire aussi sur WhatsApp</a>
+    <button class="btn btn-flag" type="button" data-close>Fermer</button>
+  </div>
+</dialog>
 
 <script>
+
   // Numéro WhatsApp au format international, sans + ni espaces (ex. 2126XXXXXXXX).
   const WHATSAPP = '212644105001';
-  if (WHATSAPP) {
+  // Backend Google Apps Script : chaque message envoyé est ajouté à la feuille « Coach Famma — Messages ».
+  const BACKEND = 'https://script.google.com/macros/s/AKfycbw7eP6DTliUMIyYeY9_8Ejd0uF1-4-MSnSZP7CV2pwTYMhq8Y6Ccxb5D0OVhzJ80i-s/exec';
+  (function () {
+    const dlg = document.getElementById('msg');
+    const form = document.getElementById('msg-form');
+    const ok = document.getElementById('msg-ok');
+    const err = document.getElementById('msg-err');
+    const send = document.getElementById('msg-send');
+    const f = function (n) { return form.elements.namedItem(n); };
+    const PRICES = { '1': '1200', '2': '1800', '3': '2500', '6': '3500' };
+    const qs = new URLSearchParams(location.search);
+    const mem = function (k, v) { try { if (v !== undefined) sessionStorage.setItem(k, v); return sessionStorage.getItem(k); } catch (e) { return v === undefined ? null : v; } };
+    let src = qs.get('utm_source') || (qs.get('fbclid') ? 'meta' : '');
+    if (!src) { try { src = document.referrer ? new URL(document.referrer).hostname : 'direct'; } catch (e) { src = 'direct'; } }
+    if (qs.get('utm_source') || qs.get('fbclid') || !mem('cf_src')) { mem('cf_src', src); mem('cf_camp', qs.get('utm_campaign') || ''); mem('cf_ad', qs.get('utm_content') || ''); }
+    const device = /Mobi|Android|iPhone/i.test(navigator.userAgent) ? 'Mobile' : 'Ordinateur';
+    const place = function (a) {
+      if (a.classList.contains('wa-float')) return 'Bouton flottant';
+      if (a.closest('header')) return 'Menu';
+      const s = a.closest('section[id]');
+      return ({ top: 'Haut de page', resultats: 'Résultats', tarifs: 'Tarifs', contact: 'Contact' })[s && s.id] || 'Page';
+    };
+    const waLink = function (text) { return 'https://wa.me/' + WHATSAPP + '?text=' + encodeURIComponent(text); };
+    let btn = 'Page';
+
+    const open = function () {
+      err.textContent = '';
+      form.hidden = false;
+      ok.hidden = true;
+      if (typeof dlg.showModal === 'function') { if (!dlg.open) dlg.showModal(); } else { dlg.setAttribute('open', ''); }
+      setTimeout(function () { f('prenom').focus(); }, 60);
+    };
+    const close = function () { if (typeof dlg.close === 'function') dlg.close(); else dlg.removeAttribute('open'); };
+
     document.querySelectorAll('[data-wa]').forEach(function (a) {
-      a.href = 'https://wa.me/' + WHATSAPP + '?text=' + encodeURIComponent(a.dataset.wa);
-      a.target = '_blank';
-      a.rel = 'noopener';
-      a.addEventListener('click', function () { if (window.fbq) fbq('track', 'Contact', { content_name: a.dataset.wa }); });
+      const m = a.dataset.wa.match(/formule (\d+) mois/);
+      a.setAttribute('href', '#contact');
+      a.removeAttribute('target');
+      a.addEventListener('click', function (ev) {
+        ev.preventDefault();
+        btn = place(a);
+        f('formule').value = m ? m[1] : '';
+        open();
+      });
     });
-  }
+    dlg.querySelectorAll('[data-close]').forEach(function (b) { b.addEventListener('click', close); });
+    dlg.addEventListener('click', function (ev) { if (ev.target === dlg) close(); });
+
+    form.addEventListener('submit', function (ev) {
+      ev.preventDefault();
+      const name = f('prenom').value.trim();
+      const phone = f('tel').value.trim();
+      if (!name) { err.textContent = 'Écris ton prénom.'; f('prenom').focus(); return; }
+      if (phone.replace(/\D/g, '').length < 9) { err.textContent = 'Écris un numéro WhatsApp valide.'; f('tel').focus(); return; }
+      const key = f('formule').value;
+      const offer = key ? key + ' mois' : 'Question / info';
+      const price = PRICES[key] || '';
+      const ref = 'CF-' + Math.floor(1000 + Math.random() * 9000);
+      const waText = 'Bonjour Coach Famma, je suis ' + name + '. ' + (key ? 'Je veux la formule ' + offer + ' (' + price + ' DH).' : "J'ai une question sur le coaching.") + ' (Réf ' + ref + ')';
+      const done = function () {
+        if (window.fbq) fbq('track', 'Contact', { content_name: offer });
+        document.getElementById('ok-name').textContent = name;
+        document.getElementById('ok-ref').textContent = ref;
+        document.getElementById('ok-wa').href = waLink(waText);
+        form.reset();
+        form.hidden = true;
+        ok.hidden = false;
+      };
+      if (!/^https?:\/\//.test(BACKEND)) { window.open(waLink(waText), '_blank'); done(); return; }
+      const data = new URLSearchParams({
+        type: 'coach_message', ref: ref, name: name, phone: phone, offer: offer, price: price,
+        message: f('texte').value.trim(), btn: btn, device: device,
+        src: mem('cf_src') || src, camp: mem('cf_camp') || '', ad: mem('cf_ad') || '', website: f('website').value
+      });
+      send.disabled = true;
+      send.textContent = 'Envoi…';
+      fetch(BACKEND, { method: 'POST', body: data, mode: 'no-cors' })
+        .then(done)
+        .catch(function () {
+          err.innerHTML = '';
+          err.append('Envoi impossible. Vérifie ta connexion ou ');
+          const a = document.createElement('a');
+          a.href = waLink(waText); a.target = '_blank'; a.rel = 'noopener'; a.textContent = 'écris directement sur WhatsApp';
+          err.append(a, '.');
+        })
+        .finally(function () { send.disabled = false; send.textContent = 'Envoyer mon message'; });
+    });
+  })();
   document.getElementById('year').textContent = new Date().getFullYear();
 </script>
 </body>
