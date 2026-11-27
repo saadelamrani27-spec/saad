@@ -650,9 +650,9 @@ html[dir="ltr"] .dlg h2{font-family:var(--f-disp);text-transform:uppercase;font-
 
     const msg = lang === 'fr'
       ? 'Bonjour, je suis ' + prenom + '. ' + (type === 'question' ? "J'ai une question sur l'inspection avant achat." : 'Je veux faire inspecter une voiture avant de l\'acheter.') +
-        (voiture ? '\nVoiture : ' + voiture : '') + (lieu ? '\nLieu : ' + lieu : '') + (question ? '\n' + question : '') + '\n(Réf ' + ref + ')'
+        '\nTéléphone : ' + tel + (voiture ? '\nVoiture : ' + voiture : '') + (lieu ? '\nLieu : ' + lieu : '') + (question ? '\n' + question : '') + '\n(Réf ' + ref + ')'
       : 'السلام، أنا ' + prenom + '. ' + (type === 'question' ? 'عندي سؤال على الفحص ديال الطوموبيل.' : 'بغيت نفحص طوموبيل قبل ما نشريها.') +
-        (voiture ? '\nالطوموبيل: ' + voiture : '') + (lieu ? '\nفين كاينة: ' + lieu : '') + (question ? '\n' + question : '') + '\n(Réf ' + ref + ')';
+        '\nالرقم: ' + tel + (voiture ? '\nالطوموبيل: ' + voiture : '') + (lieu ? '\nفين كاينة: ' + lieu : '') + (question ? '\n' + question : '') + '\n(Réf ' + ref + ')';
     const link = 'https://wa.me/' + WHATSAPP + '?text=' + encodeURIComponent(msg);
     okLink.href = link;
     form.hidden = true;
