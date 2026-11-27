@@ -459,8 +459,24 @@ html[dir="ltr"] .dlg h2{font-family:var(--f-disp);text-transform:uppercase;font-
         </div>
         <div class="row2">
           <div class="field">
-            <label for="f-voiture" data-t="f_car">الطوموبيل</label>
-            <input id="f-voiture" name="voiture" type="text" maxlength="40" data-tp="f_car_ph" placeholder="مثلا: داسيا لوگان 2017">
+            <label for="f-marque" data-t="f_brand">الماركة</label>
+            <select id="f-marque" name="marque" required dir="ltr">
+              <option value="" data-t="f_brand_ph">اختار الماركة</option>
+              <option>Alfa Romeo</option><option>Audi</option><option>BMW</option><option>BYD</option><option>Changan</option><option>Chery</option><option>Chevrolet</option><option>Chrysler</option><option>Citroën</option><option>Cupra</option><option>Dacia</option><option>Daewoo</option><option>Daihatsu</option><option>Dodge</option><option>DS</option><option>Fiat</option><option>Ford</option><option>Geely</option><option>Great Wall</option><option>Haval</option><option>Honda</option><option>Hyundai</option><option>Infiniti</option><option>Isuzu</option><option>Iveco</option><option>Jaguar</option><option>Jeep</option><option>Jetour</option><option>Kia</option><option>Lada</option><option>Land Rover (Range Rover)</option><option>Lexus</option><option>Mahindra</option><option>Maserati</option><option>Mazda</option><option>Mercedes-Benz</option><option>MG</option><option>Mini</option><option>Mitsubishi</option><option>Nissan</option><option>Opel</option><option>Peugeot</option><option>Porsche</option><option>Renault</option><option>Seat</option><option>Skoda</option><option>Smart</option><option>SsangYong</option><option>Subaru</option><option>Suzuki</option><option>Tata</option><option>Tesla</option><option>Toyota</option><option>Volkswagen</option><option>Volvo</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="f-annee" data-t="f_year">العام</label>
+            <select id="f-annee" name="annee" dir="ltr">
+              <option value="" data-t="f_year_ph">اختار العام</option>
+              <option>2026</option><option>2025</option><option>2024</option><option>2023</option><option>2022</option><option>2021</option><option>2020</option><option>2019</option><option>2018</option><option>2017</option><option>2016</option><option>2015</option><option>2014</option><option>2013</option><option>2012</option><option>2011</option><option>2010</option><option>2009</option><option>2008</option><option>2007</option><option>2006</option><option>2005</option><option>2004</option><option>2003</option><option>2002</option><option>2001</option><option>2000</option><option>1999</option><option>1998</option><option>1997</option><option>1996</option><option>1995</option><option>1994</option><option>1993</option><option>1992</option><option>1991</option><option>1990</option>
+            </select>
+          </div>
+        </div>
+        <div class="row2">
+          <div class="field">
+            <label for="f-modele" data-t="f_model">الموديل</label>
+            <input id="f-modele" name="modele" type="text" maxlength="30" data-tp="f_model_ph" placeholder="مثلا: Logan">
           </div>
           <div class="field">
             <label for="f-lieu" data-t="f_place">فين كاينة؟</label>
@@ -533,14 +549,16 @@ html[dir="ltr"] .dlg h2{font-family:var(--f-disp);text-transform:uppercase;font-
     m_title: 'Envoyez-nous votre demande', m_sub: "Remplissez ces champs, puis WhatsApp s'ouvre pour nous envoyer le message.",
     f_type: 'Votre demande', f_type1: 'Faire inspecter une voiture', f_type2: 'Juste une question',
     f_name: 'Prénom', f_tel: 'Votre numéro WhatsApp', f_car: 'La voiture', f_place: 'Où est-elle ?', f_msg: 'Question ou remarque (facultatif)',
-    f_car_ph: 'ex. Dacia Logan 2017', f_place_ph: 'ex. Salé, Tabriquet',
+    f_place_ph: 'ex. Salé, Tabriquet',
+    f_brand: 'Marque', f_brand_ph: 'Choisir la marque', f_year: 'Année', f_year_ph: "Choisir l'année",
+    f_model: 'Modèle', f_model_ph: 'ex. Logan', e_brand: 'Choisissez la marque de la voiture.',
     f_send: 'Envoyer sur WhatsApp',
     ok1: 'Merci ! Votre demande est prête.', ok2: "Si WhatsApp ne s'est pas ouvert :", ok_btn: 'Ouvrir WhatsApp',
     alt_report: "Rapport d'inspection",
     e_name: 'Indiquez votre prénom.', e_tel: 'Entrez votre numéro WhatsApp à 10 chiffres, par exemple 0612345678.',
     badge: 'Exemple', title: 'Inspection Auto · Rabat Salé'
   };
-  const AR = { e_name: 'كتب سميتك عافاك.', e_tel: 'كتب رقم الواتساب ديالك: 10 ديال الأرقام، مثلا 0612345678.', badge: 'مثال', title: document.title };
+  const AR = { e_brand: 'اختار الماركة ديال الطوموبيل.', e_name: 'كتب سميتك عافاك.', e_tel: 'كتب رقم الواتساب ديالك: 10 ديال الأرقام، مثلا 0612345678.', badge: 'مثال', title: document.title };
 
   // Le texte darija est déjà dans la page : on le garde pour pouvoir revenir.
   document.querySelectorAll('[data-t]').forEach(function (el) { AR[el.dataset.t] = el.innerHTML; });
@@ -594,7 +612,7 @@ html[dir="ltr"] .dlg h2{font-family:var(--f-disp);text-transform:uppercase;font-
   // Seulement des lettres (arabe ou latin), des chiffres et la ponctuation utile : pas de / * + etc.
   const CLEAN = {
     prenom: /[^\p{L}\p{M}\s'’-]/gu,
-    voiture: /[^\p{L}\p{M}\p{N}\s.-]/gu,
+    modele: /[^\p{L}\p{M}\p{N}\s.-]/gu,
     lieu: /[^\p{L}\p{M}\p{N}\s.,،'’-]/gu,
     texte: /[^\p{L}\p{M}\p{N}\s.,،'’?؟!:-]/gu
   };
@@ -638,7 +656,9 @@ html[dir="ltr"] .dlg h2{font-family:var(--f-disp);text-transform:uppercase;font-
     const tel = f('tel').value.replace(/\D/g, '');
     if (!prenom) { err.textContent = T('e_name'); f('prenom').focus(); return; }
     if (!/^0[5-7]\d{8}$/.test(tel)) { err.textContent = T('e_tel'); f('tel').focus(); return; }
-    const voiture = tidy('voiture');
+    const marque = f('marque').value;
+    if (!marque) { err.textContent = T('e_brand'); f('marque').focus(); return; }
+    const voiture = [marque, tidy('modele'), f('annee').value].filter(Boolean).join(' ');
     const lieu = tidy('lieu');
     const question = tidy('texte');
     const type = 'inspection';
