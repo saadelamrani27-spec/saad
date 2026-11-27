@@ -447,13 +447,6 @@ html[dir="ltr"] .dlg h2{font-family:var(--f-disp);text-transform:uppercase;font-
     </div>
     <form id="msg-form" novalidate>
       <div style="display:flex;flex-direction:column;gap:14px">
-        <div class="field">
-          <label for="f-formule" data-t="f_type">شنو بغيتي؟</label>
-          <select id="f-formule" name="formule">
-            <option value="inspection" data-t="f_type1">نفحص طوموبيل قبل ما نشريها</option>
-            <option value="question" data-t="f_type2">عندي غير سؤال</option>
-          </select>
-        </div>
         <div class="row2">
           <div class="field">
             <label for="f-prenom" data-t="f_name">سميتك</label>
@@ -461,7 +454,7 @@ html[dir="ltr"] .dlg h2{font-family:var(--f-disp);text-transform:uppercase;font-
           </div>
           <div class="field">
             <label for="f-tel" data-t="f_tel">رقم الواتساب ديالك</label>
-            <input id="f-tel" name="tel" type="tel" inputmode="tel" autocomplete="tel" placeholder="06 12 34 56 78" dir="ltr" required>
+            <input id="f-tel" name="tel" type="tel" inputmode="numeric" autocomplete="tel" maxlength="10" pattern="0[5-7][0-9]{8}" placeholder="0612345678" dir="ltr" required>
           </div>
         </div>
         <div class="row2">
@@ -544,10 +537,10 @@ html[dir="ltr"] .dlg h2{font-family:var(--f-disp);text-transform:uppercase;font-
     f_send: 'Envoyer sur WhatsApp',
     ok1: 'Merci ! Votre demande est prête.', ok2: "Si WhatsApp ne s'est pas ouvert :", ok_btn: 'Ouvrir WhatsApp',
     alt_report: "Rapport d'inspection",
-    e_name: 'Indiquez votre prénom.', e_tel: 'Entrez un numéro WhatsApp valide, par exemple 06 12 34 56 78.',
+    e_name: 'Indiquez votre prénom.', e_tel: 'Entrez votre numéro WhatsApp à 10 chiffres, par exemple 0612345678.',
     badge: 'Exemple', title: 'Inspection Auto · Rabat Salé'
   };
-  const AR = { e_name: 'كتب سميتك عافاك.', e_tel: 'كتب رقم الواتساب صحيح، مثلا 06 12 34 56 78.', badge: 'مثال', title: document.title };
+  const AR = { e_name: 'كتب سميتك عافاك.', e_tel: 'كتب رقم الواتساب ديالك: 10 ديال الأرقام، مثلا 0612345678.', badge: 'مثال', title: document.title };
 
   // Le texte darija est déjà dans la page : on le garde pour pouvoir revenir.
   document.querySelectorAll('[data-t]').forEach(function (el) { AR[el.dataset.t] = el.innerHTML; });
@@ -598,6 +591,11 @@ html[dir="ltr"] .dlg h2{font-family:var(--f-disp);text-transform:uppercase;font-
   const err = document.getElementById('msg-err');
   const f = function (n) { return form.elements.namedItem(n); };
   let btn = 'Page';
+  // Numéro marocain : 10 chiffres maximum, rien d'autre.
+  f('tel').addEventListener('input', function () {
+    const v = this.value.replace(/\D/g, '').slice(0, 10);
+    if (v !== this.value) this.value = v;
+  });
 
   function openMsg(place) {
     btn = place || 'Page';
@@ -623,14 +621,13 @@ html[dir="ltr"] .dlg h2{font-family:var(--f-disp);text-transform:uppercase;font-
     err.textContent = '';
     if (f('website').value) return;
     const prenom = f('prenom').value.trim();
-    const tel = f('tel').value.trim();
-    const digits = tel.replace(/\D/g, '');
+    const tel = f('tel').value.replace(/\D/g, '');
     if (!prenom) { err.textContent = T('e_name'); f('prenom').focus(); return; }
-    if (!/^(?:00212|212|0)?[5-7]\d{8}$/.test(digits)) { err.textContent = T('e_tel'); f('tel').focus(); return; }
+    if (!/^0[5-7]\d{8}$/.test(tel)) { err.textContent = T('e_tel'); f('tel').focus(); return; }
     const voiture = f('voiture').value.trim();
     const lieu = f('lieu').value.trim();
     const question = f('texte').value.trim();
-    const type = f('formule').value;
+    const type = 'inspection';
     const texte = [
       voiture ? 'Voiture : ' + voiture : '',
       lieu ? 'Lieu : ' + lieu : '',
