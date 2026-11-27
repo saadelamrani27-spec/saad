@@ -203,6 +203,7 @@ html[dir="ltr"] .dlg h2{font-family:var(--f-disp);text-transform:uppercase;font-
 .field label{font-weight:800;font-size:15px}
 .field input,.field select,.field textarea{font:600 16px/1.4 inherit;font-family:inherit;color:var(--ink);background:#FFFFFF;border:1.5px solid var(--line);border-radius:12px;padding:11px 13px;width:100%}
 .field textarea{min-height:76px;resize:vertical}
+.field select:disabled{opacity:.55;cursor:not-allowed}
 .field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--accent)}
 .row2{display:grid;gap:14px}
 @media (min-width:520px){.row2{grid-template-columns:1fr 1fr}}
@@ -476,7 +477,9 @@ html[dir="ltr"] .dlg h2{font-family:var(--f-disp);text-transform:uppercase;font-
         <div class="row2">
           <div class="field">
             <label for="f-modele" data-t="f_model">الموديل</label>
-            <input id="f-modele" name="modele" type="text" maxlength="30" data-tp="f_model_ph" placeholder="مثلا: Logan">
+            <select id="f-modele" name="modele" required dir="ltr" disabled>
+              <option value="">اختار الماركة الأولى</option>
+            </select>
           </div>
           <div class="field">
             <label for="f-lieu" data-t="f_place">فين كاينة؟</label>
@@ -551,14 +554,15 @@ html[dir="ltr"] .dlg h2{font-family:var(--f-disp);text-transform:uppercase;font-
     f_name: 'Prénom', f_tel: 'Votre numéro WhatsApp', f_car: 'La voiture', f_place: 'Où est-elle ?', f_msg: 'Question ou remarque (facultatif)',
     f_place_ph: 'ex. Salé, Tabriquet',
     f_brand: 'Marque', f_brand_ph: 'Choisir la marque', f_year: 'Année', f_year_ph: "Choisir l'année",
-    f_model: 'Modèle', f_model_ph: 'ex. Logan', e_brand: 'Choisissez la marque de la voiture.',
+    f_model: 'Modèle', f_model_ph: "Choisissez d'abord la marque", f_model_pick: 'Choisir le modèle', f_model_other: 'Autre modèle',
+    e_brand: 'Choisissez la marque de la voiture.', e_model: 'Choisissez le modèle.',
     f_send: 'Envoyer sur WhatsApp',
     ok1: 'Merci ! Votre demande est prête.', ok2: "Si WhatsApp ne s'est pas ouvert :", ok_btn: 'Ouvrir WhatsApp',
     alt_report: "Rapport d'inspection",
     e_name: 'Indiquez votre prénom.', e_tel: 'Entrez votre numéro WhatsApp à 10 chiffres, par exemple 0612345678.',
     badge: 'Exemple', title: 'Inspection Auto · Rabat Salé'
   };
-  const AR = { e_brand: 'اختار الماركة ديال الطوموبيل.', e_name: 'كتب سميتك عافاك.', e_tel: 'كتب رقم الواتساب ديالك: 10 ديال الأرقام، مثلا 0612345678.', badge: 'مثال', title: document.title };
+  const AR = { f_model_ph: 'اختار الماركة الأولى', f_model_pick: 'اختار الموديل', f_model_other: 'موديل آخر', e_model: 'اختار الموديل.', e_brand: 'اختار الماركة ديال الطوموبيل.', e_name: 'كتب سميتك عافاك.', e_tel: 'كتب رقم الواتساب ديالك: 10 ديال الأرقام، مثلا 0612345678.', badge: 'مثال', title: document.title };
 
   // Le texte darija est déjà dans la page : on le garde pour pouvoir revenir.
   document.querySelectorAll('[data-t]').forEach(function (el) { AR[el.dataset.t] = el.innerHTML; });
@@ -576,6 +580,78 @@ html[dir="ltr"] .dlg h2{font-family:var(--f-disp);text-transform:uppercase;font-
   let lang = 'ar';
   const T = function (k) { return (lang === 'fr' ? FR : AR)[k] || ''; };
 
+  // Modèles par marque (voitures vendues au Maroc depuis 2000). « Autre modèle » reste possible.
+  const MODELS = {
+    'Alfa Romeo': ['147', '156', '159', 'Giulietta', 'MiTo', 'Giulia', 'Stelvio', 'Tonale'],
+    'Audi': ['A1', 'A3', 'A4', 'A5', 'A6', 'A7', 'A8', 'Q2', 'Q3', 'Q5', 'Q7', 'Q8', 'TT', 'e-tron'],
+    'BMW': ['Série 1', 'Série 2', 'Série 3', 'Série 4', 'Série 5', 'Série 6', 'Série 7', 'X1', 'X2', 'X3', 'X4', 'X5', 'X6', 'X7', 'i3', 'iX'],
+    'BYD': ['F3', 'Atto 3', 'Dolphin', 'Seal', 'Song Plus', 'Tang', 'Han'],
+    'Changan': ['Alsvin', 'CS35', 'CS55', 'CS75', 'Uni-T', 'Uni-K'],
+    'Chery': ['QQ', 'Arrizo 5', 'Tiggo 2', 'Tiggo 3', 'Tiggo 4', 'Tiggo 4 Pro', 'Tiggo 7', 'Tiggo 7 Pro', 'Tiggo 8', 'Tiggo 8 Pro'],
+    'Chevrolet': ['Spark', 'Aveo', 'Sail', 'Optra', 'Cruze', 'Malibu', 'Trax', 'Captiva', 'Tahoe'],
+    'Chrysler': ['PT Cruiser', 'Sebring', '300C', 'Voyager'],
+    'Citroën': ['Saxo', 'C1', 'C2', 'C3', 'C3 Aircross', 'C4', 'C4 Cactus', 'C4 Picasso', 'C5', 'C5 Aircross', 'C-Elysée', 'Xsara', 'Xsara Picasso', 'Berlingo', 'Nemo', 'Jumpy', 'Jumper'],
+    'Cupra': ['Leon', 'Formentor', 'Ateca', 'Born'],
+    'Dacia': ['Logan', 'Sandero', 'Sandero Stepway', 'Duster', 'Lodgy', 'Dokker', 'Jogger', 'Spring', 'Bigster'],
+    'Daewoo': ['Matiz', 'Kalos', 'Lanos', 'Cielo', 'Nubira'],
+    'Daihatsu': ['Sirion', 'Charade', 'Terios'],
+    'Dodge': ['Caliber', 'Journey', 'Nitro', 'Durango', 'Ram'],
+    'DS': ['DS 3', 'DS 4', 'DS 5', 'DS 7', 'DS 9'],
+    'Fiat': ['Uno', 'Palio', 'Siena', 'Albea', 'Punto', 'Grande Punto', 'Panda', '500', '500X', 'Tipo', 'Linea', 'Bravo', 'Doblo', 'Fiorino', 'Ducato', 'Fullback'],
+    'Ford': ['Ka', 'Fiesta', 'Fusion', 'Focus', 'Mondeo', 'C-Max', 'S-Max', 'Galaxy', 'EcoSport', 'Puma', 'Kuga', 'Explorer', 'Mustang', 'Ranger', 'Transit Connect', 'Transit'],
+    'Geely': ['Emgrand', 'Coolray', 'Geometry C', 'Atlas', 'Okavango', 'Tugella', 'Monjaro'],
+    'Great Wall': ['Wingle', 'Steed', 'Poer', 'Hover'],
+    'Haval': ['Jolion', 'H2', 'H6', 'H9', 'Dargo'],
+    'Honda': ['Jazz', 'City', 'Civic', 'Accord', 'HR-V', 'CR-V'],
+    'Hyundai': ['Atos', 'i10', 'Getz', 'i20', 'Accent', 'i30', 'Elantra', 'Ioniq', 'Bayon', 'Kona', 'Creta', 'Tucson', 'Santa Fe', 'H1', 'H100'],
+    'Infiniti': ['Q30', 'Q50', 'QX50', 'QX70'],
+    'Isuzu': ['D-Max', 'MU-X'],
+    'Iveco': ['Daily'],
+    'Jaguar': ['X-Type', 'XE', 'XF', 'XJ', 'E-Pace', 'F-Pace'],
+    'Jeep': ['Renegade', 'Compass', 'Cherokee', 'Grand Cherokee', 'Wrangler'],
+    'Jetour': ['Dashing', 'X70', 'X70 Plus', 'X90', 'T2'],
+    'Kia': ['Picanto', 'Rio', 'Ceed', 'Cerato', 'Soul', 'Stonic', 'Sonet', 'Seltos', 'Niro', 'Sportage', 'Sorento', 'Carens', 'K2500'],
+    'Lada': ['Granta', 'Vesta', 'Largus', 'Niva'],
+    'Land Rover (Range Rover)': ['Freelander', 'Discovery Sport', 'Discovery', 'Defender', 'Range Rover Evoque', 'Range Rover Velar', 'Range Rover Sport', 'Range Rover'],
+    'Lexus': ['IS', 'ES', 'GS', 'UX', 'NX', 'RX', 'LX'],
+    'Mahindra': ['KUV100', 'XUV500', 'Scorpio', 'Pik-Up'],
+    'Maserati': ['Ghibli', 'Quattroporte', 'Grecale', 'Levante'],
+    'Mazda': ['2', '3', '6', 'CX-3', 'CX-30', 'CX-5', 'CX-60', 'BT-50'],
+    'Mercedes-Benz': ['Classe A', 'Classe B', 'Classe C', 'Classe E', 'Classe S', 'CLA', 'CLS', 'GLA', 'GLB', 'GLC', 'GLE', 'GLS', 'Classe G', 'Classe V', 'Vito', 'Sprinter', 'Citan'],
+    'MG': ['MG3', 'MG4', 'MG5', 'MG GT', 'MG ZS', 'MG HS', 'MG RX5'],
+    'Mini': ['Cooper', 'Clubman', 'Countryman', 'Paceman'],
+    'Mitsubishi': ['Space Star', 'Colt', 'Lancer', 'ASX', 'Eclipse Cross', 'Outlander', 'Pajero Sport', 'Pajero', 'L200'],
+    'Nissan': ['Micra', 'Note', 'Sunny', 'Almera', 'Tiida', 'Juke', 'Kicks', 'Qashqai', 'X-Trail', 'Pathfinder', 'Patrol', 'Navara', 'Pick-up'],
+    'Opel': ['Agila', 'Corsa', 'Astra', 'Vectra', 'Insignia', 'Meriva', 'Zafira', 'Mokka', 'Crossland', 'Grandland', 'Combo', 'Vivaro'],
+    'Peugeot': ['106', '107', '108', '1007', '206', '207', '208', '2008', '301', '307', '308', '3008', '406', '407', '408', '508', '5008', '607', 'Bipper', 'Partner', 'Rifter', 'Expert', 'Boxer'],
+    'Porsche': ['911', 'Boxster', 'Cayman', 'Macan', 'Cayenne', 'Panamera', 'Taycan'],
+    'Renault': ['Twingo', 'Clio', 'Clio Classic', 'Symbol', 'Mégane', 'Fluence', 'Scénic', 'Laguna', 'Latitude', 'Talisman', 'Captur', 'Kadjar', 'Arkana', 'Austral', 'Koleos', 'Kangoo', 'Express', 'Trafic', 'Master'],
+    'Seat': ['Ibiza', 'Cordoba', 'Leon', 'Toledo', 'Altea', 'Arona', 'Ateca', 'Tarraco', 'Alhambra'],
+    'Skoda': ['Fabia', 'Rapid', 'Scala', 'Octavia', 'Superb', 'Roomster', 'Yeti', 'Kamiq', 'Karoq', 'Kodiaq'],
+    'Smart': ['Fortwo', 'Forfour', '#1'],
+    'SsangYong': ['Tivoli', 'Korando', 'Actyon', 'Kyron', 'Rexton', 'Musso', 'Torres'],
+    'Subaru': ['Impreza', 'XV', 'Legacy', 'Outback', 'Forester'],
+    'Suzuki': ['Alto', 'Celerio', 'Splash', 'Swift', 'Dzire', 'Baleno', 'Ignis', 'SX4', 'S-Cross', 'Vitara', 'Grand Vitara', 'Jimny', 'Ertiga', 'Super Carry'],
+    'Tata': ['Nano', 'Indica', 'Indigo', 'Safari', 'Xenon', 'Telcoline'],
+    'Tesla': ['Model 3', 'Model Y', 'Model S', 'Model X'],
+    'Toyota': ['Aygo', 'Yaris', 'Corolla', 'Corolla Cross', 'Auris', 'Avensis', 'Camry', 'Prius', 'C-HR', 'Rush', 'RAV4', 'Fortuner', 'Land Cruiser', 'Prado', 'Hilux', 'Hiace'],
+    'Volkswagen': ['Up', 'Fox', 'Polo', 'Golf', 'Beetle', 'Jetta', 'Bora', 'Passat', 'Arteon', 'Taigo', 'T-Cross', 'T-Roc', 'Tiguan', 'Touareg', 'Touran', 'Sharan', 'ID.4', 'Caddy', 'Transporter', 'Amarok'],
+    'Volvo': ['S40', 'S60', 'S80', 'S90', 'V40', 'V60', 'XC40', 'XC60', 'XC90']
+  };
+  function fillModels() {
+    const bs = document.getElementById('f-marque');
+    const ms = document.getElementById('f-modele');
+    if (!bs || !ms) return;
+    const keep = ms.value;
+    const brand = bs.value;
+    ms.innerHTML = '';
+    ms.add(new Option(T(brand ? 'f_model_pick' : 'f_model_ph'), ''));
+    (MODELS[brand] || []).forEach(function (m) { ms.add(new Option(m, m)); });
+    if (brand) ms.add(new Option(T('f_model_other'), 'autre'));
+    ms.disabled = !brand;
+    if (keep && [].some.call(ms.options, function (o) { return o.value === keep; })) ms.value = keep;
+  }
+
   function setLang(l) {
     lang = l === 'fr' ? 'fr' : 'ar';
     const d = lang === 'fr' ? FR : AR;
@@ -590,6 +666,7 @@ html[dir="ltr"] .dlg h2{font-family:var(--f-disp);text-transform:uppercase;font-
     b.lang = lang === 'fr' ? 'ar' : 'fr';
     b.setAttribute('aria-label', lang === 'fr' ? 'بالدارجة' : 'En français');
     store.set('ia_lang', lang);
+    fillModels();
   }
 
   const qs = new URLSearchParams(location.search);
@@ -609,10 +686,10 @@ html[dir="ltr"] .dlg h2{font-family:var(--f-disp);text-transform:uppercase;font-
   const err = document.getElementById('msg-err');
   const f = function (n) { return form.elements.namedItem(n); };
   let btn = 'Page';
+  f('marque').addEventListener('change', fillModels);
   // Seulement des lettres (arabe ou latin), des chiffres et la ponctuation utile : pas de / * + etc.
   const CLEAN = {
     prenom: /[^\p{L}\p{M}\s'’-]/gu,
-    modele: /[^\p{L}\p{M}\p{N}\s.-]/gu,
     lieu: /[^\p{L}\p{M}\p{N}\s.,،'’-]/gu,
     texte: /[^\p{L}\p{M}\p{N}\s.,،'’?؟!:-]/gu
   };
@@ -658,7 +735,9 @@ html[dir="ltr"] .dlg h2{font-family:var(--f-disp);text-transform:uppercase;font-
     if (!/^0[5-7]\d{8}$/.test(tel)) { err.textContent = T('e_tel'); f('tel').focus(); return; }
     const marque = f('marque').value;
     if (!marque) { err.textContent = T('e_brand'); f('marque').focus(); return; }
-    const voiture = [marque, tidy('modele'), f('annee').value].filter(Boolean).join(' ');
+    const modele = f('modele').value;
+    if (!modele) { err.textContent = T('e_model'); f('modele').focus(); return; }
+    const voiture = [marque, modele === 'autre' ? '' : modele, f('annee').value].filter(Boolean).join(' ');
     const lieu = tidy('lieu');
     const question = tidy('texte');
     const type = 'inspection';
@@ -689,6 +768,7 @@ html[dir="ltr"] .dlg h2{font-family:var(--f-disp);text-transform:uppercase;font-
     form.hidden = true;
     ok.hidden = false;
     form.reset();
+    fillModels();
     const w = window.open(link, '_blank');
     if (w) { try { w.opener = null; } catch (x) {} }
   });
