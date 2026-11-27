@@ -450,7 +450,7 @@ html[dir="ltr"] .dlg h2{font-family:var(--f-disp);text-transform:uppercase;font-
         <div class="row2">
           <div class="field">
             <label for="f-prenom" data-t="f_name">سميتك</label>
-            <input id="f-prenom" name="prenom" type="text" autocomplete="given-name" required>
+            <input id="f-prenom" name="prenom" type="text" autocomplete="given-name" maxlength="30" required>
           </div>
           <div class="field">
             <label for="f-tel" data-t="f_tel">رقم الواتساب ديالك</label>
@@ -460,16 +460,16 @@ html[dir="ltr"] .dlg h2{font-family:var(--f-disp);text-transform:uppercase;font-
         <div class="row2">
           <div class="field">
             <label for="f-voiture" data-t="f_car">الطوموبيل</label>
-            <input id="f-voiture" name="voiture" type="text" data-tp="f_car_ph" placeholder="مثلا: داسيا لوگان 2017">
+            <input id="f-voiture" name="voiture" type="text" maxlength="40" data-tp="f_car_ph" placeholder="مثلا: داسيا لوگان 2017">
           </div>
           <div class="field">
             <label for="f-lieu" data-t="f_place">فين كاينة؟</label>
-            <input id="f-lieu" name="lieu" type="text" data-tp="f_place_ph" placeholder="مثلا: سلا، تابريكت">
+            <input id="f-lieu" name="lieu" type="text" maxlength="60" data-tp="f_place_ph" placeholder="مثلا: سلا، تابريكت">
           </div>
         </div>
         <div class="field">
           <label for="f-texte" data-t="f_msg">سؤال ولا ملاحظة (اختياري)</label>
-          <textarea id="f-texte" name="texte"></textarea>
+          <textarea id="f-texte" name="texte" maxlength="300"></textarea>
         </div>
         <div class="hp" aria-hidden="true"><label for="f-website">Website</label><input id="f-website" name="website" type="text" tabindex="-1" autocomplete="off"></div>
         <p class="err" id="msg-err" role="alert"></p>
@@ -591,6 +591,20 @@ html[dir="ltr"] .dlg h2{font-family:var(--f-disp);text-transform:uppercase;font-
   const err = document.getElementById('msg-err');
   const f = function (n) { return form.elements.namedItem(n); };
   let btn = 'Page';
+  // Seulement des lettres (arabe ou latin), des chiffres et la ponctuation utile : pas de / * + etc.
+  const CLEAN = {
+    prenom: /[^\p{L}\p{M}\s'’-]/gu,
+    voiture: /[^\p{L}\p{M}\p{N}\s.-]/gu,
+    lieu: /[^\p{L}\p{M}\p{N}\s.,،'’-]/gu,
+    texte: /[^\p{L}\p{M}\p{N}\s.,،'’?؟!:-]/gu
+  };
+  Object.keys(CLEAN).forEach(function (n) {
+    f(n).addEventListener('input', function () {
+      const v = this.value.replace(CLEAN[n], '');
+      if (v !== this.value) this.value = v;
+    });
+  });
+  const tidy = function (n) { return f(n).value.replace(CLEAN[n], '').replace(/[ \t]+/g, ' ').trim(); };
   // Numéro marocain : 10 chiffres maximum, rien d'autre.
   f('tel').addEventListener('input', function () {
     const v = this.value.replace(/\D/g, '').slice(0, 10);
@@ -620,13 +634,13 @@ html[dir="ltr"] .dlg h2{font-family:var(--f-disp);text-transform:uppercase;font-
     e.preventDefault();
     err.textContent = '';
     if (f('website').value) return;
-    const prenom = f('prenom').value.trim();
+    const prenom = tidy('prenom');
     const tel = f('tel').value.replace(/\D/g, '');
     if (!prenom) { err.textContent = T('e_name'); f('prenom').focus(); return; }
     if (!/^0[5-7]\d{8}$/.test(tel)) { err.textContent = T('e_tel'); f('tel').focus(); return; }
-    const voiture = f('voiture').value.trim();
-    const lieu = f('lieu').value.trim();
-    const question = f('texte').value.trim();
+    const voiture = tidy('voiture');
+    const lieu = tidy('lieu');
+    const question = tidy('texte');
     const type = 'inspection';
     const texte = [
       voiture ? 'Voiture : ' + voiture : '',
